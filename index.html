@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAGOS AI Security Gateway | HIVE Intelligence Portal</title>
+    <title>HIVE Intelligence Portal | LAGOS AI Security Gateway</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -16,34 +16,87 @@
             --accent-red: #ef4444;
             --accent-orange: #f59e0b;
             --accent-purple: #8b5cf6;
+            --accent-yellow: #f0c040;
             --text-main: #ffffff;
             --text-dim: rgba(255, 255, 255, 0.7);
             --text-muted: rgba(255, 255, 255, 0.35);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg-base); color: var(--text-main); font-family: 'Noto Sans KR', 'Inter', sans-serif; display: flex; min-height: 100vh; overflow: hidden; }
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            display: flex;
+            min-height: 100vh;
+            overflow: hidden;
+        }
 
-        .sidebar { width: 240px; background: var(--sidebar-bg); border-right: 1px solid var(--panel-border); display: flex; flex-direction: column; flex-shrink: 0; z-index: 20; }
-        .sidebar-brand { padding: 24px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--panel-border); }
-        .shield-icon { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #00c2ff, #005580); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+        /* --- Sidebar --- */
+        .sidebar {
+            width: 240px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--panel-border);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            z-index: 20;
+        }
+
+        .sidebar-brand {
+            padding: 24px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--panel-border);
+        }
+
+        .shield-icon {
+            width: 32px; height: 32px; border-radius: 8px;
+            background: linear-gradient(135deg, #00c2ff, #005580);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; flex-shrink: 0;
+        }
+
         .brand-text h2 { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 800; letter-spacing: 0.05em; color: #fff; }
         .brand-text p { font-size: 10px; color: var(--text-muted); font-weight: 600; }
 
         .nav-list { flex: 1; padding: 16px 8px; display: flex; flex-direction: column; gap: 4px; list-style: none; }
-        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 8px; cursor: pointer; transition: 0.2s; color: var(--text-dim); font-size: 13px; font-weight: 500; }
+        .nav-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+            border-radius: 8px; cursor: pointer; transition: 0.2s;
+            color: var(--text-dim); font-size: 13px; font-weight: 500;
+        }
         .nav-item:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
-        .nav-item.active { background: rgba(0, 194, 255, 0.12); color: var(--accent-blue); border-left: 2px solid var(--accent-blue); font-weight: 700; }
+        .nav-item.active {
+            background: rgba(0, 194, 255, 0.12);
+            color: var(--accent-blue);
+            border-left: 2px solid var(--accent-blue);
+            font-weight: 700;
+        }
         .nav-item i { font-style: normal; font-size: 16px; width: 20px; text-align: center; }
 
+        /* --- Viewport & Topbar --- */
         .viewport { flex: 1; display: flex; flex-direction: column; min-width: 0; }
-        .topbar { height: 60px; background: #0d1520; border-bottom: 1px solid var(--panel-border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; flex-shrink: 0; }
+        .topbar {
+            height: 60px; background: #0d1520;
+            border-bottom: 1px solid var(--panel-border);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 24px; flex-shrink: 0;
+        }
+
         .page-info { display: flex; align-items: center; gap: 12px; }
         .page-info i { font-size: 18px; }
         .page-info .title { font-size: 15px; font-weight: 700; }
         .page-info .subtitle { font-size: 12px; color: var(--text-muted); margin-left: 8px; }
+
         .topbar-right { display: flex; align-items: center; gap: 20px; }
-        .status-badge { display: flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 20px; padding: 4px 14px; font-size: 12px; color: var(--accent-green); font-weight: 600; }
+        .status-badge {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px; padding: 4px 14px;
+            font-size: 12px; color: var(--accent-green); font-weight: 600;
+        }
         .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
         .live-time { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text-muted); }
 
@@ -52,6 +105,7 @@
         .content-section.active { display: block; animation: sectionFade 0.3s ease-out; }
         @keyframes sectionFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* --- Components --- */
         .card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
         .panel-header { font-size: 13px; font-weight: 700; color: rgba(255, 255, 255, 0.55); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.05em; }
 
@@ -89,9 +143,8 @@
 
         .footer { margin-top: auto; padding: 40px 0; text-align: center; border-top: 1px solid var(--panel-border); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 1px; }
 
-        /* Generic Section Grids */
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .grid-2 { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; }
+        /* Grid variations */
+        .intel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
         .sec-card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 12px; padding: 24px; }
         .sec-card h3 { font-size: 15px; margin-bottom: 12px; color: #fff; }
         .sec-card p { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
@@ -101,7 +154,6 @@
 </head>
 <body>
 
-    <!-- Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-brand">
             <div class="shield-icon">🛡</div>
@@ -111,7 +163,7 @@
             </div>
         </div>
         <ul class="nav-list">
-            <li class="nav-item active" onclick="nav('dashboard', this)"><i>🏠</i> 대시보드 Overview</li>
+            <li class="nav-item active" onclick="nav('dashboard', this)"><i>🏠</i> 종합 현황 Overview</li>
             <li class="nav-item" onclick="nav('security', this)"><i>🛡️</i> 보안 아카이브 Intel</li>
             <li class="nav-item" onclick="nav('hub', this)"><i>🤖</i> AI 에이전트 허브 Hub</li>
             <li class="nav-item" onclick="nav('reports', this)"><i>📊</i> 일일 리포트 Reports</li>
@@ -121,11 +173,10 @@
     </aside>
 
     <div class="viewport">
-        <!-- Header -->
         <header class="topbar">
             <div class="page-info">
                 <i id="page-icon">🏠</i>
-                <span class="title" id="page-title">대시보드</span>
+                <span class="title" id="page-title">종합 현황</span>
                 <span class="subtitle" id="page-subtitle">Overview</span>
             </div>
             <div class="topbar-right">
@@ -136,9 +187,9 @@
             </div>
         </header>
 
-        <main class="main-scroll">
+        <main class="main-scroll" id="main-view">
 
-            <!-- 1. 대시보드 (Dashboard) -->
+            <!-- 🏠 Dashboard -->
             <section id="dashboard" class="content-section active">
                 <div class="kpi-grid">
                     <div class="card kpi-card"><div class="kpi-top"><i>⚠️</i><span class="kpi-dot" style="background:#ef4444;"></span></div><div class="kpi-val" style="color:#ef4444;">2,847</div><div class="kpi-label">탐지된 위협</div><div class="kpi-sub">+124 오늘</div></div>
@@ -148,7 +199,6 @@
                     <div class="card kpi-card"><div class="kpi-top"><i>⚡</i><span class="kpi-dot" style="background:#8b5cf6;"></span></div><div class="kpi-val" style="color:#8b5cf6;">8.2ms</div><div class="kpi-label">평균 응답 지연</div><div class="kpi-sub">SLA &lt; 15ms</div></div>
                     <div class="card kpi-card"><div class="kpi-top"><i>🤖</i><span class="kpi-dot" style="background:#f0c040;"></span></div><div class="kpi-val" style="color:#f0c040;">14</div><div class="kpi-label">모델 커버리지</div><div class="kpi-sub">연동 LLM</div></div>
                 </div>
-
                 <div class="dash-layout">
                     <div class="card">
                         <div class="panel-header">오늘의 위협 유형별 현황</div>
@@ -182,7 +232,7 @@
                 </div>
             </section>
 
-            <!-- 2. 보안 아카이브 (Security) -->
+            <!-- 🛡️ Security Archive -->
             <section id="security" class="content-section">
                 <div class="intel-grid">
                     <div class="sec-card"><span class="sec-meta">Strategy</span><h3>AI 가드레일 보안 패권 분석</h3><p>Control Plane 선점이 AI 시대의 진정한 권력입니다. Identity/Privilege/Policy 중앙 통제 아키텍처 도입 가이드.</p></div>
@@ -191,38 +241,37 @@
                 </div>
             </section>
 
-            <!-- 3. AI 에이전트 허브 (Hub) -->
+            <!-- 🤖 Agent Hub -->
             <section id="hub" class="content-section">
-                <div class="hub-grid">
-                    <div class="sec-card"><span class="sec-meta">Private</span><h3>AHHA Labs 제조 AI 분석</h3><p>제조 현장 에이전트 도입을 통한 생산성 23% 향상 및 다운타임 41% 감소 실증 데이터.</p></div>
-                    <div class="sec-card"><span class="sec-meta">Public</span><h3>지자체 AI 전환 전략</h3><p>인천광역시 AI 전환 전략수립 분석 및 행안부 AI 에이전트 도입 가이드라인 아키텍처 가이드.</p></div>
+                <div class="grid-3">
+                    <div class="sec-card"><span class="sec-meta">Commercial</span><h3>AHHA Labs 제조 AI 리포트</h3><p>제조 현장 에이전트 도입을 통한 생산성 23% 향상 및 다운타임 41% 감소 실증 데이터.</p></div>
+                    <div class="sec-card"><span class="sec-meta">Public</span><h3>인천광역시 AI 전환 전략</h3><p>지자체 AI 전환 전략수립 분석 및 행안부 AI 에이전트 도입 가이드라인 아키텍처 가이드.</p></div>
                     <div class="sec-card"><span class="sec-meta">Enterprise</span><h3>NVIDIA OpenShell 아키텍처</h3><p>Vera Rubin 하드웨어 레벨 가드레일 강제 적용 기술 및 50ms 미만 초저지연 보안 통제 레이어.</p></div>
                 </div>
             </section>
 
-            <!-- 4. 일일 리포트 (Reports) -->
+            <!-- 📊 Reports -->
             <section id="reports" class="content-section">
                 <div class="card">
-                    <div class="panel-header">4월 12일 데일리 브리핑</div>
+                    <div class="panel-header">데일리 브리핑 스트림</div>
                     <div class="terminal" style="height:auto;">
-                        <div class="log-row"><span class="log-tag bg-inf">INFO</span> 날씨: 서울 기온 17°C (대체로 흐림), 습도 65% 기록</div>
+                        <div class="log-row"><span class="log-tag bg-inf">INFO</span> 날씨: 서울 기온 17°C (대체로 흐림), 습도 65%</div>
                         <div class="log-row"><span class="log-tag bg-inf">INFO</span> 코디: 가벼운 트렌치코트 또는 얇은 가디건 권장</div>
-                        <div class="log-row"><span class="log-tag bg-inf">INFO</span> 인텔리전스: 신규 보안 리포트 7건 동기화 완료</div>
+                        <div class="log-row"><span class="log-tag bg-inf">INFO</span> 시스템: 신규 보안 인텔리전스 7건 업데이트 완료</div>
                     </div>
                 </div>
             </section>
 
-            <!-- 5. 스마트 가드닝 (Gardening) -->
+            <!-- 🌳 Smart Gardening -->
             <section id="gardening" class="content-section">
                 <div class="kpi-grid">
                     <div class="card kpi-card"><div class="kpi-top"><i>🌳</i><span class="kpi-dot" style="background:#ef4444;"></span></div><div class="kpi-val" style="color:#ef4444;">124,582</div><div class="kpi-label">관리 정원수</div><div class="kpi-sub">+1,240 오늘</div></div>
                     <div class="card kpi-card"><div class="kpi-top"><i>📈</i><span class="kpi-dot" style="background:#f59e0b;"></span></div><div class="kpi-val" style="color:#f59e0b;">98.4%</div><div class="kpi-label">생육 건강도</div><div class="kpi-sub">임계값 이상</div></div>
-                    <div class="card kpi-card"><div class="kpi-top"><i>📍</i><span class="kpi-dot" style="background:#10b981;"></span></div><div class="kpi-val" style="color:#10b981;">3</div><div class="kpi-label">시범지구 운영</div><div class="kpi-sub">전계층 정상</div></div>
+                    <div class="card kpi-card"><div class="kpi-top"><i>📍</i><span class="kpi-dot" style="background:#10b981;"></span></div><div class="kpi-val" style="color:#10b981;">3</div><div class="kpi-label">시범지구 레이어</div><div class="kpi-sub">전계층 정상</div></div>
                     <div class="card kpi-card"><div class="kpi-top"><i>CO₂</i><span class="kpi-dot" style="background:#00c2ff;"></span></div><div class="kpi-val" style="color:#00c2ff;">1,240 t</div><div class="kpi-label">탄소 저감량</div><div class="kpi-sub">연간 누적치</div></div>
                     <div class="card kpi-card"><div class="kpi-top"><i>💧</i><span class="kpi-dot" style="background:#8b5cf6;"></span></div><div class="kpi-val" style="color:#8b5cf6;">82%</div><div class="kpi-label">평균 수조 잔량</div><div class="kpi-sub">공급 안정</div></div>
                     <div class="card kpi-card"><div class="kpi-top"><i>🤖</i><span class="kpi-dot" style="background:#f0c040;"></span></div><div class="kpi-val" style="color:#f0c040;">428</div><div class="kpi-label">AI 자율 대응</div><div class="kpi-sub">24/7 가동</div></div>
                 </div>
-
                 <div class="dash-layout">
                     <div class="card">
                         <div class="panel-header">실시간 생육 지표 현황</div>
@@ -253,7 +302,6 @@
                 </div>
             </section>
 
-            <!-- Footer Metadata -->
             <footer class="footer">
                 {"label": "gateway-client", "id": "gateway-client"} | CONFIDENTIAL HIVE INTELLIGENCE | © 2026 SUNYOUTECH
             </footer>
@@ -285,7 +333,8 @@
             const h12 = h % 12 || 12;
             const m = now.getMinutes().toString().padStart(2, '0');
             const s = now.getSeconds().toString().padStart(2, '0');
-            document.getElementById('clock').innerText = `${ampm} ${h12}:${m}:${s}`;
+            const el = document.getElementById('clock');
+            if (el) el.innerText = `${ampm} ${h12}:${m}:${s}`;
         }
         setInterval(updateClock, 1000);
         updateClock();
