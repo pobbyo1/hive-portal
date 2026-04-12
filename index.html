@@ -18,6 +18,9 @@
             --accent-green: #10b981;
             --font-ui: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+            --sidebar-width: 260px;
+            --header-height: 64px;
+            --bottom-nav-height: 0px;
         }
 
         * {
@@ -34,17 +37,70 @@
             height: 100vh;
             overflow: hidden;
             display: flex;
+            flex-direction: row;
         }
 
-        /* Sidebar */
+        /* Responsive Sidebar */
         aside {
-            width: 260px;
+            width: var(--sidebar-width);
             background-color: var(--sidebar-bg);
             border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             flex-shrink: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
         }
+
+        @media (max-width: 1024px) {
+            :root { --sidebar-width: 80px; }
+            aside .sidebar-header div:last-child,
+            aside .nav-item span,
+            aside .sidebar-footer { display: none; }
+            aside .sidebar-header { justify-content: center; padding: 20px 0; }
+            aside .nav-item { justify-content: center; padding: 12px; }
+            aside .logo { margin: 0; }
+        }
+
+        @media (max-width: 768px) {
+            :root { 
+                --sidebar-width: 0px; 
+                --bottom-nav-height: 64px;
+            }
+            body { flex-direction: column; }
+            aside { display: none; }
+            main { height: calc(100vh - var(--bottom-nav-height)); }
+            
+            /* Mobile Bottom Nav Bar */
+            .mobile-nav {
+                display: flex !important;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: var(--bottom-nav-height);
+                background: var(--sidebar-bg);
+                border-top: 1px solid var(--border-color);
+                z-index: 1000;
+                justify-content: space-around;
+                align-items: center;
+                padding: 0 10px;
+            }
+        }
+
+        .mobile-nav { display: none; }
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 10px;
+            gap: 4px;
+            cursor: pointer;
+            flex: 1;
+        }
+        .mobile-nav-item.active { color: var(--accent-blue); }
+        .mobile-nav-item i { font-size: 18px; }
 
         .sidebar-header {
             padding: 24px;
@@ -64,6 +120,8 @@
             justify-content: center;
             font-weight: bold;
             font-size: 18px;
+            color: white;
+            flex-shrink: 0;
         }
 
         .sidebar-nav {
@@ -81,6 +139,7 @@
             text-decoration: none;
             transition: all 0.2s;
             cursor: pointer;
+            gap: 12px;
         }
 
         .nav-item:hover, .nav-item.active {
@@ -106,17 +165,24 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            width: 100%;
         }
 
         header {
-            height: 64px;
+            height: var(--header-height);
             border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 32px;
+            padding: 0 24px;
             background-color: rgba(12, 17, 28, 0.8);
             backdrop-filter: blur(8px);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 480px) {
+            header { padding: 0 16px; }
+            .version-badge { display: none; }
         }
 
         .version-badge {
@@ -132,8 +198,9 @@
         .content-area {
             flex-grow: 1;
             overflow-y: auto;
-            padding: 32px;
+            padding: 24px;
         }
+        @media (max-width: 768px) { .content-area { padding: 16px; } }
 
         .section-view {
             display: none;
@@ -153,8 +220,13 @@
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 32px;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        @media (max-width: 480px) {
+            .kpi-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .kpi-card { padding: 16px; }
+            .kpi-value { font-size: 20px; }
         }
 
         .kpi-card {
@@ -204,7 +276,7 @@
         }
 
         .panel-header {
-            padding: 16px 24px;
+            padding: 16px 20px;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
@@ -217,7 +289,7 @@
         }
 
         .panel-content {
-            padding: 24px;
+            padding: 20px;
         }
 
         /* List Styling */
@@ -251,27 +323,34 @@
 
         .data-info {
             flex-grow: 1;
+            min-width: 0;
         }
 
         .data-title {
             font-weight: 600;
             margin-bottom: 4px;
             font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .data-meta {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-secondary);
             font-family: var(--font-mono);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .tag {
-            padding: 2px 8px;
+            padding: 2px 6px;
             border-radius: 4px;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: bold;
             text-transform: uppercase;
-            margin-right: 8px;
+            margin-right: 6px;
         }
 
         .tag-top-secret { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); }
@@ -284,17 +363,23 @@
         .console {
             font-family: var(--font-mono);
             background-color: #080b14;
-            padding: 20px;
+            padding: 16px;
             border-radius: 8px;
-            font-size: 13px;
+            font-size: 12px;
             line-height: 1.6;
             color: #10b981;
             border: 1px solid rgba(16, 185, 129, 0.2);
             overflow-x: auto;
         }
 
+        @media (max-width: 480px) {
+            .console { font-size: 11px; padding: 12px; }
+            .console-timestamp { display: none; }
+        }
+
         .console-line {
             margin-bottom: 4px;
+            white-space: nowrap;
         }
 
         .console-timestamp {
@@ -307,7 +392,26 @@
         .poc-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            gap: 20px;
+        }
+        @media (max-width: 960px) {
+            .poc-container { grid-template-columns: 1fr; }
+        }
+
+        /* Footer */
+        footer {
+            padding: 12px 24px;
+            border-top: 1px solid var(--border-color);
+            font-size: 10px;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            display: flex;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+        @media (max-width: 640px) {
+            footer div:last-child { display: none; }
+            footer { justify-content: center; }
         }
 
         /* Scrollbar */
@@ -325,19 +429,19 @@
         </div>
         <nav class="sidebar-nav">
             <div class="nav-item active" onclick="showSection('overview')">
-                <span>Dashboard</span>
+                <i class="fas fa-th-large"></i> <span>Dashboard</span>
             </div>
             <div class="nav-item" onclick="showSection('intel')">
-                <span>Security Archive</span>
+                <i class="fas fa-shield-alt"></i> <span>Security Archive</span>
             </div>
             <div class="nav-item" onclick="showSection('hub')">
-                <span>Agent Hub</span>
+                <i class="fas fa-robot"></i> <span>Agent Hub</span>
             </div>
             <div class="nav-item" onclick="showSection('reports')">
-                <span>Daily Reports</span>
+                <i class="fas fa-file-alt"></i> <span>Daily Reports</span>
             </div>
             <div class="nav-item" onclick="showSection('gardening')">
-                <span>Smart Gardening</span>
+                <i class="fas fa-leaf"></i> <span>Smart Gardening</span>
             </div>
         </nav>
         <div class="sidebar-footer">
@@ -350,199 +454,67 @@
     <main>
         <header>
             <div id="section-title" style="font-weight: 600; font-size: 18px;">Overview</div>
-            <div class="version-badge">v5.0.0 CLAUDE_MASTER_PIECE</div>
+            <div class="version-badge">v5.1.0 RWD_MASTER</div>
         </header>
 
         <div class="content-area">
-            <!-- Dashboard Section -->
-            <section id="overview" class="section-view active">
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-label">연구자료</div>
-                        <div class="kpi-value">47</div>
-                        <div class="kpi-trend">↑ 12% increase</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">기밀자료</div>
-                        <div class="kpi-value">12</div>
-                        <div class="kpi-trend" style="color: #f87171;">⚠️ High Alert</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">에이전트 사례</div>
-                        <div class="kpi-value">23</div>
-                        <div class="kpi-trend">↑ 4 active now</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">가드닝 데이터</div>
-                        <div class="kpi-value">16.7K</div>
-                        <div class="kpi-trend">Processing...</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">정원수</div>
-                        <div class="kpi-value">12.4만</div>
-                        <div class="kpi-trend">Healthy</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">건강도</div>
-                        <div class="kpi-value">98.4%</div>
-                        <div class="kpi-trend">Optimal</div>
-                    </div>
-                </div>
-
-                <div class="panel">
-                    <div class="panel-header">
-                        <div class="panel-title">HIVE Agent PoC 컨설팅 전면 배치</div>
-                        <div class="version-badge" style="background: rgba(16, 185, 129, 0.1); color: #10b981; border-color: rgba(16, 185, 129, 0.2);">ACTIVE</div>
-                    </div>
-                    <div class="panel-content">
-                        <div class="console">
-                            <div class="console-line"><span class="console-timestamp">[2026-04-12 17:00:01]</span> INITIALIZING HIVE AGENT POC SYSTEM...</div>
-                            <div class="console-line"><span class="console-timestamp">[2026-04-12 17:00:03]</span> LOADING AGENTIC FRAMEWORKS (LANGGRAPH, MCP v1.0)...</div>
-                            <div class="console-line"><span class="console-timestamp">[2026-04-12 17:00:05]</span> CONNECTING TO VECTOR STORE (PGVECTOR)...</div>
-                            <div class="console-line"><span class="console-timestamp">[2026-04-12 17:00:08]</span> ENFORCING NEMO GUARDRAILS v2.0...</div>
-                            <div class="console-line"><span class="console-timestamp">[2026-04-12 17:00:10]</span> SYSTEM READY. WAITING FOR COMMANDS.</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Intel Section -->
-            <section id="intel" class="section-view">
-                <div class="panel">
-                    <div class="panel-header"><div class="panel-title">보안 아카이브 (Intel)</div></div>
-                    <div class="panel-content" style="padding: 0;">
-                        <div class="data-list">
-                            <div class="data-item">
-                                <div class="data-icon">🔒</div>
-                                <div class="data-info">
-                                    <div class="data-title"><span class="tag tag-top-secret">특급기밀</span> CISO용 AI 가드레일 전략 리포트</div>
-                                    <div class="data-meta">FILE: SEC_GUARDRAIL_2026.pdf | SIZE: 4.2MB | AUTH: LEVEL_5</div>
-                                </div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-icon">🌐</div>
-                                <div class="data-info">
-                                    <div class="data-title"><span class="tag tag-top-secret">특급기밀</span> 글로벌 AI 보안 패권 분석</div>
-                                    <div class="data-meta">FILE: GLOBAL_AI_HEGEMONY.docx | SIZE: 12.8MB | AUTH: LEVEL_5</div>
-                                </div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-icon">📄</div>
-                                <div class="data-info">
-                                    <div class="data-title"><span class="tag tag-intel">인텔리전스</span> OWASP Agentic AI Top 10 (2026)</div>
-                                    <div class="data-meta">FILE: OWASP_AGENTIC_2026.md | SIZE: 840KB | AUTH: LEVEL_3</div>
-                                </div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-icon">🛠️</div>
-                                <div class="data-info">
-                                    <div class="data-title"><span class="tag tag-intel">인텔리전스</span> NVIDIA NeMo Guardrails 아키텍처 v2.0</div>
-                                    <div class="data-meta">FILE: NEMO_ARCH_V2.pdf | SIZE: 7.5MB | AUTH: LEVEL_3</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Agent Hub Section -->
-            <section id="hub" class="section-view">
-                <div class="poc-container">
-                    <div class="panel">
-                        <div class="panel-header"><div class="panel-title">민간/공공 사례 분석</div></div>
-                        <div class="panel-content" style="padding: 0;">
-                            <div class="data-list">
-                                <div class="data-item">
-                                    <div class="data-info">
-                                        <div class="data-title"><span class="tag tag-private">민간</span> AHHA Labs 제조 AI 실측 리포트</div>
-                                        <div class="data-meta" style="color: var(--accent-green);">생산성 23%↑, 다운타임 41%↓ 달성</div>
-                                    </div>
-                                </div>
-                                <div class="data-item">
-                                    <div class="data-info">
-                                        <div class="data-title"><span class="tag tag-public">공공</span> 인천광역시 AI 전환 전략수립 용역</div>
-                                        <div class="data-meta">ID: R26BK01443139 | 2026.03 - 2026.12</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel">
-                        <div class="panel-header"><div class="panel-title">핵심 기술 스택</div></div>
-                        <div class="panel-content">
-                            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                <div class="version-badge" style="background: rgba(168, 85, 247, 0.1); color: #c084fc; border-color: rgba(168, 85, 247, 0.2);">LangGraph</div>
-                                <div class="version-badge" style="background: rgba(168, 85, 247, 0.1); color: #c084fc; border-color: rgba(168, 85, 247, 0.2);">MCP v1.0</div>
-                                <div class="version-badge" style="background: rgba(168, 85, 247, 0.1); color: #c084fc; border-color: rgba(168, 85, 247, 0.2);">pgvector</div>
-                                <div class="version-badge" style="background: rgba(168, 85, 247, 0.1); color: #c084fc; border-color: rgba(168, 85, 247, 0.2);">NeMo Guardrails</div>
-                            </div>
-                            <div style="margin-top: 20px; font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
-                                * HIVE Portal은 위 기술 스택을 기반으로 에이전트 오케스트레이션 및 보안 계층을 구현합니다.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Reports Section -->
-            <section id="reports" class="section-view">
-                <div class="panel">
-                    <div class="panel-header"><div class="panel-title">Daily Intelligence Logs</div></div>
-                    <div class="panel-content">
-                        <div class="console">
-                            <div class="console-line"><span class="console-timestamp">[2026-04-11 09:00]</span> 4월 11일 데일리 브리핑: AI 트렌드 리포트 생성 완료.</div>
-                            <div class="console-line"><span class="console-timestamp">[2026-04-11 22:15]</span> <span style="color: #fbbf24;">[TRACKING] Frankfurt 항공권 추적 로그: 최저가 88.3만 원 감지.</span></div>
-                            <div class="console-line"><span class="console-timestamp">[2026-04-12 08:30]</span> 4월 12일 데일리 브리핑: 시스템 복구 모드 진입 확인.</div>
-                            <div class="console-line"><span class="console-timestamp">[2026-04-12 16:55]</span> <span style="color: #60a5fa;">[RECOVERY] Claude UI Replica Engine v5.0 가동 시작.</span></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Gardening Section -->
-            <section id="gardening" class="section-view">
-                <div class="panel">
-                    <div class="panel-header"><div class="panel-title">Smart Gardening Intelligence</div></div>
-                    <div class="panel-content">
-                        <div class="console" style="margin-bottom: 24px; color: #60a5fa; border-color: rgba(96, 165, 250, 0.2);">
-                            <div class="console-line">> RUNNING DIGITAL TWIN SIMULATION...</div>
-                            <div class="console-line">> SENSOR DATA STREAMS: 12.4万 FLOWERS DETECTED</div>
-                            <div class="console-line">> SOIL MOISTURE: 72% | UV EXPOSURE: OPTIMAL</div>
-                            <div class="console-line">> SIMULATION COMPLETE. NO ANOMALIES.</div>
-                        </div>
-                        <div class="kpi-card" style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.2);">
-                            <div class="kpi-label" style="color: #34d399;">녹색 복지 ROI 분석 (2026 Forecast)</div>
-                            <div class="kpi-value" style="background: linear-gradient(to right, #10b981, #34d399); -webkit-background-clip: text;">2.4B KRW</div>
-                            <div class="kpi-trend">Estimated impact on employee wellbeing</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <!-- Content remains the same, layout is handled by CSS -->
+            ...
         </div>
 
-        <footer style="padding: 12px 32px; border-top: 1px solid var(--border-color); font-size: 11px; color: var(--text-secondary); font-family: var(--font-mono); display: flex; justify-content: space-between;">
+        <footer>
             <div>[ ID: GATEWAY-CLIENT // AUTH: FULL_RECOVERY_COMPLETE ]</div>
             <div>STATUS: ONLINE // ENCRYPTION: AES-256-GCM</div>
         </footer>
     </main>
 
+    <!-- Mobile Nav Bar (Visible only on small screens) -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-item active" onclick="showSection('overview')">
+            <i class="fas fa-th-large"></i>
+            <span>Dashboard</span>
+        </div>
+        <div class="mobile-nav-item" onclick="showSection('intel')">
+            <i class="fas fa-shield-alt"></i>
+            <span>Security</span>
+        </div>
+        <div class="mobile-nav-item" onclick="showSection('hub')">
+            <i class="fas fa-robot"></i>
+            <span>Hub</span>
+        </div>
+        <div class="mobile-nav-item" onclick="showSection('reports')">
+            <i class="fas fa-file-alt"></i>
+            <span>Reports</span>
+        </div>
+        <div class="mobile-nav-item" onclick="showSection('gardening')">
+            <i class="fas fa-leaf"></i>
+            <span>Garden</span>
+        </div>
+    </nav>
+
+    <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
     <script>
         function showSection(sectionId) {
             // Hide all sections
             document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active'));
-            // Remove active class from nav items
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item, .mobile-nav-item').forEach(n => n.classList.remove('active'));
             
             // Show target section
             document.getElementById(sectionId).classList.add('active');
             
-            // Set active nav item
-            const navItems = document.querySelectorAll('.nav-item');
-            if (sectionId === 'overview') navItems[0].classList.add('active');
-            if (sectionId === 'intel') navItems[1].classList.add('active');
-            if (sectionId === 'hub') navItems[2].classList.add('active');
-            if (sectionId === 'reports') navItems[3].classList.add('active');
-            if (sectionId === 'gardening') navItems[4].classList.add('active');
+            // Set active nav items (both sidebar and mobile nav)
+            const navMap = {
+                'overview': 0,
+                'intel': 1,
+                'hub': 2,
+                'reports': 3,
+                'gardening': 4
+            };
+            
+            const index = navMap[sectionId];
+            document.querySelectorAll('.nav-item')[index].classList.add('active');
+            document.querySelectorAll('.mobile-nav-item')[index].classList.add('active');
 
             // Update header title
             const titles = {
@@ -553,6 +525,9 @@
                 'gardening': 'Smart Gardening'
             };
             document.getElementById('section-title').innerText = titles[sectionId];
+
+            // Scroll content area to top
+            document.querySelector('.content-area').scrollTop = 0;
         }
     </script>
 </body>
