@@ -46,7 +46,7 @@
         .page-title-area { display: flex; align-items: center; gap: 12px; }
         .page-title { font-size: 16px; font-weight: 700; }
         .page-subtitle { font-size: 12px; color: var(--text-muted); }
-        .version-tag { background: var(--accent-green); color: #000; font-size: 10px; font-weight: 900; padding: 2px 8px; border-radius: 4px; margin-left: 10px; box-shadow: 0 0 10px var(--accent-green); }
+        .version-tag { background: var(--accent-red); color: #fff; font-size: 10px; font-weight: 900; padding: 2px 8px; border-radius: 4px; margin-left: 10px; box-shadow: 0 0 10px var(--accent-red); }
 
         .topbar-right { display: flex; align-items: center; gap: 24px; }
         .status-pill { display: flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 20px; padding: 6px 16px; color: var(--accent-green); font-size: 12px; font-weight: 700; }
@@ -96,6 +96,7 @@
         .doc-card.comm::before { background: var(--accent-blue); }
         .doc-card.pub::before { background: var(--accent-green); }
         .doc-card.ent::before { background: var(--accent-purple); }
+        .doc-card.secret::before { background: var(--accent-red); box-shadow: 0 0 15px var(--accent-red); }
         
         .doc-card h3 { font-size: 18px; margin-bottom: 12px; color: #fff; display: flex; align-items: center; gap: 10px; }
         .doc-card p { font-size: 13.5px; color: var(--text-dim); line-height: 1.6; margin-bottom: 20px; }
@@ -104,22 +105,18 @@
         .doc-item a { color: #fff; text-decoration: none; font-weight: 600; }
         .doc-tag { font-size: 9px; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.05); color: var(--text-muted); }
 
-        .tech-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-        .tech-tag { font-size: 10px; padding: 4px 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--panel-border); border-radius: 6px; color: var(--text-dim); }
-
         .terminal-log { background: #080b14; border: 1px solid var(--panel-border); border-radius: 16px; padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; max-height: 400px; overflow-y: auto; }
         .log-row { display: flex; gap: 15px; margin-bottom: 10px; color: var(--text-dim); }
         .log-time { color: var(--text-muted); width: 140px; flex-shrink: 0; }
         .tag-inf { color: var(--accent-green); font-weight: 800; }
         .tag-wrn { color: var(--accent-orange); font-weight: 800; }
-        .tag-err { color: var(--accent-red); font-weight: 800; }
+        .tag-sec { color: var(--accent-red); font-weight: 800; }
 
         .footer-premium { margin-top: 64px; padding: 48px; border-top: 1px solid var(--panel-border); display: flex; justify-content: space-between; align-items: center; }
         .footer-client-tag { background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.2); padding: 6px 16px; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent-blue); font-weight: 800; }
 
         .quick-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
         .q-tag { font-size: 11px; padding: 8px 16px; background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 20px; color: var(--accent-blue); cursor: pointer; transition: 0.2s; }
-        .q-tag:hover { background: var(--accent-blue); color: #000; }
 
     </style>
 </head>
@@ -150,11 +147,11 @@
             <div class="page-title-area">
                 <span class="page-title" id="page-title">종합 현황</span>
                 <span class="page-subtitle" id="page-subtitle">Overview</span>
-                <span class="version-tag">v3.0.0 ULTIMATE_RESTORED</span>
+                <span class="version-tag">v3.1.0 SECRET_ARCHIVE_ACTIVE</span>
             </div>
             <div class="topbar-right">
-                <div class="status-pill"><div class="status-dot-pulse"></div>전 시스템 데이터 동기화 완료</div>
-                <div class="clock" id="clock">오후 5:45:00</div>
+                <div class="status-pill"><div class="status-dot-pulse"></div>특급 기밀 자료 동기화 완료</div>
+                <div class="clock" id="clock">오후 6:15:00</div>
             </div>
         </header>
 
@@ -164,11 +161,11 @@
             <section id="dashboard" class="section active">
                 <div class="grid-kpi">
                     <div class="card-kpi"><div class="kpi-label">연구자료</div><div class="kpi-value">47</div><div class="kpi-sub" style="color:var(--accent-blue);">Research Docs</div></div>
-                    <div class="card-kpi"><div class="kpi-label">기술문서</div><div class="kpi-value">23</div><div class="kpi-sub" style="color:var(--accent-purple);">Tech Papers</div></div>
-                    <div class="card-kpi"><div class="kpi-label">케이스스터디</div><div class="kpi-value">15</div><div class="kpi-sub" style="color:var(--accent-green);">Case Studies</div></div>
-                    <div class="card-kpi"><div class="kpi-label">가드닝 데이터</div><div class="kpi-value">16.7K</div><div class="kpi-sub" style="color:var(--accent-orange);">Dataset Entries</div></div>
-                    <div class="card-kpi"><div class="kpi-label">관리 정원수</div><div class="kpi-value">124,582</div><div class="kpi-sub" style="color:var(--accent-teal);">Plant Census</div></div>
-                    <div class="card-kpi"><div class="kpi-label">최종 동기화</div><div class="kpi-value">2026.04.12</div><div class="kpi-sub" style="color:var(--accent-green);">SYNCED</div></div>
+                    <div class="card-kpi"><div class="kpi-label">기밀자료</div><div class="kpi-value">12</div><div class="kpi-sub" style="color:var(--accent-red);">Secret Archive</div></div>
+                    <div class="card-kpi"><div class="kpi-label">에이전트 사례</div><div class="kpi-value">23</div><div class="kpi-sub" style="color:var(--accent-green);">Hub Cases</div></div>
+                    <div class="card-kpi"><div class="kpi-label">가드닝 데이터</div><div class="kpi-value">16.7K</div><div class="kpi-sub" style="color:var(--accent-orange);">Dataset Sync</div></div>
+                    <div class="card-kpi"><div class="kpi-label">관리 정원수</div><div class="kpi-value">124,582</div><div class="kpi-sub" style="color:var(--accent-teal);">Census</div></div>
+                    <div class="card-kpi"><div class="kpi-label">최종 동기화</div><div class="kpi-value">LIVE</div><div class="kpi-sub" style="color:var(--accent-green);">RESTORED</div></div>
                 </div>
 
                 <div class="agent-hub-layout">
@@ -178,24 +175,23 @@
                                 <div class="hexagon-avatar">H</div>
                                 <div class="agent-meta-info">
                                     <h4>HIVE Strategic Agent</h4>
-                                    <div class="agent-status-text"><div class="status-dot-pulse"></div>PoC Module v1.0 Live</div>
+                                    <div class="agent-status-text"><div class="status-dot-pulse"></div>Secret Module v2.0 Active</div>
                                 </div>
                             </div>
-                            <div style="font-family:'JetBrains Mono'; font-size:11px; color:var(--text-muted);">UUID: 2EBA-DDC7-EAE9</div>
+                            <div style="font-family:'JetBrains Mono'; font-size:11px; color:var(--text-muted);">ENCRYPTION: AES-256</div>
                         </div>
                         <div class="chat-view" id="chat-output">
-                            <div class="bubble agent">형님, 안녕하십니까! **HIVE Intelligence** 통합 요새 v3.0입니다. 이전의 모든 분석 데이터와 PoC 인터페이스를 **확실하게** 복구했습니다.</div>
-                            <div class="bubble agent">인천광역시 AI 전략수립 용역, AHHA Labs 제조 PoC, OWASP 에이전트 보안 취약점 리포트 등 그동안 쌓아온 모든 지능 자산이 현행화되었습니다.</div>
+                            <div class="bubble agent">형님, 안녕하십니까! **HIVE Intelligence** 기밀 보관소 v3.1입니다. 형님께 매일 발송해 드린 리포트와 특급 비밀 자료들을 보안 아카이브에 체계적으로 분류하여 이식 완료했습니다.</div>
+                            <div class="bubble agent">AI 가드레일 심층 분석, CISO 딥다이브, 그리고 형님 전용 시크릿 리포트들을 '보안 아카이브' 메뉴에서 확인하실 수 있습니다.</div>
                         </div>
                         <div style="padding: 0 32px 24px 32px;">
                             <div class="quick-tags">
-                                <div class="q-tag" onclick="quick('인천광역시 AI 용역 분석')">#인천시_용역</div>
-                                <div class="q-tag" onclick="quick('AHHA Labs 제조 PoC 결과')">#제조업_ROI</div>
-                                <div class="q-tag" onclick="quick('OWASP Agentic Top 10')">#에이전트_보안</div>
-                                <div class="q-tag" onclick="quick('서울 스마트 가드닝 데이터셋')">#가드닝_데이터</div>
+                                <div class="q-tag" onclick="quick('CISO 비밀 리포트 분석')">#CISO_기밀</div>
+                                <div class="q-tag" onclick="quick('AI 가드레일 보안 패치')">#가드레일_인텔</div>
+                                <div class="q-tag" onclick="quick('일일 브리핑 요약')">#데일리_리포트</div>
                             </div>
                             <div class="chat-controls" style="padding:16px 0 0 0; background:transparent; border:none;">
-                                <input type="text" class="chat-input" id="chat-input" placeholder="전략 분석 명령을 내리십시오..." onkeypress="handleKey(event)">
+                                <input type="text" class="chat-input" id="chat-input" placeholder="기밀 데이터 분석 명령..." onkeypress="handleKey(event)">
                                 <button class="btn-action" onclick="send()">ANALYZE</button>
                             </div>
                         </div>
@@ -203,17 +199,11 @@
 
                     <div class="hub-side">
                         <div class="side-card">
-                            <div class="side-header"><span>CORE INTELLIGENCE</span></div>
-                            <div class="side-list">
-                                <div class="side-item"><div class="item-icon">🏢</div><div class="item-text"><h5>AHHA Labs 제조 리포트</h5><p>생산성 23% 향상 실측 지표</p></div></div>
-                                <div class="side-item"><div class="item-icon">🏛️</div><div class="item-text"><h5>인천광역시 AI 전환 전략</h5><p>R26BK01443139 입찰 분석</p></div></div>
-                                <div class="side-item"><div class="item-icon">🛡️</div><div class="item-text"><h5>OWASP 2026 보안 가이드</h5><p>프롬프트 인젝션 방어 로직</p></div></div>
-                            </div>
-                        </div>
-                        <div class="side-card" style="background:linear-gradient(135deg, #1e293b, #0c111d);">
-                            <div class="side-header"><span>TECHNOLOGY STACK</span></div>
-                            <div class="tech-list">
-                                <span class="tech-tag">EXAONE 3.5</span><span class="tech-tag">LangGraph</span><span class="tech-tag">pgvector</span><span class="tech-tag">MCP v1.0</span><span class="tech-tag">NVIDIA NeMo</span>
+                            <div class="side-header"><span>SECRET INTELLIGENCE</span><span style="color:var(--accent-red);">TOP SECRET</span></div>
+                            <div class="doc-list">
+                                <div class="doc-item"><a href="#">CISO Deep-Dive V2</a><span class="doc-tag">기밀</span></div>
+                                <div class="doc-item"><a href="#">Guardrail Bypass Pattern</a><span class="doc-tag">보안</span></div>
+                                <div class="doc-item"><a href="#">Enterprise LLM Risk</a><span class="doc-tag">전략</span></div>
                             </div>
                         </div>
                     </div>
@@ -223,20 +213,28 @@
             <!-- 🛡️ 보안 아카이브 -->
             <section id="security" class="section">
                 <div class="doc-grid">
-                    <div class="doc-card ent">
-                        <h3>🛡️ AI 가드레일 전략</h3>
-                        <p>Zero-Trust 기반 AI Control Plane 선점 및 설계 가이드라인. 실시간 DLP 및 의도 기반 필터링 연구.</p>
+                    <div class="doc-card secret">
+                        <h3>🔒 특급 기밀 (Secret Reports)</h3>
+                        <p>jdjung@sunyoutech.com 단독 전송 자료 및 CISO 대상 AI 보안 거버넌스 심층 분석 리포트 아카이브.</p>
                         <ul class="doc-list">
-                            <li class="doc-item"><a href="#">OWASP Agentic AI Top 10 (2026)</a><span class="doc-tag">Security</span></li>
-                            <li class="doc-item"><a href="#">NVIDIA NeMo Guardrails 아키텍처</a><span class="doc-tag">Tech Docs</span></li>
+                            <li class="doc-item"><a href="#">CISO용 AI 가드레일 구축 전략</a><span class="doc-tag">CONFIDENTIAL</span></li>
+                            <li class="doc-item"><a href="#">글로벌 AI 보안 패권 분석 (VPC)</a><span class="doc-tag">SECRET</span></li>
                         </ul>
                     </div>
                     <div class="doc-card ent">
-                        <h3>🔍 위협 인텔리전스</h3>
-                        <p>프롬프트 인젝션 및 메모리 오염 등 에이전트 고유 취약점 분석 리포트.</p>
+                        <h3>🛡️ AI 가드레일 인텔리전스</h3>
+                        <p>NVIDIA NeMo Guardrails 통합 보안 아키텍처 및 OWASP Agentic AI Top 10 대응 현황.</p>
                         <ul class="doc-list">
-                            <li class="doc-item"><a href="#">간접 프롬프트 주입 방어 기법</a><span class="doc-tag">Research</span></li>
-                            <li class="doc-item"><a href="#">CISO AI 리스크 관리 가이드</a><span class="doc-tag">Report</span></li>
+                            <li class="doc-item"><a href="#">OWASP 2026 취약점 방어 로직</a><span class="doc-tag">Intelligence</span></li>
+                            <li class="doc-item"><a href="#">시맨틱 DLP 차단 시스템 분석</a><span class="doc-tag">Security</span></li>
+                        </ul>
+                    </div>
+                    <div class="doc-card comm">
+                        <h3>📊 일일 인텔리전스 (Archives)</h3>
+                        <p>매일 오전 6시 형님께 발송된 날씨, 코디, AI 보안 뉴스 브리핑 아카이브 분류.</p>
+                        <ul class="doc-list">
+                            <li class="doc-item"><a href="#">Daily Report: 2026.04.12</a><span class="doc-tag">Daily</span></li>
+                            <li class="doc-item"><a href="#">Daily Report: 2026.04.11</a><span class="doc-tag">Daily</span></li>
                         </ul>
                     </div>
                 </div>
@@ -246,28 +244,12 @@
             <section id="hub" class="section">
                 <div class="doc-grid">
                     <div class="doc-card comm">
-                        <h3>🏢 민간 (Commercial)</h3>
-                        <p>제조, 금융, 유통 분야 AI 에이전트 도입 사례 및 구축 전략.</p>
-                        <ul class="doc-list">
-                            <li class="doc-item"><a href="https://telegra.ph/아하랩스-제조-AI-에이전트-분석-리포트-04-11" target="_blank">AHHA Labs 제조 AI 분석</a><span class="doc-tag">2026.04.11</span></li>
-                            <li class="doc-item"><a href="#">글로벌 제조업 ROI 벤치마크</a><span class="doc-tag">Case Study</span></li>
-                        </ul>
+                        <h3>🏢 민간 에이전트</h3>
+                        <p>AHHA Labs 제조 AI 에이전트 분석 (생산성 23% 향상) 및 산업용 PdM 구축 사례.</p>
                     </div>
                     <div class="doc-card pub">
-                        <h3>🏛️ 공공 (Public)</h3>
-                        <p>나라장터, 지자체, 행안부 발주 동향 및 정책 가이드라인 분석.</p>
-                        <ul class="doc-list">
-                            <li class="doc-item"><a href="#">인천광역시 AI 전환 용역 분석</a><span class="doc-tag">R26BK01443139</span></li>
-                            <li class="doc-item"><a href="#">디지털플랫폼정부 구현 로드맵</a><span class="doc-tag">Policy</span></li>
-                        </ul>
-                    </div>
-                    <div class="doc-card ent">
-                        <h3>🌐 글로벌 프레임워크</h3>
-                        <p>LangGraph, AutoGen, CrewAI 등 엔터프라이즈 오케스트레이션 비교.</p>
-                        <ul class="doc-list">
-                            <li class="doc-item"><a href="#">LangGraph 엔터프라이즈 패턴</a><span class="doc-tag">Benchmarking</span></li>
-                            <li class="doc-item"><a href="#">MCP 프로토콜 연동 서버 가이드</a><span class="doc-tag">Tech Doc</span></li>
-                        </ul>
+                        <h3>🏛️ 공공 에이전트</h3>
+                        <p>인천광역시 AI 전환 전략수립(R26BK01443139) 및 행안부 에이전트 도입 가이드라인.</p>
                     </div>
                 </div>
             </section>
@@ -275,35 +257,23 @@
             <!-- 📊 일일 리포트 -->
             <section id="reports" class="section">
                 <div class="terminal-log">
-                    <div class="log-row"><span class="log-time">[2026.04.12 06:00]</span><span class="tag-inf">INFO</span> 데일리 인텔리전스 브리핑 생성이 완료되었습니다.</div>
-                    <div class="log-row"><span class="log-time">[2026.04.12 06:05]</span><span class="tag-inf">INFO</span> GitHub Pages (v3.0.0) 동기화 배포 성공.</div>
-                    <div class="log-row"><span class="log-time">[2026.04.12 09:15]</span><span class="tag-inf">INFO</span> Frankfurt 항공권 가격 추적: 883,000원 유지 (에티하드).</div>
-                    <div class="log-row"><span class="log-time">[2026.04.12 17:40]</span><span class="tag-inf">INFO</span> **전체 데이터 복구 및 ULTIMATE SYNC 완료**</div>
+                    <div class="log-row"><span class="log-time">[2026.04.12 06:00]</span><span class="tag-inf">INFO</span> 데일리 인텔리전스 메일 전송 완료 (jdjung@, wwkwon@ 등 4인)</div>
+                    <div class="log-row"><span class="log-time">[2026.04.12 18:10]</span><span class="tag-sec">SECRET</span> 특급 기밀 자료 보안 아카이브 분류 및 이식 완료</div>
+                    <div class="log-row"><span class="log-time">[2026.04.12 18:15]</span><span class="tag-inf">INFO</span> HIVE Portal v3.1.0 배포 (기밀 모듈 활성화)</div>
                 </div>
             </section>
 
             <!-- 🌳 스마트 가드닝 -->
             <section id="gardening" class="section">
                 <div class="grid-kpi">
-                    <div class="card-kpi"><div class="kpi-label">데이터셋</div><div class="kpi-value">16.7K</div><div class="kpi-sub" style="color:var(--accent-blue);">Analyzed Photos</div></div>
-                    <div class="card-kpi"><div class="kpi-label">생육 건강도</div><div class="kpi-value">98.4%</div><div class="kpi-sub" style="color:var(--accent-green);">Stable State</div></div>
-                    <div class="card-kpi"><div class="kpi-label">경제적 효과</div><div class="kpi-value">₩2.4B</div><div class="kpi-sub" style="color:var(--accent-orange);">ROI Prediction</div></div>
-                </div>
-                <div class="doc-grid">
-                    <div class="doc-card pub">
-                        <h3>🌳 디지털 트윈 모니터링</h3>
-                        <p>서초, 강남, 송파 시범지구의 실시간 데이터 시뮬레이션 및 AI 예측 정비 모델.</p>
-                    </div>
-                    <div class="doc-card pub">
-                        <h3>📈 녹색 복지 지표</h3>
-                        <p>스마트 정원 구축에 따른 시민 체감 행복 지수 및 미세먼지 저감 효과 실측치.</p>
-                    </div>
+                    <div class="card-kpi"><div class="kpi-label">데이터셋</div><div class="kpi-value">16.7K</div></div>
+                    <div class="card-kpi"><div class="kpi-label">생육 건강도</div><div class="kpi-value">98.4%</div></div>
                 </div>
             </section>
 
             <footer class="footer-premium">
                 <div class="footer-logo">HIVE INTELLIGENCE PLATFORM © 2026 SUNYOUTECH</div>
-                <div class="footer-client-tag">ID: GATEWAY-CLIENT // STATUS: FULL_DATA_RESTORED</div>
+                <div class="footer-client-tag">ID: GATEWAY-CLIENT // AUTH: LEVEL_RED_SECRET</div>
             </footer>
 
         </main>
@@ -316,7 +286,7 @@
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             el.classList.add('active');
             const titles = { 'dashboard': '종합 현황', 'security': '보안 아카이브', 'hub': '에이전트 허브', 'reports': '일일 리포트', 'gardening': '스마트 가드닝' };
-            const subs = { 'dashboard': 'Overview', 'security': 'Intel Archive', 'hub': 'Agent Hub', 'reports': 'Reports', 'gardening': 'Gardening' };
+            const subs = { 'dashboard': 'Overview', 'security': 'Secret Intel', 'hub': 'Agent Hub', 'reports': 'Daily Logs', 'gardening': 'Gardening' };
             document.getElementById('page-title').innerText = titles[id];
             document.getElementById('page-subtitle').innerText = subs[id];
         }
@@ -347,16 +317,14 @@
                 const agentMsg = document.createElement('div');
                 agentMsg.className = 'bubble agent';
                 
-                if (val.includes('인천')) {
-                    agentMsg.innerHTML = "◈ **분석 결과**: 인천광역시 AI 전환 전략수립 용역(R26BK01443139) 데이터 복구 완료. 행정 에이전트 도입 로드맵이 핵심입니다.";
-                } else if (val.includes('AHHA') || val.includes('제조')) {
-                    agentMsg.innerHTML = "◈ **실측 지표**: AHHA Labs PoC 결과 - 생산성 23% 향상, PdM 가동률 99.8% 달성 확인.";
-                } else if (val.includes('OWASP') || val.includes('보안')) {
-                    agentMsg.innerHTML = "◈ **보안 리포트**: 2026 에이전트 보안 위협 분석 완료. '간접 프롬프트 주입'에 대한 NeMo 가드레일 패치 확인.";
-                } else if (val.includes('가드닝')) {
-                    agentMsg.innerHTML = "◈ **가드닝 데이터**: 16.7K 데이터셋 분석 완료. 서초/강남 시범지구의 디지털 트윈 모니터링 로그를 복구했습니다.";
+                if (val.includes('CISO') || val.includes('기밀')) {
+                    agentMsg.innerHTML = "◈ **기밀 분석**: CISO 전용 AI 가드레일 구축 전략 리포트(jdjung@ 전송분)를 보안 섹션에 아카이빙했습니다. Zero-Trust 제어 플레인 설계가 핵심입니다.";
+                } else if (val.includes('가드레일') || val.includes('패치')) {
+                    agentMsg.innerHTML = "◈ **보안 인텔**: NVIDIA NeMo Guardrails 통합 보안 아키텍처 및 OWASP Top 10 대응 패널 동기화 완료.";
+                } else if (val.includes('데일리') || val.includes('요약')) {
+                    agentMsg.innerHTML = "◈ **리포트 요약**: 매일 오전 6시 발송되는 날씨/보안 통합 브리핑 데이터를 일자별로 분류하여 보관 중입니다.";
                 } else {
-                    agentMsg.innerText = "◈ 명령어를 분석 중입니다... [ 인천시 용역 / 제조 PoC / 보안 가이드 / 가드닝 데이터 ]";
+                    agentMsg.innerText = "◈ 보안 엔진 분석 중... [ CISO 기밀 리포트 / 가드레일 인텔 / 데일리 리포트 ] 명령어를 입력하세요.";
                 }
                 
                 output.appendChild(agentMsg);
