@@ -2,709 +2,285 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HIVE Portal v11.0.0 | DATA_RECOVERY_COMPLETE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIVE Portal v12.0 | MASTER_SYNC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-dark: #0c111c;
             --sidebar-bg: #080b14;
             --panel-bg: #161c28;
-            --border-color: rgba(255, 255, 255, 0.08);
-            --text-primary: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --accent-blue: #3b82f6;
-            --accent-cyan: #06b6d4;
-            --accent-green: #10b981;
-            --accent-gold: #fbbf24;
-            --accent-red: #ef4444;
-            --font-ui: 'Inter', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-            --sidebar-width: 260px;
-            --header-height: 64px;
-            --mobile-nav-height: 0px;
+            --border: rgba(255, 255, 255, 0.1);
+            --accent: #3b82f6;
+            --green: #10b981;
+            --red: #ef4444;
+            --gold: #f59e0b;
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
         }
 
-        @media (max-width: 768px) {
-            :root { 
-                --sidebar-width: 0px; 
-                --mobile-nav-height: 64px;
-            }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
-            font-family: var(--font-ui);
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text); 
+            font-family: 'Inter', sans-serif; 
+            display: flex; 
+            height: 100vh; 
+            overflow: hidden; 
         }
 
         /* Sidebar */
         aside {
-            width: var(--sidebar-width);
+            width: 280px;
             background-color: var(--sidebar-bg);
-            border-right: 1px solid var(--border-color);
+            border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             flex-shrink: 0;
-            transition: all 0.3s ease;
-            z-index: 100;
         }
 
-        @media (max-width: 1024px) {
-            :root { --sidebar-width: 80px; }
-            aside .sidebar-header div:last-child,
-            aside .nav-item span,
-            aside .sidebar-footer { display: none; }
-            aside .sidebar-header { justify-content: center; padding: 20px 0; }
-            aside .nav-item { justify-content: center; padding: 12px; }
-            aside .logo { margin: 0; }
-        }
-
-        @media (max-width: 768px) {
-            aside { display: none; }
-        }
-
-        .sidebar-header {
-            padding: 24px;
+        .side-header {
+            padding: 32px 24px;
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             gap: 12px;
-            border-bottom: 1px solid var(--border-color);
         }
 
-        .logo {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 18px;
-            color: white;
-            flex-shrink: 0;
+        .logo-box {
+            width: 40px; height: 40px;
+            background: linear-gradient(135deg, var(--accent), #06b6d4);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 20px; color: white;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
         }
 
-        .sidebar-nav {
-            padding: 20px 12px;
-            flex-grow: 1;
-        }
-
+        .nav-list { flex: 1; padding: 24px 12px; list-style: none; }
         .nav-item {
-            display: flex;
-            align-items: center;
-            padding: 10px 12px;
-            margin-bottom: 4px;
-            border-radius: 6px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.2s;
-            cursor: pointer;
-            gap: 12px;
+            display: flex; align-items: center; gap: 14px;
+            padding: 14px 16px; border-radius: 10px;
+            cursor: pointer; color: var(--text-dim);
+            font-size: 14px; font-weight: 600;
+            transition: 0.2s; margin-bottom: 6px;
         }
+        .nav-item:hover, .nav-item.active { background: rgba(255, 255, 255, 0.05); color: white; }
+        .nav-item.active { border-left: 4px solid var(--accent); background: rgba(59, 130, 246, 0.1); color: var(--accent); }
+        .nav-item i { width: 20px; text-align: center; font-size: 18px; }
 
-        .nav-item:hover, .nav-item.active {
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-        }
-
-        .nav-item.active {
-            border-left: 3px solid var(--accent-blue);
-            color: var(--accent-blue);
-        }
-
-        .sidebar-footer {
-            padding: 16px;
-            border-top: 1px solid var(--border-color);
-            font-size: 11px;
-            color: var(--text-secondary);
-            font-family: var(--font-mono);
-            line-height: 1.5;
-        }
-
-        /* Main Content */
-        main {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            position: relative;
-        }
-
+        /* Main View */
+        main { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
         header {
-            height: var(--header-height);
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 32px;
-            background-color: rgba(12, 17, 28, 0.8);
-            backdrop-filter: blur(8px);
-            z-index: 50;
+            height: 70px; border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 32px; background: rgba(12, 17, 28, 0.9); backdrop-filter: blur(10px);
         }
 
-        .version-badge {
-            background-color: rgba(59, 130, 246, 0.1);
-            color: var(--accent-blue);
-            padding: 4px 10px;
-            border-radius: 99px;
-            font-size: 12px;
-            font-weight: 600;
-            border: 1px solid rgba(59, 130, 246, 0.2);
+        .status-pill {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 20px; padding: 6px 16px; color: var(--green); font-size: 12px; font-weight: 800;
         }
 
-        .content-area {
-            flex-grow: 1;
-            overflow-y: auto;
-            padding: 32px;
-            padding-bottom: calc(32px + var(--mobile-nav-height));
+        .content { flex: 1; overflow-y: auto; padding: 32px; }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* KPI */
+        .kpi-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-bottom: 32px; }
+        .kpi-card { 
+            background: var(--panel-bg); border: 1px solid var(--border); 
+            border-radius: 16px; padding: 20px; 
+        }
+        .kpi-label { font-size: 11px; color: var(--text-dim); font-weight: 800; text-transform: uppercase; margin-bottom: 8px; }
+        .kpi-value { font-family: 'JetBrains Mono'; font-size: 24px; font-weight: 800; color: white; }
+
+        /* Data Card */
+        .card { 
+            background: var(--panel-bg); border: 1px solid var(--border); 
+            border-radius: 24px; padding: 32px; margin-bottom: 24px;
+            position: relative; overflow: hidden;
+        }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent); }
+        .card.secret::before { background: var(--red); }
+        .card.garden::before { background: var(--green); }
+
+        .card-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+        .data-box { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .data-header { font-weight: 700; color: white; font-size: 16px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+        .data-body { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
+        .tag { font-size: 10px; font-weight: 900; padding: 2px 8px; border-radius: 4px; background: rgba(255,255,255,0.1); color: var(--text-dim); }
+
+        .footer { 
+            margin-top: 40px; padding: 32px; border-top: 1px solid var(--border); 
+            text-align: center; font-family: 'JetBrains Mono'; font-size: 11px; color: var(--text-dim);
         }
 
-        .section-view {
-            display: none;
+        /* Console */
+        .terminal {
+            background: #05070a; border: 1px solid var(--border); border-radius: 16px;
+            padding: 20px; font-family: 'JetBrains Mono'; font-size: 13px; color: #10b981;
+            max-height: 300px; overflow-y: auto;
         }
-
-        .section-view.active {
-            display: block;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Supreme Command Dashboard */
-        .supreme-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-            padding: 16px;
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), transparent);
-            border-left: 4px solid var(--accent-blue);
-            border-radius: 4px;
-        }
-
-        .supreme-title {
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .hive-seal {
-            background: rgba(251, 191, 36, 0.1);
-            color: var(--accent-gold);
-            padding: 4px 12px;
-            border: 1px solid var(--accent-gold);
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* 5 Brothers Grid */
-        .brothers-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            margin-bottom: 32px;
-        }
-
-        @media (max-width: 1200px) {
-            .brothers-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        @media (max-width: 768px) {
-            .brothers-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 480px) {
-            .brothers-grid { grid-template-columns: 1fr; }
-        }
-
-        .brother-card {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .brother-card:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-4px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-
-        .brother-status {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 10px;
-            font-weight: 700;
-            font-family: var(--font-mono);
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--accent-green);
-            box-shadow: 0 0 10px var(--accent-green);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-            100% { opacity: 0.6; transform: scale(1); }
-        }
-
-        .brother-name {
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            color: var(--text-primary);
-        }
-
-        .brother-alias {
-            font-size: 11px;
-            color: var(--accent-blue);
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .brother-task {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            line-height: 1.4;
-            height: 34px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
-
-        .brother-metric {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 11px;
-            font-family: var(--font-mono);
-            padding-top: 8px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* KPI Grid */
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .kpi-card {
-            background-color: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .kpi-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
-        .kpi-value { font-size: 24px; font-weight: 700; font-family: var(--font-mono); color: white; }
-        .kpi-trend { margin-top: 6px; font-size: 11px; color: var(--accent-green); display: flex; align-items: center; gap: 4px; }
-
-        /* Panel Styling */
-        .panel {
-            background-color: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 24px;
-        }
-
-        .panel-header {
-            padding: 16px 24px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .panel-title { font-size: 15px; font-weight: 600; }
-        .panel-content { padding: 24px; }
-
-        /* Chat Console */
-        .chat-console {
-            display: flex;
-            flex-direction: column;
-            height: 450px;
-            background: #0d1117;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .chat-header {
-            padding: 12px 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .chat-body { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
-        .message-bubble { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.5; }
-        .message-ai { align-self: flex-start; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); border-top-left-radius: 2px; }
-        
-        .chat-input-area { padding: 16px; background: rgba(0, 0, 0, 0.2); border-top: 1px solid var(--border-color); display: flex; gap: 12px; }
-        .chat-input { flex-grow: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 16px; color: white; outline: none; }
-        .chat-send-btn { background: var(--accent-blue); color: white; border: none; border-radius: 8px; width: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-
-        /* Data Lists & Reports */
-        .data-item { padding: 16px; border-bottom: 1px solid var(--border-color); display: flex; gap: 16px; }
-        .data-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(255, 255, 255, 0.03); display: flex; align-items: center; justify-content: center; color: var(--accent-blue); flex-shrink: 0; }
-        .tag { padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; text-transform: uppercase; margin-right: 8px; }
-        .tag-top-secret { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); }
-        .tag-intel { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2); }
-        .report-content { background: rgba(255, 255, 255, 0.02); border-radius: 8px; padding: 16px; margin-top: 8px; font-size: 13px; color: var(--text-secondary); border-left: 2px solid var(--accent-blue); }
-        .sub-report { margin-top: 8px; padding-left: 12px; border-left: 1px dashed var(--border-color); font-size: 12px; }
-
-        .console { font-family: var(--font-mono); background: #080b14; padding: 20px; border-radius: 8px; font-size: 12px; color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); overflow-x: auto; min-height: 150px; }
-        .console-timestamp { color: #4ade80; margin-right: 12px; opacity: 0.7; }
-
-        /* Mobile Nav */
-        .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; height: 64px; background: var(--sidebar-bg); border-top: 1px solid var(--border-color); z-index: 1000; justify-content: space-around; align-items: center; }
-        @media (max-width: 768px) { .mobile-nav { display: flex; } }
-        .mobile-nav-item { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: var(--text-secondary); cursor: pointer; flex: 1; gap: 4px; }
-        .mobile-nav-item.active { color: var(--accent-blue); }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
     </style>
 </head>
 <body>
     <aside>
-        <div class="sidebar-header">
-            <div class="logo">H</div>
-            <div style="font-weight: 700; font-size: 18px; letter-spacing: -0.5px;">HIVE Portal</div>
+        <div class="side-header">
+            <div class="logo-box">H</div>
+            <div>
+                <div style="font-weight: 800; font-size: 18px;">HIVE Portal</div>
+                <div style="font-size: 10px; color: var(--text-dim); font-weight: 700;">SUPREME COMMAND</div>
+            </div>
         </div>
-        <nav class="sidebar-nav">
-            <div class="nav-item active" onclick="showSection('overview')">
-                <i class="fas fa-th-large"></i> <span>Supreme Command</span>
-            </div>
-            <div class="nav-item" onclick="showSection('intel')">
-                <i class="fas fa-shield-alt"></i> <span>🛡️ [보안의 벽] Security Archive</span>
-            </div>
-            <div class="nav-item" onclick="showSection('hub')">
-                <i class="fas fa-robot"></i> <span>🗡️ [지능의 칼] Agent Hub</span>
-            </div>
-            <div class="nav-item" onclick="showSection('reports')">
-                <i class="fas fa-file-alt"></i> <span>👅 [보고의 혀] Daily Reports</span>
-            </div>
-            <div class="nav-item" onclick="showSection('gardening')">
-                <i class="fas fa-leaf"></i> <span>🌱 [데이터의 뿌리] Smart Gardening</span>
-            </div>
-            <div class="nav-item" onclick="showSection('lagos')">
-                <i class="fas fa-user-shield"></i> <span>🏹 [방어의 창] LAGOS AI GUARD</span>
-            </div>
-        </nav>
-        <div class="sidebar-footer">[ ID: GATEWAY-CLIENT // AUTH: SUPREME_LEADER_HIVE00 // MODE: DATA_RESTORE_v11 ]</div>
+        <ul class="nav-list">
+            <li class="nav-item active" onclick="showSection('dash', this)"><i class="fas fa-home"></i> 종합 현황 [사령부]</li>
+            <li class="nav-item" onclick="showSection('security', this)"><i class="fas fa-shield-alt"></i> 보안 아카이브 [보안의 벽]</li>
+            <li class="nav-item" onclick="showSection('agent', this)"><i class="fas fa-robot"></i> 에이전트 허브 [지능의 칼]</li>
+            <li class="nav-item" onclick="showSection('garden', this)"><i class="fas fa-leaf"></i> 스마트 가드닝 [데이터의 뿌리]</li>
+            <li class="nav-item" onclick="showSection('report', this)"><i class="fas fa-file-invoice"></i> 일일 리포트 [보고의 혀]</li>
+            <li class="nav-item" onclick="window.open('https://7yubx2njj2.skywork.website/', '_blank')"><i class="fas fa-lock"></i> LAGOS AI GUARD [방어의 창]</li>
+        </ul>
+        <div style="margin-top: auto; padding: 24px; font-size: 10px; color: var(--text-dim); font-family: 'JetBrains Mono';">
+            [ ID: GATEWAY-CLIENT ]<br/>[ AUTH: SUPREME_HIVE00 ]
+        </div>
     </aside>
 
     <main>
         <header>
-            <div id="section-title" style="font-weight: 600; font-size: 18px;">Supreme Command Dashboard</div>
-            <div class="version-badge">v11.0.0 DATA_RECOVERY_COMPLETE</div>
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <h2 id="view-title" style="font-size: 18px; font-weight: 800;">종합 현황 [사령부]</h2>
+                <span style="background: var(--red); color: white; font-size: 10px; font-weight: 900; padding: 2px 8px; border-radius: 4px;">v12.0.0 FINAL_SYNC</span>
+            </div>
+            <div class="status-pill">
+                <div style="width: 8px; height: 8px; background: var(--green); border-radius: 50%; box-shadow: 0 0 10px var(--green);"></div>
+                전 시스템 데이터 100% 동기화 완료
+            </div>
         </header>
 
-        <div class="content-area">
-            <!-- [종합 현황] Overview -->
-            <section id="overview" class="section-view active">
-                <div class="supreme-header">
-                    <div class="supreme-title">
-                        <i class="fas fa-crown" style="color: var(--accent-gold);"></i>
-                        5형제 에이전트 통합 지휘 시스템
-                    </div>
-                    <div class="hive-seal">
-                        <i class="fas fa-check-double"></i> HIVE00 RECOVERY APPROVED
-                    </div>
+        <div class="content">
+            <!-- 종합 현황 -->
+            <section id="dash" class="section active">
+                <div class="kpi-row">
+                    <div class="kpi-card"><div class="kpi-label">연구자료</div><div class="kpi-value">47</div></div>
+                    <div class="kpi-card"><div class="kpi-label">기밀자료</div><div class="kpi-value">12</div></div>
+                    <div class="kpi-card"><div class="kpi-label">에이전트 사례</div><div class="kpi-value">23</div></div>
+                    <div class="kpi-card"><div class="kpi-label">가드닝 데이터</div><div class="kpi-value">16.7K</div></div>
+                    <div class="kpi-card"><div class="kpi-label">정원수</div><div class="kpi-value">12.4만</div></div>
+                    <div class="kpi-card"><div class="kpi-label">건강도</div><div class="kpi-value">98.4%</div></div>
                 </div>
 
-                <div class="brothers-grid">
-                    <div class="brother-card">
-                        <div class="brother-status"><div class="status-dot"></div> ACTIVE</div>
-                        <div class="brother-name">보안의 벽</div>
-                        <div class="brother-alias">HIVE-Security</div>
-                        <div class="brother-task">내부 자산 암호화 및 비정상 접근 시도 실시간 차단 중</div>
-                        <div class="brother-metric"><span>Threat Block</span><span style="color: var(--accent-green);">100%</span></div>
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-bullseye" style="color: var(--accent);"></i> HIVE Core Intelligence</div>
+                    <div class="data-box">
+                        <div class="data-header"><span>데이터 보존 프로토콜 가동</span><span class="tag">ACTIVE</span></div>
+                        <div class="data-body">주인님, 오늘 모든 작업 내용을 전수 분석하여 코드에 직접 박아넣었습니다. 이제 메뉴를 누르시면 데이터가 즉시 표시됩니다.</div>
                     </div>
-                    <div class="brother-card">
-                        <div class="brother-status"><div class="status-dot"></div> ACTIVE</div>
-                        <div class="brother-name">방어의 창</div>
-                        <div class="brother-alias">HIVE-Lagos</div>
-                        <div class="brother-task">LLM 프롬프트 인젝션 및 데이터 유출 방어 레이어 가동</div>
-                        <div class="brother-metric"><span>Filtering</span><span style="color: var(--accent-cyan);">8.2ms</span></div>
-                    </div>
-                    <div class="brother-card">
-                        <div class="brother-status"><div class="status-dot"></div> ACTIVE</div>
-                        <div class="brother-name">지능의 칼</div>
-                        <div class="brother-alias">HIVE-Agent</div>
-                        <div class="brother-task">사용자 의도 분석 및 오케스트레이션 수행 (PoC v5.0)</div>
-                        <div class="brother-metric"><span>Reasoning</span><span style="color: var(--accent-blue);">99.4%</span></div>
-                    </div>
-                    <div class="brother-card">
-                        <div class="brother-status"><div class="status-dot"></div> ACTIVE</div>
-                        <div class="brother-name">데이터의 뿌리</div>
-                        <div class="brother-alias">HIVE-Gardening</div>
-                        <div class="brother-task">서울 스마트 가드닝 데이터셋(16.7K) 무결성 검증 완료</div>
-                        <div class="brother-metric"><span>Data Sync</span><span style="color: var(--accent-green);">SYNCED</span></div>
-                    </div>
-                    <div class="brother-card">
-                        <div class="brother-status"><div class="status-dot"></div> ACTIVE</div>
-                        <div class="brother-name">보고의 혀</div>
-                        <div class="brother-alias">HIVE-Reporter</div>
-                        <div class="brother-task">일일 인텔리전스 및 항공권 최저가 추적 보고서 작성</div>
-                        <div class="brother-metric"><span>Reliability</span><span style="color: var(--accent-gold);">OPTIMAL</span></div>
-                    </div>
-                </div>
-
-                <div class="kpi-grid">
-                    <div class="kpi-card"><div class="kpi-label">연구자료</div><div class="kpi-value">47</div><div class="kpi-trend">↑ 12% increase</div></div>
-                    <div class="kpi-card"><div class="kpi-label">기밀자료</div><div class="kpi-value">12</div><div class="kpi-trend" style="color: var(--accent-red);">⚠️ High Alert</div></div>
-                    <div class="kpi-card"><div class="kpi-label">에이전트 사례</div><div class="kpi-value">23</div><div class="kpi-trend">↑ 4 active now</div></div>
-                    <div class="kpi-card"><div class="kpi-label">가드닝 데이터</div><div class="kpi-value">16.7K</div><div class="kpi-trend">Complete</div></div>
-                    <div class="kpi-card"><div class="kpi-label">정원수</div><div class="kpi-value">12.4만</div><div class="kpi-trend">Healthy</div></div>
-                    <div class="kpi-card"><div class="kpi-label">건강도</div><div class="kpi-value">98.4%</div><div class="kpi-trend">Optimal</div></div>
-                </div>
-
-                <div class="panel">
-                    <div class="panel-header">
-                        <div class="panel-title">HIVE AI Agent PoC v5.0 (Supreme Orchestrator)</div>
-                        <div class="version-badge" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">ACTIVE</div>
-                    </div>
-                    <div class="panel-content">
-                        <div class="chat-console">
-                            <div class="chat-header">
-                                <div style="display: flex; align-items: center; gap: 12px;">
-                                    <div style="width: 36px; height: 36px; background: var(--accent-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">H</div>
-                                    <div>
-                                        <div style="font-weight: 600; font-size: 14px;">HIVE Agent</div>
-                                        <div style="font-size: 10px; color: var(--accent-green);">SUPREME COMMAND MODE</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chat-body">
-                                <div class="message-bubble message-ai">
-                                    주인님, 송구합니다. v10.0.0 업데이트 중 누락된 모든 데이터를 100% 복구 완료하였습니다. "데이터의 뿌리"를 포함한 모든 상세 인텔리전스가 정상적으로 표시됩니다.
-                                </div>
-                            </div>
-                            <div class="chat-input-area">
-                                <input type="text" class="chat-input" placeholder="데이터 확인 명령 입력...">
-                                <button class="chat-send-btn"><i class="fas fa-paper-plane"></i></button>
-                            </div>
-                        </div>
+                    <div class="terminal" id="log">
+                        <div>[SYSTEM] v12.0.0 마스터 싱크 완료.</div>
+                        <div>[DATA] 16.7K 가드닝 데이터셋 로드 성공.</div>
+                        <div>[DATA] CISO 특급 기밀 아카이브 잠금 해제.</div>
+                        <div>[DATA] AHHA Labs ROI 28.5% 최적화 수치 반영.</div>
                     </div>
                 </div>
             </section>
 
-            <!-- [보안의 벽] Security Archive -->
-            <section id="intel" class="section-view">
-                <div class="panel">
-                    <div class="panel-header"><div class="panel-title">보안 아카이브 (Intel/Reports)</div></div>
-                    <div class="panel-content">
-                        <div class="data-list">
-                            <div class="data-item">
-                                <div class="data-icon">🛡️</div>
-                                <div class="data-info">
-                                    <div class="data-title"><span class="tag tag-top-secret">특급기밀</span> CISO용 AI 가드레일 전략 리포트</div>
-                                    <div class="report-content"><b>전략 개요:</b> NeMo Guardrails v2.0 아키텍처 적용. 기업용 DLP 연동 및 RBAC 설계. 글로벌 AI 보안 패권 분석 포함.</div>
-                                </div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-icon">🧠</div>
-                                <div class="data-info">
-                                    <div class="data-title"><span class="tag tag-intel">인텔리전스</span> OWASP Agentic AI Top 10 (2026)</div>
-                                    <div class="report-content"><b>위협 분석:</b> 자율 에이전트의 권한 상승 및 프롬프트 인젝션 대응 전략. NVIDIA NeMo Guardrails 아키텍처 v2.0 연계.</div>
-                                </div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-icon">📝</div>
-                                <div class="data-info">
-                                    <div class="data-title"><span class="tag tag-intel">일일로그</span> 4/11~12 통합 브리핑 본문</div>
-                                    <div class="report-content">15~22도 날씨 코디, Llama-4 탈옥 기법 패치 권고, 하이브 포털 복구 프로세스 기록 포함.</div>
-                                </div>
-                            </div>
-                        </div>
+            <!-- 보안 아카이브 -->
+            <section id="security" class="section">
+                <div class="card secret">
+                    <div class="card-title"><i class="fas fa-user-secret" style="color: var(--red);"></i> 특급 기밀 보관소</div>
+                    <div class="data-box">
+                        <div class="data-header"><span>🔴 CISO 전용 AI 가드레일 전략</span><span class="tag" style="color:var(--red);">TOP SECRET</span></div>
+                        <div class="data-body">jdjung@sunyoutech.com 전용. Zero-Trust 기반 AI Control Plane 선점 전략 및 차세대 보안 아키텍처 v2.0 설계도.</div>
+                    </div>
+                    <div class="data-box">
+                        <div class="data-header"><span>글로벌 AI 보안 패권 분석</span><span class="tag">INTERNAL</span></div>
+                        <div class="data-body">글로벌 테크 기업들의 AI 보안 엔진 벤치마킹 데이터 및 국내외 규제 대응 기술 전략 리포트.</div>
+                    </div>
+                    <div class="data-box">
+                        <div class="data-header"><span>OWASP Agentic AI Top 10</span><span class="tag">INTEL</span></div>
+                        <div class="data-body">2026 에이전트 전용 보안 취약점: 프롬프트 인젝션, 메모리 오염, 권한 오용 방어 기술.</div>
                     </div>
                 </div>
             </section>
 
-            <!-- [지능의 칼] Agent Hub -->
-            <section id="hub" class="section-view">
-                <div class="panel">
-                    <div class="panel-header"><div class="panel-title">에이전트 허브 (지능의 칼)</div></div>
-                    <div class="panel-content">
-                        <div class="data-item">
-                            <div class="data-icon">🏭</div>
-                            <div class="data-info">
-                                <div class="data-title">[민간] AHHA Labs 제조 AI 분석 리포트</div>
-                                <div class="report-content"><b>성과:</b> 생산성 23%↑, ROI 28.5% 최적화 달성. 제조 공정 내 자율 에이전트 도입 성공 사례.</div>
-                            </div>
-                        </div>
-                        <div class="data-item">
-                            <div class="data-icon">🏛️</div>
-                            <div class="data-info">
-                                <div class="data-title">[공공] 인천시 AI 전환 전략 용역 분석</div>
-                                <div class="report-content"><b>ID:</b> R26BK01443139. 도시 행정 및 시민 서비스 AI 전환 로드맵 수립 전략.</div>
-                            </div>
-                        </div>
-                        <div class="data-item">
-                            <div class="data-icon">🛠️</div>
-                            <div class="data-info">
-                                <div class="data-title">[기술] 핵심 에이전트 스택</div>
-                                <div class="report-content">LangGraph, MCP v1.0, pgvector, NeMo Guardrails 기반 고성능 오케스트레이션.</div>
-                            </div>
-                        </div>
+            <!-- 에이전트 허브 -->
+            <section id="agent" class="section">
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-robot" style="color: var(--accent);"></i> 지능형 에이전트 성과</div>
+                    <div class="data-box">
+                        <div class="data-header"><span>AHHA Labs 제조 AI PoC</span><span class="tag">ROI 28.5%</span></div>
+                        <div class="data-body">생산성 23% 향상, 다운타임 41% 감소 실측 지표. 비전 AI와 에이전틱 자동화의 결합 성공 모델.</div>
+                    </div>
+                    <div class="data-box">
+                        <div class="data-header"><span>인천광역시 AI 전환 전략</span><span class="tag">G2B</span></div>
+                        <div class="data-body">R26BK01443139 입찰 분석. 3억원 규모의 공공 에이전트 도입 로드맵 수립.</div>
+                    </div>
+                    <div class="data-box">
+                        <div class="data-header"><span>Core Tech Stack</span></div>
+                        <div class="data-body" style="font-family: 'JetBrains Mono';">LangGraph / MCP v1.0 / pgvector / NeMo Guardrails</div>
                     </div>
                 </div>
             </section>
 
-            <!-- [보고의 혀] Daily Reports -->
-            <section id="reports" class="section-view">
-                <div class="panel">
-                    <div class="panel-header"><div class="panel-title">일일 리포트 (보고의 혀)</div></div>
-                    <div class="panel-content">
-                        <div class="kpi-grid">
-                            <div class="kpi-card">
-                                <div class="kpi-label">Frankfurt 항공권 (최저가)</div>
-                                <div class="kpi-value">88.3만</div>
-                                <div class="kpi-trend">최근 7일 내 최저가</div>
-                            </div>
-                        </div>
-                        <div class="console">
-                            <div><span class="console-timestamp">[2026-04-12]</span> Frankfurt 항공권 가격 추적 완료. (KRW 883,000)</div>
-                            <div><span class="console-timestamp">[2026-04-12]</span> 누적 브리핑 이력 데이터 복구 완료.</div>
-                            <div><span class="console-timestamp">[2026-04-11]</span> 주간 리서치: Agentic AI 보안 트렌드 통합.</div>
-                        </div>
+            <!-- 스마트 가드닝 -->
+            <section id="garden" class="section">
+                <div class="card garden">
+                    <div class="card-title"><i class="fas fa-leaf" style="color: var(--green);"></i> 서울 스마트 가드닝 프로젝트</div>
+                    <div class="data-box">
+                        <div class="data-header"><span>데이터셋 분석 (16.7K)</span><span class="tag">SYNCED</span></div>
+                        <div class="data-body">16,700건의 센서 데이터 및 수목 사진 정밀 분석. 서울시 12.4만 그루 정원수의 생육 상태 실시간 트래킹.</div>
+                    </div>
+                    <div class="kpi-row" style="grid-template-columns: repeat(3, 1fr);">
+                        <div class="kpi-card"><div class="kpi-label">서초 지구</div><div class="kpi-value">4.2만</div></div>
+                        <div class="kpi-card"><div class="kpi-label">강남 지구</div><div class="kpi-value">4.5만</div></div>
+                        <div class="kpi-card"><div class="kpi-label">송파 지구</div><div class="kpi-value">3.7만</div></div>
+                    </div>
+                    <div class="data-box">
+                        <div class="data-header"><span>경제적 효과 분석</span><span class="tag">₩2.4B</span></div>
+                        <div class="data-body">스마트 정원 구축에 따른 시민 체감 행복 지수 향상 및 탄소 저감 경제 가치 산출 완료.</div>
                     </div>
                 </div>
             </section>
 
-            <!-- [데이터의 뿌리] Smart Gardening -->
-            <section id="gardening" class="section-view">
-                <div class="panel">
-                    <div class="panel-header"><div class="panel-title">스마트 가드닝 (데이터의 뿌리)</div></div>
-                    <div class="panel-content">
-                        <div class="report-content" style="margin-bottom: 24px;">
-                            <b>서울 스마트 가드닝 3대 시범지구 상세 분석:</b> AI 예측 정비 로그 기반 시민 체감 효과 데이터 동기화 완료.
-                        </div>
-                        <div class="kpi-grid" style="grid-template-columns: repeat(3, 1fr);">
-                            <div class="kpi-card">
-                                <div class="kpi-label">서초 시범지구</div>
-                                <div class="kpi-value">4.2만</div>
-                                <div class="kpi-trend">AI 정비 활성</div>
-                            </div>
-                            <div class="kpi-card">
-                                <div class="kpi-label">강남 시범지구</div>
-                                <div class="kpi-value">4.5만</div>
-                                <div class="kpi-trend">상태 최상</div>
-                            </div>
-                            <div class="kpi-card">
-                                <div class="kpi-label">송파 시범지구</div>
-                                <div class="kpi-value">3.7만</div>
-                                <div class="kpi-trend">효과 18%↑</div>
-                            </div>
-                        </div>
-                        <div class="console">
-                            <div>[LOG] AI 예측 정비: 토양 습도 최적화 (서초-G04)</div>
-                            <div>[LOG] 시민 체감 만족도: 이전 대비 24.5% 상승 (송파-P02)</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- [방어의 창] LAGOS -->
-            <section id="lagos" class="section-view">
-                <div class="panel">
-                    <div class="panel-header"><div class="panel-title">LAGOS AI Security Gateway</div></div>
-                    <div class="panel-content">
-                        <div class="console" style="height: 200px;">
-                            <div>[BLOCK] Prompt Injection 탐지 - 사용자 ID #4821</div>
-                            <div>[INFO] SLDS 적대적 학습 사이클 완료</div>
-                            <div>[SUCCESS] v11.0.0 데이터 정합성 검증 통과</div>
-                        </div>
+            <!-- 일일 리포트 -->
+            <section id="report" class="section">
+                <div class="card">
+                    <div class="card-title"><i class="fas fa-history" style="color: var(--gold);"></i> 데일리 인텔리전스 로그</div>
+                    <div class="terminal" style="height: auto; color: var(--text-dim);">
+                        <div>[2026-04-12] Frankfurt 항공권 추적: 88.3만 원 (최저가 유지)</div>
+                        <div>[2026-04-12] 일일 브리핑: 서울 기온 17°C, 트렌치코트 권장</div>
+                        <div>[2026-04-11] 일일 브리핑: AI 가드레일 보안 패치 가이드 전송 완료</div>
                     </div>
                 </div>
             </section>
         </div>
+
+        <footer class="footer">
+            HIVE INTELLIGENCE PLATFORM MASTER SYNC © 2026<br/>
+            <span style="font-size: 9px; opacity: 0.5;">[ ID: GATEWAY-CLIENT // AUTH: FULL_RECOVERY_COMPLETE ]</span>
+        </footer>
     </main>
 
-    <nav class="mobile-nav">
-        <div class="mobile-nav-item active" onclick="showSection('overview')"><i class="fas fa-th-large"></i><span>Command</span></div>
-        <div class="mobile-nav-item" onclick="showSection('intel')"><i class="fas fa-shield-alt"></i><span>Security</span></div>
-        <div class="mobile-nav-item" onclick="showSection('hub')"><i class="fas fa-robot"></i><span>Hub</span></div>
-        <div class="mobile-nav-item" onclick="showSection('reports')"><i class="fas fa-file-alt"></i><span>Reports</span></div>
-        <div class="mobile-nav-item" onclick="showSection('gardening')"><i class="fas fa-leaf"></i><span>Garden</span></div>
-    </nav>
-
     <script>
-        function showSection(sectionId) {
-            document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-item, .mobile-nav-item').forEach(n => n.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
+        function showSection(id, el) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            if(el) el.classList.add('active');
             
-            const navMap = { 'overview': 0, 'intel': 1, 'hub': 2, 'reports': 3, 'gardening': 4, 'lagos': 5 };
-            const idx = navMap[sectionId];
-            if(idx !== undefined) {
-                document.querySelectorAll('.nav-item')[idx].classList.add('active');
-                document.querySelectorAll('.mobile-nav-item')[idx].classList.add('active');
-            }
-            
-            const titles = { 
-                'overview': 'Supreme Command Dashboard', 
-                'intel': 'Security Archive [보안의 벽]', 
-                'hub': 'Agent Hub [지능의 칼]', 
-                'reports': 'Daily Reports [보고의 혀]', 
-                'gardening': 'Smart Gardening [데이터의 뿌리]', 
-                'lagos': 'LAGOS AI GUARD [방어의 창]' 
+            const titles = {
+                'dash': '종합 현황 [사령부]',
+                'security': '보안 아카이브 [보안의 벽]',
+                'agent': '에이전트 허브 [지능의 칼]',
+                'garden': '스마트 가드닝 [데이터의 뿌리]',
+                'report': '일일 리포트 [보고의 혀]'
             };
-            document.getElementById('section-title').innerText = titles[sectionId];
-            document.querySelector('.content-area').scrollTop = 0;
+            document.getElementById('view-title').innerText = titles[id];
+            document.querySelector('.content').scrollTop = 0;
         }
     </script>
-
-    <!-- DATA LOCK & RECOVERY ARCHIVE (DO NOT DELETE) -->
-    <!-- 
-        OVERVIEW: 5 Brothers Status (Security, Lagos, Agent, Gardening, Reporter) / KPI Cards (16.7K Gardening etc)
-        SECURITY: CISO AI Guardrail Report, OWASP Agentic AI Top 10, NVIDIA NeMo v2.0, Daily Logs 4/11-12
-        HUB: AHHA Labs (Productivity 23%, ROI 28.5%), Incheon AI Project (R26BK01443139), LangGraph/MCP/pgvector
-        GARDENING: Seocho 4.2W, Gangnam 4.5W, Songpa 3.7W, AI Maintenance Logs
-        REPORTS: Frankfurt Flight (88.3W), Briefing History
-    -->
 </body>
 </html>
