@@ -23,28 +23,81 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg-base); color: var(--text-main); font-family: 'Noto Sans KR', 'Inter', sans-serif; display: flex; min-height: 100vh; overflow: hidden; }
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            display: flex;
+            min-height: 100vh;
+            overflow: hidden;
+        }
 
-        .sidebar { width: 240px; background: var(--sidebar-bg); border-right: 1px solid var(--panel-border); display: flex; flex-direction: column; flex-shrink: 0; z-index: 20; }
-        .sidebar-brand { padding: 24px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--panel-border); }
-        .shield-icon { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #00c2ff, #005580); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+        /* --- Sidebar --- */
+        .sidebar {
+            width: 240px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--panel-border);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            z-index: 20;
+        }
+
+        .sidebar-brand {
+            padding: 24px 20px;
+            display: flex;
+            align-items: center; gap: 12px;
+            border-bottom: 1px solid var(--panel-border);
+        }
+
+        .shield-icon {
+            width: 32px; height: 32px; border-radius: 8px;
+            background: linear-gradient(135deg, #00c2ff, #005580);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; flex-shrink: 0;
+        }
+
         .brand-text h2 { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 800; letter-spacing: 0.05em; color: #fff; }
         .brand-text p { font-size: 10px; color: var(--text-muted); font-weight: 600; }
 
         .nav-list { flex: 1; padding: 16px 8px; display: flex; flex-direction: column; gap: 4px; list-style: none; }
-        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 8px; cursor: pointer; transition: 0.2s; color: var(--text-dim); font-size: 13px; font-weight: 500; }
+        .nav-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+            border-radius: 8px; cursor: pointer; transition: 0.2s;
+            color: var(--text-dim); font-size: 13px; font-weight: 500;
+        }
         .nav-item:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
-        .nav-item.active { background: rgba(0, 194, 255, 0.12); color: var(--accent-blue); border-left: 2px solid var(--accent-blue); font-weight: 700; }
+        .nav-item.active {
+            background: rgba(0, 194, 255, 0.12);
+            color: var(--accent-blue);
+            border-left: 2px solid var(--accent-blue);
+            font-weight: 700;
+        }
         .nav-item i { font-style: normal; font-size: 16px; width: 20px; text-align: center; }
 
+        /* --- Main Content --- */
         .viewport { flex: 1; display: flex; flex-direction: column; min-width: 0; }
-        .topbar { height: 60px; background: #0d1520; border-bottom: 1px solid var(--panel-border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; flex-shrink: 0; }
+        
+        .topbar {
+            height: 60px; background: #0d1520;
+            border-bottom: 1px solid var(--panel-border);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 24px; flex-shrink: 0;
+        }
+
         .page-info { display: flex; align-items: center; gap: 12px; }
         .page-info i { font-size: 18px; }
         .page-info .title { font-size: 15px; font-weight: 700; }
         .page-info .subtitle { font-size: 12px; color: var(--text-muted); margin-left: 8px; }
+        .version-badge { margin-left: 15px; font-size: 10px; color: var(--accent-blue); background: rgba(0, 194, 255, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--accent-blue); }
+
         .topbar-right { display: flex; align-items: center; gap: 20px; }
-        .status-badge { display: flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 20px; padding: 4px 14px; font-size: 12px; color: var(--accent-green); font-weight: 600; }
+        .status-badge {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px; padding: 4px 14px;
+            font-size: 12px; color: var(--accent-green); font-weight: 600;
+        }
         .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
         .live-time { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text-muted); }
 
@@ -53,13 +106,14 @@
         .content-section.active { display: block; animation: sectionFade 0.3s ease-out; }
         @keyframes sectionFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* --- Components --- */
         .card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
         .panel-header { font-size: 13px; font-weight: 700; color: rgba(255, 255, 255, 0.55); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.05em; }
 
         .kpi-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 24px; }
         .kpi-card { padding: 20px; position: relative; }
         .kpi-top { display: flex; justify-content: space-between; margin-bottom: 12px; }
-        .kpi-top i { font-size: 20px; }
+        .kpi-top i { font-size: 20px; font-style: normal; }
         .kpi-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 4px; }
         .kpi-val { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 900; line-height: 1; }
         .kpi-label { font-size: 12px; font-weight: 700; color: var(--text-dim); margin-top: 8px; }
@@ -90,6 +144,8 @@
 
         .footer { margin-top: auto; padding: 40px 0; text-align: center; border-top: 1px solid var(--panel-border); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 1px; }
 
+        /* Grid variations */
+        .intel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .sec-card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 12px; padding: 24px; }
         .sec-card h3 { font-size: 15px; margin-bottom: 12px; color: #fff; }
@@ -100,6 +156,7 @@
 </head>
 <body>
 
+    <!-- Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-brand">
             <div class="shield-icon">🛡</div>
@@ -119,12 +176,13 @@
     </aside>
 
     <div class="viewport">
+        <!-- Header -->
         <header class="topbar">
             <div class="page-info">
                 <i id="page-icon">🏠</i>
                 <span class="title" id="page-title">종합 현황</span>
                 <span class="subtitle" id="page-subtitle">Overview</span>
-                <span style="margin-left: 15px; font-size: 10px; color: var(--accent-blue); background: rgba(0, 194, 255, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--accent-blue);">v2.5.1 LIVE</span>
+                <span class="version-badge">v2.5.2 LIVE</span>
             </div>
             <div class="topbar-right">
                 <div class="status-badge"><span class="status-dot"></span> 전 계층 정상</div>
@@ -165,11 +223,11 @@
                     <div class="card">
                         <div class="panel-header">실시간 정보 업데이트 로그</div>
                         <div class="terminal">
-                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> 일간 리포트 생성 및 배포 완료</div>
-                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> GitHub Pages 최종 동기화 완료</div>
-                            <div class="log-row"><span class="log-tag bg-wrn">WARN</span> 가드닝 강남 노드 업데이트 지연</div>
-                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> 신규 보안 아카이브 3건 크롤링</div>
-                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> HIVE Intelligence v2.5.0 패치</div>
+                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [06:00:01] 일간 리포트 생성 및 배포 완료</div>
+                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [06:05:12] GitHub Pages 최종 동기화 완료</div>
+                            <div class="log-row"><span class="log-tag bg-wrn">WARN</span> [10:24:45] 가드닝 강남 노드 업데이트 지연</div>
+                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [12:30:00] 신규 보안 아카이브 3건 크롤링</div>
+                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [14:15:22] HIVE Intelligence v2.5.0 패치</div>
                         </div>
                     </div>
                 </div>
@@ -195,9 +253,12 @@
             <section id="reports" class="content-section">
                 <div class="card">
                     <div class="panel-header">데일리 브리핑 아카이브</div>
-                    <div class="terminal" style="height:auto;">
-                        <div class="log-row"><span class="log-tag bg-inf">INFO</span> 날씨: 서울 17°C (흐림), 코디: 트렌치코트 권장</div>
-                        <div class="log-row"><span class="log-tag bg-inf">INFO</span> 보안: 신규 위협 인텔리전스 7건 업데이트 완료</div>
+                    <div id="report-list">
+                        <!-- Last Update Marker -->
+                        <div class="terminal" style="height:auto;">
+                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> 날씨: 서울 기온 17°C (흐림), 코디: 트렌치코트 권장</div>
+                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> 보안: 신규 위협 인텔리전스 7건 업데이트 완료</div>
+                        </div>
                     </div>
                 </div>
             </section>
