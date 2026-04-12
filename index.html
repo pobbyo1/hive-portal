@@ -595,6 +595,9 @@
             <div class="nav-item" onclick="showSection('report')">
                 <i>📊</i> <span>일일 리포트</span>
             </div>
+            <div class="nav-item" onclick="showSection('gardening')">
+                <i>🌳</i> <span>스마트 가드닝</span>
+            </div>
             <div class="nav-item" onclick="window.open('https://7yubx2njj2.skywork.website/', '_blank')">
                 <i>🔐</i> <span>Lagos AI Guard</span>
             </div>
@@ -983,15 +986,8 @@
                         <span class="report-date">2026.04.12</span>
                     </div>
                     <div class="report-body">
-                        <ul>
-                            <li>OWASP Agentic Top 10 (2026) — 실시간 권한 검증 기술 표준화</li>
-                            <li>시맨틱 DLP '인라인 추론 차단(In-inference Interception)' 주요 기업 채택</li>
-                            <li>Prompt Fuzzing 자동화 공격으로 가드레일 회피율 증가</li>
-                            <li>간접 프롬프트 주입(Indirect Prompt Injection) — 2026 상반기 최대 위협</li>
-                            <li>NVIDIA OpenShell 가드레일 가속기 공개</li>
-                            <li>Meta 개방형 가드레일 평가 프레임워크 발표</li>
-                            <li>Full-stack AI Security 아키텍처로 업계 전환 가속</li>
-                        </ul>
+                        <p>OWASP Agentic Top 10 표준화 및 NVIDIA OpenShell 등 7건의 주요 보안 업데이트가 반영되었습니다.</p>
+                        <button onclick="showSection('security')" style="margin-top:10px; background:var(--accent-blue); border:none; color:white; padding:5px 12px; border-radius:4px; cursor:pointer; font-size:0.8rem;">인텔리전스 전문 보기</button>
                     </div>
                 </div>
 
@@ -1082,6 +1078,97 @@
             <p>HIVE Intelligence Portal | JDJung 전용</p>
             <p style="opacity:0.6; margin-top:5px;">🔒 외부 공개 금지 · 매일 오전 6시 자동 업데이트</p>
         </footer>
+
+    
+        <!-- SECTION 6: 스마트 가드닝 프로젝트 -->
+        <section id="gardening" class="content-section">
+            <h2 class="section-title">🌳 지능형 가드닝 & 녹색복지 통합플랫폼</h2>
+            
+            <div class="card" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(21, 128, 61, 0.1) 100%);">
+                <div style="display:flex; justify-content:space-between; align-items:start;">
+                    <div>
+                        <span class="badge badge-hot" style="background:#22c55e;">핵심 프로젝트</span>
+                        <h3 style="margin-top:10px; font-size:1.4rem;">선유기술(주) 차세대 녹색복지 모델</h3>
+                        <p style="margin-top:8px; color:var(--text-muted); font-size:0.9rem;">디지털 트윈 기반의 지능형 관리와 시니어 정서 케어를 결합한 통합 솔루션</p>
+                    </div>
+                    <div style="text-align:right;">
+                        <span style="font-size:0.8rem; color:var(--accent-teal);">상태: 분석 및 기획 단계</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sector-grid">
+                <!-- 핵심 기술 -->
+                <div class="card">
+                    <h3 style="color:#22c55e; margin-bottom:15px;">🛡️ 핵심 기술 (Tech Stack)</h3>
+                    <ul class="doc-list">
+                        <li>
+                            <div class="doc-link">
+                                <span>디지털 트윈 가드닝</span>
+                                <small>실물 가든의 가상화 모델링 및 실시간 시뮬레이션</small>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="doc-link">
+                                <span>AI 식물 생체 센싱</span>
+                                <small>엽록소, 수분, 생육 상태 정밀 센싱 및 에이전트 분석</small>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="doc-link">
+                                <span>원예 치료 데이터 플랫폼</span>
+                                <small>정서적 치유 효과 측정 및 복지 지수 데이터화</small>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 시장 기회 -->
+                <div class="card">
+                    <h3 style="color:var(--accent-blue); margin-bottom:15px;">📡 시장 전략 (Strategy)</h3>
+                    <ul class="doc-list">
+                        <li>
+                            <div class="doc-link">
+                                <span>서울시 스마트 경로당</span>
+                                <small>자치구별 스마트 경로당 구축 사업 연계 최적화</small>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="doc-link">
+                                <span>녹색 복지 예산 타겟팅</span>
+                                <small>행안부/보건복지부 노인 복지 및 환경 개선 예산 확보</small>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="doc-link">
+                                <span>기업 ESG 솔루션</span>
+                                <small>사옥 내 지능형 녹지 조성을 통한 기업 ESG 가치 제고</small>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 기대 효과 -->
+                <div class="card">
+                    <h3 style="color:var(--accent-gold); margin-bottom:15px;">📊 기대 효과 (Impact)</h3>
+                    <div class="stats-row" style="grid-template-columns: 1fr 1fr; gap:10px;">
+                        <div style="background:rgba(255,255,255,0.03); padding:10px; border-radius:8px; text-align:center;">
+                            <div style="font-size:1.2rem; font-weight:700; color:#22c55e;">41%</div>
+                            <div style="font-size:0.7rem; color:var(--text-muted);">관리 비용 절감</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.03); padding:10px; border-radius:8px; text-align:center;">
+                            <div style="font-size:1.2rem; font-weight:700; color:var(--accent-teal);">25%</div>
+                            <div style="font-size:0.7rem; color:var(--text-muted);">우울 지수 감소</div>
+                        </div>
+                    </div>
+                    <p style="margin-top:15px; font-size:0.8rem; color:var(--text-muted); line-height:1.4;">"단순 조경을 넘어 데이터 기반의 복지 서비스를 실현하는 스마트 시티의 핵심 레이어로 포지셔닝"</p>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:20px;">
+                <button onclick="alert('제안서 원본 파일은 서버 내 /home/skywork/workspace/InputFiles/ 에 안전하게 보관 중입니다.')" style="background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); color:white; padding:12px 30px; border-radius:30px; cursor:pointer; font-size:0.9rem;">📄 제안서 원본 아카이브 확인</button>
+            </div>
+        </section>
 
     </main>
 
