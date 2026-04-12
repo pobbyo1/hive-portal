@@ -572,238 +572,180 @@
             .sector-grid, .stats-row, .hero-columns, .quick-access-grid, .term-grid { grid-template-columns: 1fr; }
             .tech-stack-grid { grid-template-columns: repeat(3, 1fr); }
         }
-        /* --- Section 6: 스마트 가드닝 엘리트 관제 시스템 (Enterprise Grade) --- */
+        /* --- Section 6: 스마트 가드닝 LAGOS 스타일 프리미엄 대시보드 --- */
         #gardening {
-            background-color: #03060b;
-            padding: 40px;
-            color: #f8fafc;
+            background-color: #0c111c;
+            padding: 24px;
+            color: #f1f5f9;
             min-height: 100vh;
-            font-family: 'Inter', 'Pretendard', sans-serif;
-            position: relative;
-            overflow: hidden;
+            font-family: 'Inter', -apple-system, sans-serif;
         }
 
-        /* Cyber Grid Background */
-        #gardening::before {
+        .lagos-dashboard {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Top Header Area */
+        .lagos-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+        }
+
+        .lagos-title { display: flex; align-items: center; gap: 12px; }
+        .lagos-title i { font-style: normal; font-size: 1.2rem; }
+        .lagos-title h1 { font-size: 1.1rem; font-weight: 700; color: #fff; }
+        .lagos-title span { font-size: 0.85rem; color: #64748b; font-weight: 400; }
+
+        .lagos-meta { display: flex; align-items: center; gap: 20px; }
+        .lagos-status {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .lagos-clock { font-size: 0.85rem; color: #94a3b8; font-weight: 500; }
+        .lagos-btn {
+            background: #1e293b;
+            color: #4facfe;
+            border: 1px solid rgba(79, 172, 254, 0.3);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Top KPI Grid */
+        .lagos-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+        }
+
+        .lagos-kpi-card {
+            background: #161c28;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .lagos-kpi-card::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(79, 172, 254, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(79, 172, 254, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 0;
+            top: 12px; right: 12px;
+            width: 6px; height: 6px;
+            border-radius: 50%;
         }
 
-        .elite-dashboard {
-            position: relative;
-            z-index: 1;
-            max-width: 1600px;
-            margin: 0 auto;
+        .kpi-red::after { background: #ef4444; box-shadow: 0 0 10px #ef4444; }
+        .kpi-orange::after { background: #f59e0b; box-shadow: 0 0 10px #f59e0b; }
+        .kpi-green::after { background: #10b981; box-shadow: 0 0 10px #10b981; }
+        .kpi-blue::after { background: #3b82f6; box-shadow: 0 0 10px #3b82f6; }
+        .kpi-purple::after { background: #8b5cf6; box-shadow: 0 0 10px #8b5cf6; }
+        .kpi-gold::after { background: #d97706; box-shadow: 0 0 10px #d97706; }
+
+        .lagos-kpi-val { font-size: 1.6rem; font-weight: 700; color: #fff; display: block; margin-bottom: 5px; }
+        .lagos-kpi-label { font-size: 0.8rem; color: #94a3b8; font-weight: 500; }
+        .lagos-kpi-trend { font-size: 0.7rem; color: #64748b; margin-top: 8px; display: block; }
+
+        /* Middle Section Layout */
+        .lagos-main-grid {
             display: grid;
-            grid-template-columns: 350px 1fr 380px;
-            grid-template-rows: auto 1fr auto;
-            gap: 24px;
-            height: auto;
+            grid-template-columns: 1fr 1fr 1.2fr;
+            gap: 12px;
         }
 
-        /* Global Header */
-        .ed-header {
-            grid-column: 1 / -1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            border-bottom: 2px solid rgba(79, 172, 254, 0.2);
-            margin-bottom: 10px;
-        }
-
-        .ed-brand { display: flex; align-items: center; gap: 15px; }
-        .ed-brand h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; }
-        .ed-brand span { color: var(--accent-blue); font-size: 0.8rem; letter-spacing: 3px; font-weight: 600; }
-
-        /* KPI Ribbon */
-        .ed-kpi-ribbon {
-            grid-column: 1 / -1;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        .ed-kpi-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .lagos-panel {
+            background: #161c28;
+            border: 1px solid #1e293b;
             border-radius: 12px;
             padding: 24px;
-            display: flex;
-            flex-direction: column;
-            backdrop-filter: blur(10px);
         }
 
-        .ed-kpi-label { font-size: 0.75rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; margin-bottom: 10px; }
-        .ed-kpi-value { font-size: 2.2rem; font-weight: 700; color: #fff; line-height: 1; }
-        .ed-kpi-sub { font-size: 0.8rem; margin-top: 10px; color: #22c55e; font-weight: 600; }
+        .panel-title { font-size: 0.85rem; font-weight: 700; color: #94a3b8; margin-bottom: 20px; display: flex; justify-content: space-between; }
+        .panel-title small { font-weight: 400; font-size: 0.7rem; color: #475569; }
 
-        /* Side Panel (Left) - Asset Inventory */
-        .ed-panel-left {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
+        /* Data Bars (오늘의 생육 데이터) */
+        .bar-group { margin-bottom: 18px; }
+        .bar-label { display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 6px; }
+        .bar-bg { height: 6px; background: #0f172a; border-radius: 3px; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 3px; }
 
-        .glass-box {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 25px;
-            backdrop-filter: blur(15px);
-        }
-
-        .glass-box h3 { font-size: 1rem; color: var(--accent-teal); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-
-        .asset-item {
+        /* Status List (시범지구 상태) */
+        .status-list { display: flex; flex-direction: column; gap: 12px; }
+        .status-item {
+            background: #0f172a;
+            padding: 14px 20px;
+            border-radius: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .asset-item:last-child { border-bottom: none; }
-        .asset-info p { font-size: 0.85rem; font-weight: 600; }
-        .asset-info small { font-size: 0.7rem; color: #64748b; }
+        .status-key { font-family: monospace; font-size: 0.8rem; color: #38bdf8; font-weight: 600; }
+        .status-desc { font-size: 0.8rem; color: #94a3b8; }
+        .status-dot-green { width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; }
 
-        /* Main Center (Map & Core Monitoring) */
-        .ed-center {
+        /* Event Log (실시간 AI 이벤트) */
+        .event-log {
             display: flex;
             flex-direction: column;
-            gap: 24px;
-        }
-
-        .main-monitor {
-            flex-grow: 1;
-            background: radial-gradient(circle at center, rgba(79, 172, 254, 0.1) 0%, transparent 70%);
-            border: 1px solid rgba(79, 172, 254, 0.2);
-            border-radius: 24px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-        }
-
-        /* Scanning HUD */
-        .hud-frame {
-            position: absolute;
-            inset: 20px;
-            border: 1px solid rgba(79, 172, 254, 0.1);
-            pointer-events: none;
-        }
-        .hud-corner {
-            position: absolute; width: 20px; height: 20px; border: 2px solid var(--accent-blue);
-        }
-        .tl { top: 0; left: 0; border-right: none; border-bottom: none; }
-        .tr { top: 0; right: 0; border-left: none; border-bottom: none; }
-        .bl { bottom: 0; left: 0; border-right: none; border-top: none; }
-        .br { bottom: 0; right: 0; border-left: none; border-top: none; }
-
-        .live-map-sim {
-            font-size: 12rem; opacity: 0.1; filter: blur(2px);
-        }
-
-        .target-overlay {
-            position: absolute;
-            display: flex; flex-direction: column; align-items: center;
-        }
-        .target-reticle {
-            width: 40px; height: 40px; border: 1px solid var(--accent-blue); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            animation: rotateTarget 10s linear infinite;
-        }
-        .target-reticle::after {
-            content: ''; width: 4px; height: 4px; background: var(--accent-blue); border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-blue);
-        }
-        @keyframes rotateTarget { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-        .target-label {
-            background: rgba(0,0,0,0.8); border: 1px solid var(--accent-blue); padding: 4px 10px;
-            border-radius: 4px; font-size: 0.7rem; margin-top: 10px; white-space: nowrap;
-        }
-
-        /* Side Panel (Right) - AI Decisions & ROI */
-        .ed-panel-right {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .decision-log {
-            background: #000;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 20px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.75rem;
+            gap: 12px;
             height: 300px;
-            overflow: hidden;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        .event-log::-webkit-scrollbar { width: 4px; }
+        .event-log::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
+
+        .log-entry { font-size: 0.72rem; line-height: 1.5; color: #cbd5e1; }
+        .tag-block { color: #ef4444; font-weight: 800; margin-right: 5px; }
+        .tag-info { color: #10b981; font-weight: 800; margin-right: 5px; }
+        .tag-warn { color: #f59e0b; font-weight: 800; margin-right: 5px; }
+
+        /* Bottom Section Grid */
+        .lagos-bottom-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 12px;
+        }
+
+        .metric-card-group { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .small-metric { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); border-radius: 8px; padding: 20px; }
+        .sm-val { font-size: 1.1rem; font-weight: 700; color: #38bdf8; }
+        .sm-label { font-size: 0.7rem; color: #64748b; margin-top: 5px; }
+
+        /* Modality Status Boxes */
+        .modality-list { display: flex; flex-direction: column; gap: 10px; }
+        .modality-box {
+            background: rgba(255,255,255,0.02);
+            padding: 12px 18px;
+            border-radius: 8px;
             display: flex;
-            flex-direction: column;
-            gap: 8px;
+            justify-content: space-between;
+            align-items: center;
         }
+        .mod-info { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; }
+        .mod-tag { font-size: 0.65rem; font-weight: 800; padding: 2px 6px; border-radius: 4px; }
+        .tag-critical { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid #ef4444; }
+        .tag-high { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid #f59e0b; }
 
-        .log-line { display: flex; gap: 10px; animation: slideUp 0.3s ease-out; }
-        .log-time { color: #4facfe; opacity: 0.6; }
-        .log-msg { color: #22c55e; }
-        .log-alert { color: #f7c948; }
-
-        @keyframes slideUp { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-
-        .roi-gauge-container {
-            display: flex; flex-direction: column; align-items: center; gap: 15px;
-        }
-        .roi-ring {
-            width: 120px; height: 120px; border-radius: 50%;
-            background: conic-gradient(var(--accent-teal) 75%, rgba(255,255,255,0.05) 0);
-            display: flex; align-items: center; justify-content: center;
-            position: relative;
-        }
-        .roi-ring::after {
-            content: '₩ 4.2B';
-            position: absolute; inset: 10px; background: #0a0e1a; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; font-weight: 800; color: #fff;
-        }
-
-        /* Status Pills */
-        .ed-status-bar {
-            grid-column: 1 / -1;
-            display: flex; justify-content: center; gap: 15px; margin-top: 20px;
-        }
-        .status-pill {
-            padding: 8px 20px; border-radius: 30px; font-size: 0.75rem; font-weight: 600;
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
-            color: #94a3b8; display: flex; align-items: center; gap: 8px;
-        }
-        .status-pill.active { border-color: var(--accent-blue); color: #fff; background: rgba(79, 172, 254, 0.1); }
-        .status-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 5px #22c55e; }
-
-        /* Animation Keyframes */
-        @keyframes scanhud {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
-        }
-
-        /* Footer Metadata Style */
-        .ed-footer-meta {
-            grid-column: 1 / -1;
+        .footer-metadata {
             text-align: center;
             padding: 40px 0;
-            opacity: 0.4;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            color: #94a3b8;
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: #334155;
+            letter-spacing: 1px;
         }
 
         @media (max-width: 1200px) {
@@ -1334,154 +1276,177 @@
         </footer>
 
     
-        <!-- SECTION 6: 스마트 가드닝 엘리트 관제 시스템 -->
+        <!-- SECTION 6: 스마트 가드닝 LAGOS 스타일 대시보드 -->
         <section id="gardening" class="content-section">
-            <div class="elite-dashboard">
+            <div class="lagos-dashboard">
                 
-                <!-- 1. Enterprise Header -->
-                <header class="ed-header">
-                    <div class="ed-brand">
-                        <div class="hexagon-small"></div>
-                        <div>
-                            <h1>SMART GARDENING</h1>
-                            <span>ENTERPRISE COMMAND CENTER</span>
-                        </div>
+                <!-- 1. Header -->
+                <div class="lagos-header">
+                    <div class="lagos-title">
+                        <i>🏠</i>
+                        <h1>스마트 가드닝 <span>Overview</span></h1>
                     </div>
-                    <div style="text-align: right;">
-                        <div id="ed-clock" style="font-size: 1.5rem; font-weight: 800; color: var(--accent-blue); letter-spacing: 2px;">14:15:22</div>
-                        <div style="font-size: 0.7rem; color: #64748b; font-weight: 700;">SEOUL CORE · LIVE STREAM</div>
-                    </div>
-                </header>
-
-                <!-- 2. Strategic KPI Ribbon -->
-                <div class="ed-kpi-ribbon">
-                    <div class="ed-kpi-card">
-                        <span class="ed-kpi-label">TOTAL MANAGED ASSETS</span>
-                        <span class="ed-kpi-value">124,582</span>
-                        <span class="ed-kpi-sub">● SYSTEM STABLE</span>
-                    </div>
-                    <div class="ed-kpi-card">
-                        <span class="ed-kpi-label">AVG BIOLOGICAL HEALTH</span>
-                        <span class="ed-kpi-value">98.4%</span>
-                        <span class="ed-kpi-sub">↑ 0.2% YTD</span>
-                    </div>
-                    <div class="ed-kpi-card">
-                        <span class="ed-kpi-label">CARBON SEQUESTRATION</span>
-                        <span class="ed-kpi-value">1,240 <small>t</small></span>
-                        <span class="ed-kpi-sub">AI OPTIMIZED</span>
-                    </div>
-                    <div class="ed-kpi-card">
-                        <span class="ed-kpi-label">AUTONOMOUS ACTIONS</span>
-                        <span class="ed-kpi-value">428</span>
-                        <span class="ed-kpi-sub" style="color:var(--accent-teal);">ACTIVE 24/7</span>
+                    <div class="lagos-meta">
+                        <div class="lagos-status">● 전 계층 정상</div>
+                        <div class="lagos-clock" id="lg-clock">오후 2:06:36</div>
+                        <button class="lagos-btn" onclick="showSection('\''report'\'' )">리포트 홈 →</button>
                     </div>
                 </div>
 
-                <!-- 3. Left Panel: Asset Inventory -->
-                <aside class="ed-panel-left">
-                    <div class="glass-box">
-                        <h3>📁 DATA REPOSITORY</h3>
-                        <div class="asset-item">
-                            <div class="asset-info"><p>Plant Photos</p><small>Daily Field Sync</small></div>
-                            <span style="font-weight:700;">4,281</span>
-                        </div>
-                        <div class="asset-item">
-                            <div class="asset-info"><p>Biological Stats</p><small>In-situ Measurements</small></div>
-                            <span style="font-weight:700;">12,502</span>
-                        </div>
-                        <div class="asset-item">
-                            <div class="asset-info"><p>Sensor Logs</p><small>Real-time Telemetry</small></div>
-                            <span style="font-weight:700;">85K+</span>
-                        </div>
+                <!-- 2. KPI Cards -->
+                <div class="lagos-kpi-grid">
+                    <div class="lagos-kpi-card kpi-red">
+                        <span class="lagos-kpi-val">124,582</span>
+                        <span class="lagos-kpi-label">관리 정원수</span>
+                        <span class="lagos-kpi-trend">+1,240 오늘</span>
                     </div>
-                    <div class="glass-box">
-                        <h3>📍 PILOT SITES</h3>
-                        <div class="site-status-item" style="background:transparent; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
-                            <div style="font-size:0.85rem; font-weight:600;">SEOCHO-GU <small style="color:#22c55e;">●</small></div>
-                            <div style="font-size:0.75rem; color:#64748b;">Syncing Digital Twin</div>
-                        </div>
-                        <div class="site-status-item" style="background:transparent; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
-                            <div style="font-size:0.85rem; font-weight:600;">GANGNAM-GU <small style="color:#f7c948;">●</small></div>
-                            <div style="font-size:0.75rem; color:#f7c948;">Action Required</div>
-                        </div>
-                        <div class="site-status-item" style="background:transparent; padding:10px 0;">
-                            <div style="font-size:0.85rem; font-weight:600;">SONGPA-GU <small style="color:#22c55e;">●</small></div>
-                            <div style="font-size:0.75rem; color:#64748b;">Optimal Status</div>
-                        </div>
+                    <div class="lagos-kpi-card kpi-orange">
+                        <span class="lagos-kpi-val">98.4%</span>
+                        <span class="lagos-kpi-label">생육 건강도</span>
+                        <span class="lagos-kpi-trend">안정권 유지</span>
                     </div>
-                </aside>
-
-                <!-- 4. Center: Strategic Monitoring -->
-                <div class="ed-center">
-                    <div class="main-monitor">
-                        <div class="hud-frame">
-                            <div class="hud-corner tl"></div><div class="hud-corner tr"></div>
-                            <div class="hud-corner bl"></div><div class="hud-corner br"></div>
-                            <div style="position:absolute; top:0; left:50%; transform:translateX(-50%); background:var(--accent-blue); color:#000; font-size:0.6rem; padding:2px 10px; font-weight:800;">LIVE FEED: DIGITAL TWIN SCAN</div>
-                        </div>
-                        <div class="live-map-sim">🇰🇷</div>
-                        
-                        <!-- Animated Target Reticles -->
-                        <div class="target-overlay" style="top:30%; left:45%;">
-                            <div class="target-reticle"></div>
-                            <div class="target-label">SEOCHO_01 [NORMAL]</div>
-                        </div>
-                        <div class="target-overlay" style="top:50%; left:60%;">
-                            <div class="target-reticle" style="border-color:#f7c948;"></div>
-                            <div class="target-label" style="border-color:#f7c948; color:#f7c948;">GANGNAM_X [LOW_MOISTURE]</div>
-                        </div>
-                        <div class="target-overlay" style="bottom:20%; right:30%;">
-                            <div class="target-reticle"></div>
-                            <div class="target-label">SONGPA_05 [OPTIMAL]</div>
-                        </div>
+                    <div class="lagos-kpi-card kpi-green">
+                        <span class="lagos-kpi-val">3</span>
+                        <span class="lagos-kpi-label">시범지구 운영</span>
+                        <span class="lagos-kpi-trend">전계층 정상</span>
+                    </div>
+                    <div class="lagos-kpi-card kpi-blue">
+                        <span class="lagos-kpi-val">1,240 <small>t</small></span>
+                        <span class="lagos-kpi-label">누적 탄소 저감</span>
+                        <span class="lagos-kpi-trend">기여도 높음</span>
+                    </div>
+                    <div class="lagos-kpi-card kpi-purple">
+                        <span class="lagos-kpi-val">82%</span>
+                        <span class="lagos-kpi-label">평균 수조 잔량</span>
+                        <span class="lagos-kpi-trend">충분한 보급</span>
+                    </div>
+                    <div class="lagos-kpi-card kpi-gold">
+                        <span class="lagos-kpi-val">428</span>
+                        <span class="lagos-kpi-label">AI 자율 대응</span>
+                        <span class="lagos-kpi-trend">24/7 가동 중</span>
                     </div>
                 </div>
 
-                <!-- 5. Right Panel: Intelligence -->
-                <aside class="ed-panel-right">
-                    <div class="glass-box" style="padding:0; background:transparent; border:none;">
-                        <h3>🧠 AI DECISION LOGS</h3>
-                        <div class="decision-log">
-                            <div class="log-line"><span class="log-time">14:12:01</span> <span class="log-msg">Scanning Seocho Assets... OK</span></div>
-                            <div class="log-line"><span class="log-time">14:12:45</span> <span class="log-msg">Gangnam_X: Moisture 32% detected</span></div>
-                            <div class="log-line"><span class="log-time">14:13:02</span> <span class="log-alert">INITIATING AUTONOMOUS IRRIGATION</span></div>
-                            <div class="log-line"><span class="log-time">14:14:12</span> <span class="log-msg">Water reservoir 15% remaining</span></div>
-                            <div class="log-line"><span class="log-time">14:15:00</span> <span class="log-msg">Digital Twin: Songpa updated</span></div>
-                            <div class="log-line"><span class="log-time">14:15:15</span> <span class="log-msg">CO2 Capture Stats re-calculated</span></div>
+                <!-- 3. Main Central Grid -->
+                <div class="lagos-main-grid">
+                    
+                    <!-- Left: Data Bars -->
+                    <div class="lagos-panel">
+                        <div class="panel-title">오늘의 생육 데이터 현황</div>
+                        <div class="bar-group">
+                            <div class="bar-label"><span>토양 수분 (Moisture)</span><span>82%</span></div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 82%; background: #ef4444;"></div></div>
+                        </div>
+                        <div class="bar-group">
+                            <div class="bar-label"><span>엽록소 수치 (Chlorophyll)</span><span>76%</span></div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 76%; background: #f59e0b;"></div></div>
+                        </div>
+                        <div class="bar-group">
+                            <div class="bar-label"><span>토양 온도 (Soil Temp)</span><span>22.4°C</span></div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 65%; background: #8b5cf6;"></div></div>
+                        </div>
+                        <div class="bar-group">
+                            <div class="bar-label"><span>일조량 (Illuminance)</span><span>92%</span></div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 92%; background: #3b82f6;"></div></div>
+                        </div>
+                        <div class="bar-group">
+                            <div class="bar-label"><span>대기 습도 (Humidity)</span><span>45%</span></div>
+                            <div class="bar-bg"><div class="bar-fill" style="width: 45%; background: #10b981;"></div></div>
                         </div>
                     </div>
-                    <div class="glass-box" style="text-align:center;">
-                        <h3>🌿 SOCIAL IMPACT ROI</h3>
-                        <div class="roi-gauge-container">
-                            <div class="roi-ring"></div>
-                            <p class="roi-label">Est. Social Value Creation</p>
-                            <div style="display:flex; gap:10px; margin-top:10px;">
-                                <div style="background:rgba(34,229,94,0.1); padding:10px; border-radius:10px; flex:1;">
-                                    <div style="font-size:1.1rem; font-weight:700; color:#22c55e;">28%</div>
-                                    <div style="font-size:0.6rem; color:#94a3b8;">WELLBEING ↑</div>
-                                </div>
-                                <div style="background:rgba(79,172,254,0.1); padding:10px; border-radius:10px; flex:1;">
-                                    <div style="font-size:1.1rem; font-weight:700; color:var(--accent-blue);">41%</div>
-                                    <div style="font-size:0.6rem; color:#94a3b8;">COST SAVED ↓</div>
-                                </div>
+
+                    <!-- Center: Status List -->
+                    <div class="lagos-panel">
+                        <div class="panel-title">시범지구 실시간 상태</div>
+                        <div class="status-list">
+                            <div class="status-item">
+                                <div><span class="status-key">seocho_01</span> <span class="status-desc">디지털 트윈 동기화</span></div>
+                                <div class="status-dot-green"></div>
+                            </div>
+                            <div class="status-item">
+                                <div><span class="status-key">gangnam_x</span> <span class="status-desc">자율 관수 시퀀스</span></div>
+                                <div class="status-dot-green"></div>
+                            </div>
+                            <div class="status-item">
+                                <div><span class="status-key">songpa_05</span> <span class="status-desc">생육 최적 상태 유지</span></div>
+                                <div class="status-dot-green"></div>
+                            </div>
+                            <div class="status-item">
+                                <div><span class="status-key">seoul_core</span> <span class="status-desc">메인 게이트웨이 연동</span></div>
+                                <div class="status-dot-green"></div>
+                            </div>
+                            <div class="status-item">
+                                <div><span class="status-key">data_sync</span> <span class="status-desc">실시간 텔레메트리 업데이트</span></div>
+                                <div class="status-dot-green"></div>
                             </div>
                         </div>
                     </div>
-                </aside>
 
-                <!-- 6. Status Bar -->
-                <div class="ed-status-bar">
-                    <div class="status-pill active"><div class="dot"></div> IoT SENSORS: ONLINE</div>
-                    <div class="status-pill active"><div class="dot"></div> AI AGENT: ACTIVE</div>
-                    <div class="status-pill active"><div class="dot"></div> DATA SYNC: 99.8%</div>
-                    <div class="status-pill active"><div class="dot"></div> SECURITY: ENFORCED</div>
+                    <!-- Right: AI Event Log -->
+                    <div class="lagos-panel">
+                        <div class="panel-title">실시간 가드닝 AI 이벤트</div>
+                        <div class="event-log">
+                            <div class="log-entry"><span class="tag-block">BLOCK</span> 국외 가이드라인 미준수 패턴 차단 — 접근 거부</div>
+                            <div class="log-entry"><span class="tag-info">INFO</span> 서초 시범지구 소나무 A-12 분석 완료 — 신규 패턴 등록</div>
+                            <div class="log-entry"><span class="tag-block">BLOCK</span> 수분 과다 주입 패턴 감지 — 시스템 가동 중단</div>
+                            <div class="log-entry"><span class="tag-warn">WARN</span> 강남지구 토양 온도 급증 감지 (센서 오류 점검 권고)</div>
+                            <div class="log-entry"><span class="tag-block">BLOCK</span> 비인가 센서 데이터 유입 시도 — 송파 노드 차단</div>
+                            <div class="log-entry"><span class="tag-info">INFO</span> 하이브 AI 자율 학습 모델 업데이트 완료 — v2.4.1 배포</div>
+                            <div class="log-entry"><span class="tag-warn">WARN</span> 수조 수위 낮음 알림 (보충 주기 단축 예약)</div>
+                            <div class="log-entry"><span class="tag-block">BLOCK</span> 데이터 탈취 시도 패턴 차단 — RAG 쿼리 변조 시도</div>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- 7. Global Footer Meta -->
-                <footer class="ed-footer-meta">
-                    {"label": "gateway-client", "id": "gateway-client"} | 
-                    CONFIDENTIAL ENTERPRISE SOLUTION | © 2026 HIVE INTELLIGENCE BY SUNYOUTECH
-                </footer>
+                <!-- 4. Bottom Grid -->
+                <div class="lagos-bottom-grid">
+                    
+                    <div class="metric-card-group">
+                        <div class="lagos-panel small-metric">
+                            <div class="panel-title">AI 생육 분석 성능</div>
+                            <div style="margin-top:20px;">
+                                <div class="sm-val">98.4%</div>
+                                <div class="sm-label">분석 정확도 (Confidence)</div>
+                                <div class="sm-val" style="margin-top:15px;">100ms</div>
+                                <div class="sm-label">실시간 분석 지연 시간</div>
+                            </div>
+                        </div>
+                        <div class="lagos-panel small-metric">
+                            <div class="panel-title">데이터 확보 현황</div>
+                            <div style="margin-top:20px;">
+                                <div class="sm-val">67%↑</div>
+                                <div class="sm-label">전월 대비 데이터 수집량</div>
+                                <div class="sm-val" style="margin-top:15px;">자동</div>
+                                <div class="sm-label">학습 사이클 가동 모드</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lagos-panel">
+                        <div class="panel-title">데이터 확보 모달리티 현황</div>
+                        <div class="modality-list">
+                            <div class="modality-box">
+                                <div class="mod-info">🖼️ 이미지 (Photos)</div>
+                                <span class="mod-tag tag-critical">CRITICAL</span>
+                            </div>
+                            <div class="modality-box">
+                                <div class="mod-info">🔊 음향 (Bio-Acoustics)</div>
+                                <span class="mod-tag tag-high">HIGH</span>
+                            </div>
+                            <div class="modality-box">
+                                <div class="mod-info">📄 문서 (Field Reports)</div>
+                                <span class="mod-tag tag-high">HIGH</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- 5. Metadata Footer -->
+                <div class="footer-metadata">
+                    {"label": "gateway-client", "id": "gateway-client"} | CONFIDENTIAL HIVE INTELLIGENCE PORTAL
+                </div>
 
             </div>
         </section>
@@ -1647,12 +1612,14 @@
             document.getElementById('current-date').innerText = formatted;
             document.getElementById('dash-date').innerText = formatted.split(' ')[0];
 
-            // Mission Control Clock
-            const h = now.getHours().toString().padStart(2, '0');
+            // Lagos Style Clock
+            const h = now.getHours();
+            const ampm = h >= 12 ? '오후' : '오전';
+            const h12 = h % 12 || 12;
             const m = now.getMinutes().toString().padStart(2, '0');
             const s = now.getSeconds().toString().padStart(2, '0');
-            const clockEl = document.getElementById('ed-clock');
-            if (clockEl) clockEl.innerText = `${h}:${m}:${s}`;
+            const clockEl = document.getElementById('lg-clock');
+            if (clockEl) clockEl.innerText = `${ampm} ${h12}:${m}:${s}`;
         }
 
         setInterval(updateDate, 1000);
