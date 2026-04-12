@@ -686,6 +686,105 @@
 
         .pill:hover { border-color: white; color: white; background: rgba(255,255,255,0.1); }
 
+        /* --- Section 6: 스마트 가드닝 프리미엄 대시보드 --- */
+        #gardening {
+            background-color: #05070a;
+            padding: 80px 30px;
+            color: white;
+        }
+
+        .command-center-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(79, 172, 254, 0.05);
+            border: 1px solid rgba(79, 172, 254, 0.2);
+            border-radius: 12px;
+        }
+
+        .ticker-item {
+            text-align: center;
+            padding: 0 25px;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+        .ticker-item:last-child { border-right: none; }
+        .ticker-val { display: block; font-size: 1.5rem; font-weight: 700; color: var(--accent-teal); }
+        .ticker-label { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; }
+
+        .control-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .hologram-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hologram-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+            animation: moveScan 3s linear infinite;
+        }
+
+        @keyframes moveScan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        .site-status-list { list-style: none; }
+        .site-status-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        .site-status-item:hover { background: rgba(79, 172, 254, 0.1); transform: translateX(5px); }
+
+        .health-gauge {
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            border: 4px solid #1e293b;
+            border-top-color: var(--accent-teal);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 700;
+        }
+
+        .ai-log {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: #22c55e;
+            background: #000;
+            padding: 15px;
+            border-radius: 10px;
+            height: 200px;
+            overflow-y: auto;
+            line-height: 1.6;
+        }
+
+        .welfare-card {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, transparent 100%);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+        }
+
     </style>
 </head>
 <body>
@@ -1197,163 +1296,129 @@
         <!-- SECTION 6: 스마트 가드닝 프로젝트 -->
         <section id="gardening" class="content-section">
             
-            <div class="gardening-hero-sub">SUNYOUTECH · 지능형 가드닝 통합 플랫폼</div>
-            <h1 class="gardening-hero-title">
-                서울시 정원수 인텔리전스
-                <span>데이터 확보 및 분석</span>
+            <!-- Mayor Level Branding -->
+            <div class="gardening-hero-sub" style="color:var(--accent-teal); border: 1px solid var(--accent-teal); padding: 5px 15px; border-radius: 20px; display: inline-block;">
+                OFFICIAL COMMAND CENTER · SEOUL SMART GARDENING
+            </div>
+            
+            <h1 class="gardening-hero-title" style="font-size: 3.5rem; margin-top: 30px;">
+                서울시 지능형 가드닝
+                <span class="glow-text">통합 관제 및 데이터 센터</span>
             </h1>
 
-            <div class="gardening-hero-desc">
-                IoT 생체 센싱 · 디지털 트윈 관제 · AI 성상 분석<br>
-                국내 지자체 환경에 최적화된 스마트 가드닝 라이선싱, SUNYOUTECH의<br>
-                데이터 기반 녹색 복지 솔루션을 확인하십시오
+            <!-- Real-time Global Ticker -->
+            <div class="command-center-header">
+                <div class="ticker-item">
+                    <span class="ticker-val">124,582</span>
+                    <span class="ticker-label">전체 관리 정원수</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-val" style="color:#22c55e;">98.4%</span>
+                    <span class="ticker-label">평균 건강 지수</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-val" style="color:#f7c948;">3건</span>
+                    <span class="ticker-label">실시간 AI 특이사항</span>
+                </div>
+                <div class="ticker-item">
+                    <span class="ticker-val">1,240 ton</span>
+                    <span class="ticker-label">연간 탄소 저감량</span>
+                </div>
             </div>
 
-            <button class="premium-btn" onclick="document.getElementById('\''poc-control'\'' ).scrollIntoView({behavior: '\''smooth'\''})">
-                🖥️ 가드닝 통합 관제 대시보드
-            </button>
-
-            <div class="pill-container">
-                <div class="pill pill-green">IoT 센서 데이터</div>
-                <div class="pill pill-gold">현장 사진 아카이브</div>
-                <div class="pill pill-blue">AI 성상 분석</div>
-                <div class="pill pill-purple">디지털 트윈</div>
-                <div class="pill">비교해보세요</div>
-            </div>
-
-            <div class="sector-grid">
-                <!-- 핵심 기술 -->
-                <div class="card">
-                    <h3 style="color:#22c55e; margin-bottom:15px;">🛡️ 핵심 기술 (Tech Stack)</h3>
-                    <ul class="doc-list">
-                        <li>
-                            <div class="doc-link">
-                                <span>디지털 트윈 가드닝</span>
-                                <small>실물 가든의 가상화 모델링 및 실시간 시뮬레이션</small>
+            <!-- AA-Level Control Grid -->
+            <div class="control-grid">
+                
+                <!-- Left: Site Status -->
+                <div class="hologram-card">
+                    <h3 style="margin-bottom:20px; font-size:1.1rem; display:flex; align-items:center; gap:8px;">
+                        📍 시범지구 실시간 현황
+                    </h3>
+                    <div class="site-status-list">
+                        <div class="site-status-item">
+                            <div>
+                                <div style="font-weight:700;">서초구 반포동</div>
+                                <div style="font-size:0.7rem; color:#94a3b8;">디지털 트윈 동기화 완료</div>
                             </div>
-                        </li>
-                        <li>
-                            <div class="doc-link">
-                                <span>AI 식물 생체 센싱</span>
-                                <small>엽록소, 수분, 생육 상태 정밀 센싱 및 에이전트 분석</small>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="doc-link">
-                                <span>원예 치료 데이터 플랫폼</span>
-                                <small>정서적 치유 효과 측정 및 복지 지수 데이터화</small>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- 데이터 확보 방안 (Core Asset) -->
-                <div class="card" style="border: 2px solid var(--accent-teal);">
-                    <h3 style="color:var(--accent-teal); margin-bottom:15px;">📁 가드닝 데이터 인텔리전스 구축 (Core)</h3>
-                    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:15px;">서울시 가드닝 데이터셋 확보를 위한 매일 자동 축적 프로세스</p>
-                    <ul class="doc-list">
-                        <li>
-                            <div class="doc-link">
-                                <span style="color:white;">📸 현장 사진 데이터 (Photos)</span>
-                                <small>서울시 관리 정원수 및 식재 현장 실시간 이미지 데이터 수집</small>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="doc-link">
-                                <span style="color:white;">📈 식물 성상 데이터 (Biological Stats)</span>
-                                <small>수종별 생육 상태, 수고, 흉고직경 등 정밀 측정 데이터 DB화</small>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="doc-link">
-                                <span style="color:white;">🗓️ 일간 가드닝 리포트 (Daily Sync)</span>
-                                <small>매일 업데이트되는 현장 데이터 기반의 가드닝 인텔리전스 생성</small>
-                            </div>
-                        </li>
-                    </ul>
-                    <div style="margin-top:20px; padding:12px; background:rgba(0,242,254,0.05); border-radius:8px; border:1px dashed var(--accent-teal);">
-                        <p style="font-size:0.8rem; text-align:center; color:var(--accent-teal);">🤖 하이브가 매일 <b>Gardening_Data/</b> 폴더에 데이터를 차곡차곡 쌓고 있습니다.</p>
-                    </div>
-                </div>
-
-                <!-- 기대 효과 -->
-                <div class="card">
-                    <h3 style="color:var(--accent-gold); margin-bottom:15px;">📊 기대 효과 (Impact)</h3>
-                    <div class="stats-row" style="grid-template-columns: 1fr 1fr; gap:10px;">
-                        <div style="background:rgba(255,255,255,0.03); padding:10px; border-radius:8px; text-align:center;">
-                            <div style="font-size:1.2rem; font-weight:700; color:#22c55e;">41%</div>
-                            <div style="font-size:0.7rem; color:var(--text-muted);">관리 비용 절감</div>
+                            <div class="health-gauge">92%</div>
                         </div>
-                        <div style="background:rgba(255,255,255,0.03); padding:10px; border-radius:8px; text-align:center;">
-                            <div style="font-size:1.2rem; font-weight:700; color:var(--accent-teal);">25%</div>
-                            <div style="font-size:0.7rem; color:var(--text-muted);">우울 지수 감소</div>
+                        <div class="site-status-item">
+                            <div>
+                                <div style="font-weight:700;">강남구 역삼동</div>
+                                <div style="font-size:0.7rem; color:#f7c948;">⚠️ 수분 부족 예측 (AI)</div>
+                            </div>
+                            <div class="health-gauge" style="border-top-color:#f7c948;">65%</div>
+                        </div>
+                        <div class="site-status-item">
+                            <div>
+                                <div style="font-weight:700;">송파구 잠실동</div>
+                                <div style="font-size:0.7rem; color:#94a3b8;">생육 상태 최상</div>
+                            </div>
+                            <div class="health-gauge">98%</div>
                         </div>
                     </div>
-                    <p style="margin-top:15px; font-size:0.8rem; color:var(--text-muted); line-height:1.4;">"단순 조경을 넘어 데이터 기반의 복지 서비스를 실현하는 스마트 시티의 핵심 레이어로 포지셔닝"</p>
+                </div>
+
+                <!-- Center: AI Agent Intelligence -->
+                <div class="hologram-card" style="background: rgba(79, 172, 254, 0.05); border-color: rgba(79, 172, 254, 0.3);">
+                    <h3 style="margin-bottom:20px; font-size:1.1rem; color:var(--accent-blue);">🤖 HIVE AI 분석 로그</h3>
+                    <div class="ai-log">
+                        [13:42:01] 서초지구 소나무 A-01 성상 분석 중...<br>
+                        [13:42:05] 엽록소 수치 82% 측정 (정상 범위)<br>
+                        [13:43:12] 강남지구 토양 수분 센서 데이터 수집 완료<br>
+                        [13:43:15] <span style="color:#f7c948;">[경고] 향후 48시간 내 폭염 예보 감지</span><br>
+                        [13:43:18] 강남지구 수목 보호를 위한 자동 관수량 +15% 조정 예약<br>
+                        [13:44:01] 서울시 전체 정원수 데이터셋 1.2GB 누적 업데이트...<br>
+                        [13:44:30] 송파지구 시민 복지 체감 지수 상승 (+12.4%)<br>
+                        [SYSTEM] 데이터 확보 프로세스 정상 가동 중...
+                    </div>
+                    <div style="margin-top:20px; text-align:left;">
+                        <span class="badge" style="background:var(--accent-blue);">Predictive Control</span>
+                        <p style="margin-top:10px; font-size:0.85rem; color:#cbd5e1;">AI 하이브가 서울시 전체 가드닝 데이터를 실시간으로 크롤링 및 분석하여 최적의 생육 환경을 자동 제어합니다.</p>
+                    </div>
+                </div>
+
+                <!-- Right: Welfare & Impact -->
+                <div class="hologram-card welfare-card">
+                    <h3 style="margin-bottom:20px; font-size:1.1rem; color:#22c55e;">🌿 녹색 복지 가치 (ROI)</h3>
+                    <div style="text-align:center; padding:20px 0;">
+                        <div style="font-size:2.5rem; font-weight:800; color:white;">₩ 4.2B+</div>
+                        <div style="font-size:0.8rem; color:#94a3b8; margin-top:5px;">연간 사회적 비용 절감액 (추산)</div>
+                    </div>
+                    <div style="font-size:0.8rem; line-height:2; border-top: 1px solid rgba(255,255,255,0.1); padding-top:15px;">
+                        <div style="display:flex; justify-content:space-between;"><span>시민 정서 안정도</span><span style="color:#22c55e;">↑ 28%</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>주변 온도 저감</span><span style="color:#22c55e;">↓ 3.2°C</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>관리 예산 효율</span><span style="color:#22c55e;">↑ 41%</span></div>
+                    </div>
+                    <div style="margin-top:20px; text-align:center;">
+                        <button class="premium-btn" style="padding: 10px 20px; font-size: 0.85rem; margin-bottom:0;" onclick="window.open('\''https://pobbyo1.github.io/hive-portal/proposal.pdf'\'')">
+                            📊 상세 전략서 (PDF)
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Action Area -->
+            <div class="pill-container" style="margin-bottom:30px;">
+                <div class="pill pill-green">Real-time IoT</div>
+                <div class="pill pill-gold">AI Prediction</div>
+                <div class="pill pill-blue">Digital Twin</div>
+                <div class="pill pill-purple">Green Welfare</div>
+                <div class="pill pill-cyan">Big Data Assets</div>
+            </div>
+
+            <!-- Data Acquisition Link -->
+            <div class="card" style="width:100%; max-width:1000px; border: 1px dashed var(--accent-teal); background: rgba(0,242,254,0.02);">
+                <div style="display:flex; align-items:center; justify-content:center; gap:20px;">
+                    <span style="font-size:1.5rem;">📁</span>
+                    <div style="text-align:left;">
+                        <h4 style="color:white;">가드닝 인텔리전스 데이터 자산 축적 중</h4>
+                        <p style="font-size:0.8rem; color:var(--text-muted);">Photos: 4,281건 / Stats: 12,502건 / 매일 06:00 KST 자동 동기화</p>
+                    </div>
                 </div>
             </div>
 
-            <div style="text-align:center; margin-top:20px;">
-                <button onclick="alert('제안서 원본 파일은 서버 내 /home/skywork/workspace/InputFiles/ 에 안전하게 보관 중입니다.')" style="background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); color:white; padding:12px 30px; border-radius:30px; cursor:pointer; font-size:0.9rem;">📄 제안서 원본 아카이브 확인</button>
-            </div>
-
-            <!-- POC 관제 대시보드 -->
-            <h3 id="poc-control" style="margin: 80px 0 20px; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                <span class="status-dot"></span> POC 통합 관제 센터 (Simulated)
-            </h3>
-            
-            <div class="quick-access-grid" style="grid-template-columns: repeat(3, 1fr);">
-                <!-- Site 1: Seocho -->
-                <div class="card" style="padding: 15px; border-top: 4px solid var(--accent-blue);">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-                        <h4 style="color:white;">📍 서초구 시범지구</h4>
-                        <span class="badge" style="background:#22c55e;">정상</span>
-                    </div>
-                    <div style="font-size:0.8rem; line-height:1.8; text-align: left;">
-                        <div style="display:flex; justify-content:space-between;"><span>온도</span><span style="color:var(--accent-teal);">22.4°C</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>습도</span><span style="color:var(--accent-teal);">45%</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>토양 수분</span><span style="color:var(--accent-teal);">68%</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>수조 잔량</span><span style="color:var(--accent-teal);">82%</span></div>
-                    </div>
-                    <div style="margin-top:15px; height:4px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden;">
-                        <div style="width:82%; height:100%; background:var(--accent-blue);"></div>
-                    </div>
-                </div>
-
-                <!-- Site 2: Gangnam -->
-                <div class="card" style="padding: 15px; border-top: 4px solid var(--accent-purple);">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-                        <h4 style="color:white;">📍 강남구 시범지구</h4>
-                        <span class="badge" style="background:#f7c948; color:black;">주의</span>
-                    </div>
-                    <div style="font-size:0.8rem; line-height:1.8; text-align: left;">
-                        <div style="display:flex; justify-content:space-between;"><span>온도</span><span style="color:var(--accent-teal);">24.1°C</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>습도</span><span style="color:var(--accent-teal);">38%</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>토양 수분</span><span style="color:#f7c948;">32%</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>수조 잔량</span><span style="color:var(--accent-teal);">15%</span></div>
-                    </div>
-                    <div style="margin-top:15px; height:4px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden;">
-                        <div style="width:15%; height:100%; background:#f7c948;"></div>
-                    </div>
-                </div>
-
-                <!-- Site 3: Songpa -->
-                <div class="card" style="padding: 15px; border-top: 4px solid var(--accent-teal);">
-                    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-                        <h4 style="color:white;">📍 송파구 시범지구</h4>
-                        <span class="badge" style="background:#22c55e;">정상</span>
-                    </div>
-                    <div style="font-size:0.8rem; line-height:1.8; text-align: left;">
-                        <div style="display:flex; justify-content:space-between;"><span>온도</span><span style="color:var(--accent-teal);">21.8°C</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>습도</span><span style="color:var(--accent-teal);">50%</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>토양 수분</span><span style="color:var(--accent-teal);">72%</span></div>
-                        <div style="display:flex; justify-content:space-between;"><span>수조 잔량</span><span style="color:var(--accent-teal);">95%</span></div>
-                    </div>
-                    <div style="margin-top:15px; height:4px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden;">
-                        <div style="width:95%; height:100%; background:var(--accent-teal);"></div>
-                    </div>
-                </div>
-            </div>
         </section>
 
     </main>
