@@ -575,91 +575,116 @@
         /* SECTION 6: 스마트 가드닝 프로젝트 */
         #gardening {
             background-color: #080b14;
-            padding: 60px 40px;
+            padding: 100px 40px;
             text-align: center;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .gardening-hero-sub {
             color: #f7c948;
-            letter-spacing: 4px;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
+            letter-spacing: 5px;
+            font-size: 0.95rem;
+            margin-bottom: 35px;
             font-weight: 500;
+            opacity: 0.9;
         }
 
         .gardening-hero-title {
-            font-size: 3.5rem;
+            font-size: 4.2rem;
             font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 40px;
+            line-height: 1.1;
+            margin-bottom: 50px;
             color: white;
+            letter-spacing: -1px;
         }
 
         .gardening-hero-title span {
             display: block;
-            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            margin-top: 15px;
+            background: linear-gradient(to right, #4facfe 20%, #00f2fe 80%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .gardening-hero-desc {
-            color: var(--text-muted);
-            font-size: 1.1rem;
+            color: #94a3b8;
+            font-size: 1.25rem;
             line-height: 1.8;
-            margin-bottom: 50px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 60px;
+            max-width: 900px;
+            font-weight: 300;
         }
 
         .premium-btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             background: linear-gradient(180deg, #4facfe 0%, #3a8dce 100%);
             border: none;
             color: white;
-            padding: 18px 40px;
-            border-radius: 12px;
-            font-size: 1.1rem;
+            padding: 22px 55px;
+            border-radius: 14px;
+            font-size: 1.2rem;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
-            transition: all 0.3s;
-            margin-bottom: 60px;
+            box-shadow: 0 15px 45px rgba(79, 172, 254, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .premium-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(79, 172, 254, 0.6);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(79, 172, 254, 0.6);
+        }
+
+        .premium-btn:hover::after {
+            opacity: 1;
         }
 
         .pill-container {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 18px;
             flex-wrap: wrap;
-            margin-bottom: 80px;
+            margin-bottom: 40px;
         }
 
         .pill {
-            padding: 10px 25px;
-            border-radius: 30px;
-            font-size: 0.9rem;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-size: 0.95rem;
             font-weight: 500;
-            background: rgba(255,255,255,0.03);
+            background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.1);
-            color: var(--text-muted);
+            color: #94a3b8;
             transition: all 0.3s;
         }
 
-        .pill-green { border-color: #22c55e; color: #22c55e; background: rgba(34, 197, 94, 0.05); }
-        .pill-gold { border-color: #f7c948; color: #f7c948; background: rgba(247, 201, 72, 0.05); }
-        .pill-blue { border-color: #4facfe; color: #4facfe; background: rgba(79, 172, 254, 0.05); }
-        .pill-purple { border-color: #9b51e0; color: #9b51e0; background: rgba(155, 81, 224, 0.05); }
-        .pill-cyan { border-color: #00f2fe; color: #00f2fe; background: rgba(0, 242, 254, 0.05); }
+        .pill-green { border-color: #22c55e; color: #22c55e; background: rgba(34, 197, 94, 0.03); }
+        .pill-gold { border-color: #f7c948; color: #f7c948; background: rgba(247, 201, 72, 0.03); }
+        .pill-blue { border-color: #4facfe; color: #4facfe; background: rgba(79, 172, 254, 0.03); }
+        .pill-purple { border-color: #9b51e0; color: #9b51e0; background: rgba(155, 81, 224, 0.03); }
+        .pill-cyan { border-color: #00f2fe; color: #00f2fe; background: rgba(0, 242, 254, 0.03); }
 
-        .pill:hover { background: rgba(255,255,255,0.1); color: white; }
+        .pill:hover { border-color: white; color: white; background: rgba(255,255,255,0.1); }
 
     </style>
 </head>
