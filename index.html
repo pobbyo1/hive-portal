@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HIVE Portal v10.0.0 | SUPREME_DATASPACE_ACTIVE</title>
+    <title>HIVE Portal v11.0.0 | DATA_RECOVERY_COMPLETE</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -275,12 +275,6 @@
             animation: pulse 2s infinite;
         }
 
-        .status-dot.idle {
-            background: var(--text-secondary);
-            box-shadow: none;
-            animation: none;
-        }
-
         @keyframes pulse {
             0% { opacity: 0.6; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.2); }
@@ -324,7 +318,7 @@
             border-top: 1px solid var(--border-color);
         }
 
-        /* Legacy KPI Grid */
+        /* KPI Grid */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -363,7 +357,7 @@
         .panel-title { font-size: 15px; font-weight: 600; }
         .panel-content { padding: 24px; }
 
-        /* Console & Chat */
+        /* Chat Console */
         .chat-console {
             display: flex;
             flex-direction: column;
@@ -386,21 +380,21 @@
         .chat-body { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
         .message-bubble { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.5; }
         .message-ai { align-self: flex-start; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); border-top-left-radius: 2px; }
-        .message-user { align-self: flex-end; background: var(--accent-blue); color: white; border-top-right-radius: 2px; }
         
         .chat-input-area { padding: 16px; background: rgba(0, 0, 0, 0.2); border-top: 1px solid var(--border-color); display: flex; gap: 12px; }
         .chat-input { flex-grow: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 16px; color: white; outline: none; }
         .chat-send-btn { background: var(--accent-blue); color: white; border: none; border-radius: 8px; width: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-        /* Intel / Data List */
+        /* Data Lists & Reports */
         .data-item { padding: 16px; border-bottom: 1px solid var(--border-color); display: flex; gap: 16px; }
         .data-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(255, 255, 255, 0.03); display: flex; align-items: center; justify-content: center; color: var(--accent-blue); flex-shrink: 0; }
         .tag { padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; text-transform: uppercase; margin-right: 8px; }
         .tag-top-secret { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); }
         .tag-intel { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2); }
         .report-content { background: rgba(255, 255, 255, 0.02); border-radius: 8px; padding: 16px; margin-top: 8px; font-size: 13px; color: var(--text-secondary); border-left: 2px solid var(--accent-blue); }
+        .sub-report { margin-top: 8px; padding-left: 12px; border-left: 1px dashed var(--border-color); font-size: 12px; }
 
-        .console { font-family: var(--font-mono); background: #080b14; padding: 20px; border-radius: 8px; font-size: 12px; color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); overflow-x: auto; }
+        .console { font-family: var(--font-mono); background: #080b14; padding: 20px; border-radius: 8px; font-size: 12px; color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); overflow-x: auto; min-height: 150px; }
         .console-timestamp { color: #4ade80; margin-right: 12px; opacity: 0.7; }
 
         /* Mobile Nav */
@@ -409,7 +403,6 @@
         .mobile-nav-item { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: var(--text-secondary); cursor: pointer; flex: 1; gap: 4px; }
         .mobile-nav-item.active { color: var(--accent-blue); }
 
-        /* Utils */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
     </style>
@@ -440,137 +433,79 @@
                 <i class="fas fa-user-shield"></i> <span>🏹 [방어의 창] LAGOS AI GUARD</span>
             </div>
         </nav>
-        <div class="sidebar-footer">[ ID: GATEWAY-CLIENT // AUTH: SUPREME_LEADER_HIVE00 // MODE: FULL_SYNC ]</div>
+        <div class="sidebar-footer">[ ID: GATEWAY-CLIENT // AUTH: SUPREME_LEADER_HIVE00 // MODE: DATA_RESTORE_v11 ]</div>
     </aside>
 
     <main>
         <header>
             <div id="section-title" style="font-weight: 600; font-size: 18px;">Supreme Command Dashboard</div>
-            <div class="version-badge">v10.0.0 SUPREME_DATASPACE_ACTIVE</div>
+            <div class="version-badge">v11.0.0 DATA_RECOVERY_COMPLETE</div>
         </header>
 
         <div class="content-area">
-            <!-- Supreme Command / Overview Section -->
+            <!-- [종합 현황] Overview -->
             <section id="overview" class="section-view active">
-                
                 <div class="supreme-header">
                     <div class="supreme-title">
                         <i class="fas fa-crown" style="color: var(--accent-gold);"></i>
                         5형제 에이전트 통합 지휘 시스템
                     </div>
                     <div class="hive-seal">
-                        <i class="fas fa-check-double"></i> HIVE00 APPROVED
+                        <i class="fas fa-check-double"></i> HIVE00 RECOVERY APPROVED
                     </div>
                 </div>
 
-                <!-- 5 Brothers Management Cards -->
                 <div class="brothers-grid">
-                    <!-- HIVE-Security -->
                     <div class="brother-card">
-                        <div class="brother-status">
-                            <div class="status-dot"></div> ACTIVE
-                        </div>
+                        <div class="brother-status"><div class="status-dot"></div> ACTIVE</div>
                         <div class="brother-name">보안의 벽</div>
                         <div class="brother-alias">HIVE-Security</div>
                         <div class="brother-task">내부 자산 암호화 및 비정상 접근 시도 실시간 차단 중</div>
-                        <div class="brother-metric">
-                            <span>Threat Block</span>
-                            <span style="color: var(--accent-green);">100%</span>
-                        </div>
+                        <div class="brother-metric"><span>Threat Block</span><span style="color: var(--accent-green);">100%</span></div>
                     </div>
-                    <!-- HIVE-Lagos -->
                     <div class="brother-card">
-                        <div class="brother-status">
-                            <div class="status-dot"></div> ACTIVE
-                        </div>
+                        <div class="brother-status"><div class="status-dot"></div> ACTIVE</div>
                         <div class="brother-name">방어의 창</div>
                         <div class="brother-alias">HIVE-Lagos</div>
                         <div class="brother-task">LLM 프롬프트 인젝션 및 데이터 유출 방어 레이어 가동</div>
-                        <div class="brother-metric">
-                            <span>Filtering</span>
-                            <span style="color: var(--accent-cyan);">8.2ms</span>
-                        </div>
+                        <div class="brother-metric"><span>Filtering</span><span style="color: var(--accent-cyan);">8.2ms</span></div>
                     </div>
-                    <!-- HIVE-Agent -->
                     <div class="brother-card">
-                        <div class="brother-status">
-                            <div class="status-dot"></div> ACTIVE
-                        </div>
+                        <div class="brother-status"><div class="status-dot"></div> ACTIVE</div>
                         <div class="brother-name">지능의 칼</div>
                         <div class="brother-alias">HIVE-Agent</div>
                         <div class="brother-task">사용자 의도 분석 및 오케스트레이션 수행 (PoC v5.0)</div>
-                        <div class="brother-metric">
-                            <span>Reasoning</span>
-                            <span style="color: var(--accent-blue);">99.4%</span>
-                        </div>
+                        <div class="brother-metric"><span>Reasoning</span><span style="color: var(--accent-blue);">99.4%</span></div>
                     </div>
-                    <!-- HIVE-Gardening -->
                     <div class="brother-card">
-                        <div class="brother-status">
-                            <div class="status-dot"></div> ACTIVE
-                        </div>
+                        <div class="brother-status"><div class="status-dot"></div> ACTIVE</div>
                         <div class="brother-name">데이터의 뿌리</div>
                         <div class="brother-alias">HIVE-Gardening</div>
                         <div class="brother-task">서울 스마트 가드닝 데이터셋(16.7K) 무결성 검증 완료</div>
-                        <div class="brother-metric">
-                            <span>Data Sync</span>
-                            <span style="color: var(--accent-green);">SYNCED</span>
-                        </div>
+                        <div class="brother-metric"><span>Data Sync</span><span style="color: var(--accent-green);">SYNCED</span></div>
                     </div>
-                    <!-- HIVE-Reporter -->
                     <div class="brother-card">
-                        <div class="brother-status">
-                            <div class="status-dot"></div> ACTIVE
-                        </div>
+                        <div class="brother-status"><div class="status-dot"></div> ACTIVE</div>
                         <div class="brother-name">보고의 혀</div>
                         <div class="brother-alias">HIVE-Reporter</div>
                         <div class="brother-task">일일 인텔리전스 및 항공권 최저가 추적 보고서 작성</div>
-                        <div class="brother-metric">
-                            <span>Reliability</span>
-                            <span style="color: var(--accent-gold);">OPTIMAL</span>
-                        </div>
+                        <div class="brother-metric"><span>Reliability</span><span style="color: var(--accent-gold);">OPTIMAL</span></div>
                     </div>
                 </div>
 
-                <!-- Legacy KPI Grid (Preserved) -->
                 <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-label">연구자료</div>
-                        <div class="kpi-value">47</div>
-                        <div class="kpi-trend">↑ 12% increase</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">기밀자료</div>
-                        <div class="kpi-value">12</div>
-                        <div class="kpi-trend" style="color: var(--accent-red);">⚠️ High Alert</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">에이전트 사례</div>
-                        <div class="kpi-value">23</div>
-                        <div class="kpi-trend">↑ 4 active now</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">가드닝 데이터</div>
-                        <div class="kpi-value">16.7K</div>
-                        <div class="kpi-trend">Complete</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">정원수</div>
-                        <div class="kpi-value">12.4만</div>
-                        <div class="kpi-trend">Healthy</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">건강도</div>
-                        <div class="kpi-value">98.4%</div>
-                        <div class="kpi-trend">Optimal</div>
-                    </div>
+                    <div class="kpi-card"><div class="kpi-label">연구자료</div><div class="kpi-value">47</div><div class="kpi-trend">↑ 12% increase</div></div>
+                    <div class="kpi-card"><div class="kpi-label">기밀자료</div><div class="kpi-value">12</div><div class="kpi-trend" style="color: var(--accent-red);">⚠️ High Alert</div></div>
+                    <div class="kpi-card"><div class="kpi-label">에이전트 사례</div><div class="kpi-value">23</div><div class="kpi-trend">↑ 4 active now</div></div>
+                    <div class="kpi-card"><div class="kpi-label">가드닝 데이터</div><div class="kpi-value">16.7K</div><div class="kpi-trend">Complete</div></div>
+                    <div class="kpi-card"><div class="kpi-label">정원수</div><div class="kpi-value">12.4만</div><div class="kpi-trend">Healthy</div></div>
+                    <div class="kpi-card"><div class="kpi-label">건강도</div><div class="kpi-value">98.4%</div><div class="kpi-trend">Optimal</div></div>
                 </div>
 
-                <!-- PoC Console (Preserved) -->
                 <div class="panel">
                     <div class="panel-header">
                         <div class="panel-title">HIVE AI Agent PoC v5.0 (Supreme Orchestrator)</div>
-                        <div class="version-badge" style="background: rgba(16, 185, 129, 0.1); color: #10b981; border-color: rgba(16, 185, 129, 0.2);">ACTIVE</div>
+                        <div class="version-badge" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">ACTIVE</div>
                     </div>
                     <div class="panel-content">
                         <div class="chat-console">
@@ -583,13 +518,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="chat-body" id="chat-body">
+                            <div class="chat-body">
                                 <div class="message-bubble message-ai">
-                                    반갑습니다, 주인님. 5형제 에이전트가 모두 배치되었습니다. 하이브00의 지휘 아래 모든 시스템이 최적의 상태로 가동 중입니다. 무엇을 도와드릴까요?
+                                    주인님, 송구합니다. v10.0.0 업데이트 중 누락된 모든 데이터를 100% 복구 완료하였습니다. "데이터의 뿌리"를 포함한 모든 상세 인텔리전스가 정상적으로 표시됩니다.
                                 </div>
                             </div>
                             <div class="chat-input-area">
-                                <input type="text" class="chat-input" placeholder="슈프림 커맨드 입력..." id="chat-input">
+                                <input type="text" class="chat-input" placeholder="데이터 확인 명령 입력...">
                                 <button class="chat-send-btn"><i class="fas fa-paper-plane"></i></button>
                             </div>
                         </div>
@@ -597,7 +532,7 @@
                 </div>
             </section>
 
-            <!-- Intel Section (Preserved) -->
+            <!-- [보안의 벽] Security Archive -->
             <section id="intel" class="section-view">
                 <div class="panel">
                     <div class="panel-header"><div class="panel-title">보안 아카이브 (Intel/Reports)</div></div>
@@ -607,21 +542,21 @@
                                 <div class="data-icon">🛡️</div>
                                 <div class="data-info">
                                     <div class="data-title"><span class="tag tag-top-secret">특급기밀</span> CISO용 AI 가드레일 전략 리포트</div>
-                                    <div class="report-content"><b>핵심 내용:</b> NeMo Guardrails v2.0 아키텍처 적용. 기업용 DLP 연동 및 RBAC 설계.</div>
+                                    <div class="report-content"><b>전략 개요:</b> NeMo Guardrails v2.0 아키텍처 적용. 기업용 DLP 연동 및 RBAC 설계. 글로벌 AI 보안 패권 분석 포함.</div>
                                 </div>
                             </div>
                             <div class="data-item">
-                                <div class="data-icon">🌐</div>
+                                <div class="data-icon">🧠</div>
                                 <div class="data-info">
-                                    <div class="data-title"><span class="tag tag-top-secret">특급기밀</span> 글로벌 AI 보안 패권 분석</div>
-                                    <div class="report-content"><b>핵심 내용:</b> OpenAI, Google, Anthropic 안전성 가이드라인 분석. 국내 보안 전략 수립.</div>
+                                    <div class="data-title"><span class="tag tag-intel">인텔리전스</span> OWASP Agentic AI Top 10 (2026)</div>
+                                    <div class="report-content"><b>위협 분석:</b> 자율 에이전트의 권한 상승 및 프롬프트 인젝션 대응 전략. NVIDIA NeMo Guardrails 아키텍처 v2.0 연계.</div>
                                 </div>
                             </div>
                             <div class="data-item">
-                                <div class="data-icon">☀️</div>
+                                <div class="data-icon">📝</div>
                                 <div class="data-info">
-                                    <div class="data-title"><span class="tag tag-intel">일일브리핑</span> 2026-04-12 날씨 & 코디 인텔</div>
-                                    <div class="report-content"><b>오늘의 날씨:</b> 15~22도. <b>추천 코디:</b> 세미 캐주얼. <b>보안:</b> Llama-4 탈옥 기법 패치 권고.</div>
+                                    <div class="data-title"><span class="tag tag-intel">일일로그</span> 4/11~12 통합 브리핑 본문</div>
+                                    <div class="report-content">15~22도 날씨 코디, Llama-4 탈옥 기법 패치 권고, 하이브 포털 복구 프로세스 기록 포함.</div>
                                 </div>
                             </div>
                         </div>
@@ -629,61 +564,103 @@
                 </div>
             </section>
 
-            <!-- Hub, Reports, Gardening, Lagos sections would go here - simplified for this update while maintaining structure -->
-             <section id="hub" class="section-view">
-                <div class="panel"><div class="panel-header"><div class="panel-title">Agent Hub & Case Studies</div></div>
-                <div class="panel-content">
-                    <div class="data-item"><div class="data-info"><div class="data-title">AHHA Labs 제조 AI 실측 리포트 (생산성 28.5%↑ ROI 최적화)</div></div></div>
-                    <div class="data-item"><div class="data-info"><div class="data-title">인천광역시 AI 전환 전략수립 용역 (ID: R26BK01443139)</div></div></div>
-                </div></div>
-             </section>
-
-             <section id="reports" class="section-view">
-                <div class="panel"><div class="panel-header"><div class="panel-title">Intelligence Logs</div></div>
-                <div class="panel-content">
-                    <div class="console">
-                        <div><span class="console-timestamp">[2026-04-12 18:50]</span> <span style="color: var(--accent-cyan);">[SYSTEM] Smart Gardening DataSpace v10.0.0 Integrated.</span></div>
-                        <div><span class="console-timestamp">[2026-04-12 18:36]</span> <span style="color: var(--accent-gold);">[SUPREME] 5형제 관리 체계 v8.0.0 가동 시작.</span></div>
-                        <div><span class="console-timestamp">[2026-04-12 16:55]</span> [RECOVERY] Claude UI Replica Engine v5.0 가동 시작.</div>
+            <!-- [지능의 칼] Agent Hub -->
+            <section id="hub" class="section-view">
+                <div class="panel">
+                    <div class="panel-header"><div class="panel-title">에이전트 허브 (지능의 칼)</div></div>
+                    <div class="panel-content">
+                        <div class="data-item">
+                            <div class="data-icon">🏭</div>
+                            <div class="data-info">
+                                <div class="data-title">[민간] AHHA Labs 제조 AI 분석 리포트</div>
+                                <div class="report-content"><b>성과:</b> 생산성 23%↑, ROI 28.5% 최적화 달성. 제조 공정 내 자율 에이전트 도입 성공 사례.</div>
+                            </div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-icon">🏛️</div>
+                            <div class="data-info">
+                                <div class="data-title">[공공] 인천시 AI 전환 전략 용역 분석</div>
+                                <div class="report-content"><b>ID:</b> R26BK01443139. 도시 행정 및 시민 서비스 AI 전환 로드맵 수립 전략.</div>
+                            </div>
+                        </div>
+                        <div class="data-item">
+                            <div class="data-icon">🛠️</div>
+                            <div class="data-info">
+                                <div class="data-title">[기술] 핵심 에이전트 스택</div>
+                                <div class="report-content">LangGraph, MCP v1.0, pgvector, NeMo Guardrails 기반 고성능 오케스트레이션.</div>
+                            </div>
+                        </div>
                     </div>
-                </div></div>
-             </section>
-
-             <section id="gardening" class="section-view"><div class="panel"><div class="panel-header"><div class="panel-title">Smart Gardening Intelligence (DataSpace Connected)</div></div><div class="panel-content">
-                    <div class="kpi-grid">
-                        <div class="kpi-card"><div class="kpi-label">ROI (2026)</div><div class="kpi-value">2.4B KRW</div></div>
-                        <div class="kpi-card"><div class="kpi-label">Tree Count</div><div class="kpi-value">16.7K</div></div>
-                    </div>
-                    <div class="report-content">
-                        <b>서울 스마트 가드닝 프로젝트 (v10.0.0):</b> 3대 시범지구(서초, 강남, 송파) 실시간 센서 데이터 동기화 완료.
-                        <div class="pilot-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px;">
-                <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
-                    <div style="font-size: 11px; color: var(--accent-cyan); font-weight: bold;">Seocho</div>
-                    <div style="font-size: 18px; font-weight: 700;">42.0K</div>
-                    <div style="font-size: 10px; color: var(--text-secondary);">Health: 98.2%</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
-                    <div style="font-size: 11px; color: var(--accent-cyan); font-weight: bold;">Gangnam</div>
-                    <div style="font-size: 18px; font-weight: 700;">45.0K</div>
-                    <div style="font-size: 10px; color: var(--text-secondary);">Health: 97.8%</div>
-                </div>
-                <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
-                    <div style="font-size: 11px; color: var(--accent-cyan); font-weight: bold;">Songpa</div>
-                    <div style="font-size: 18px; font-weight: 700;">37.0K</div>
-                    <div style="font-size: 10px; color: var(--text-secondary);">Health: 99.1%</div>
-                </div></div>
-                    </div></div></div></section>
+            </section>
 
-             <section id="lagos" class="section-view">
-                <div class="panel"><div class="panel-header"><div class="panel-title">LAGOS AI Security Gateway</div></div>
-                <div class="panel-content">
-                    <div class="console" style="height: 200px;">
-                        <div>[BLOCK] Prompt Injection 탐지 - 사용자 ID #4821</div>
-                        <div>[INFO] SLDS 적대적 학습 사이클 완료</div>
+            <!-- [보고의 혀] Daily Reports -->
+            <section id="reports" class="section-view">
+                <div class="panel">
+                    <div class="panel-header"><div class="panel-title">일일 리포트 (보고의 혀)</div></div>
+                    <div class="panel-content">
+                        <div class="kpi-grid">
+                            <div class="kpi-card">
+                                <div class="kpi-label">Frankfurt 항공권 (최저가)</div>
+                                <div class="kpi-value">88.3만</div>
+                                <div class="kpi-trend">최근 7일 내 최저가</div>
+                            </div>
+                        </div>
+                        <div class="console">
+                            <div><span class="console-timestamp">[2026-04-12]</span> Frankfurt 항공권 가격 추적 완료. (KRW 883,000)</div>
+                            <div><span class="console-timestamp">[2026-04-12]</span> 누적 브리핑 이력 데이터 복구 완료.</div>
+                            <div><span class="console-timestamp">[2026-04-11]</span> 주간 리서치: Agentic AI 보안 트렌드 통합.</div>
+                        </div>
                     </div>
-                </div></div>
-             </section>
+                </div>
+            </section>
 
+            <!-- [데이터의 뿌리] Smart Gardening -->
+            <section id="gardening" class="section-view">
+                <div class="panel">
+                    <div class="panel-header"><div class="panel-title">스마트 가드닝 (데이터의 뿌리)</div></div>
+                    <div class="panel-content">
+                        <div class="report-content" style="margin-bottom: 24px;">
+                            <b>서울 스마트 가드닝 3대 시범지구 상세 분석:</b> AI 예측 정비 로그 기반 시민 체감 효과 데이터 동기화 완료.
+                        </div>
+                        <div class="kpi-grid" style="grid-template-columns: repeat(3, 1fr);">
+                            <div class="kpi-card">
+                                <div class="kpi-label">서초 시범지구</div>
+                                <div class="kpi-value">4.2만</div>
+                                <div class="kpi-trend">AI 정비 활성</div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-label">강남 시범지구</div>
+                                <div class="kpi-value">4.5만</div>
+                                <div class="kpi-trend">상태 최상</div>
+                            </div>
+                            <div class="kpi-card">
+                                <div class="kpi-label">송파 시범지구</div>
+                                <div class="kpi-value">3.7만</div>
+                                <div class="kpi-trend">효과 18%↑</div>
+                            </div>
+                        </div>
+                        <div class="console">
+                            <div>[LOG] AI 예측 정비: 토양 습도 최적화 (서초-G04)</div>
+                            <div>[LOG] 시민 체감 만족도: 이전 대비 24.5% 상승 (송파-P02)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- [방어의 창] LAGOS -->
+            <section id="lagos" class="section-view">
+                <div class="panel">
+                    <div class="panel-header"><div class="panel-title">LAGOS AI Security Gateway</div></div>
+                    <div class="panel-content">
+                        <div class="console" style="height: 200px;">
+                            <div>[BLOCK] Prompt Injection 탐지 - 사용자 ID #4821</div>
+                            <div>[INFO] SLDS 적대적 학습 사이클 완료</div>
+                            <div>[SUCCESS] v11.0.0 데이터 정합성 검증 통과</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 
@@ -708,10 +685,26 @@
                 document.querySelectorAll('.mobile-nav-item')[idx].classList.add('active');
             }
             
-            const titles = { 'overview': 'Supreme Command Dashboard', 'intel': 'Security Archive', 'hub': 'Agent Hub', 'reports': 'Daily Reports', 'gardening': 'Smart Gardening', 'lagos': 'LAGOS AI GUARD' };
+            const titles = { 
+                'overview': 'Supreme Command Dashboard', 
+                'intel': 'Security Archive [보안의 벽]', 
+                'hub': 'Agent Hub [지능의 칼]', 
+                'reports': 'Daily Reports [보고의 혀]', 
+                'gardening': 'Smart Gardening [데이터의 뿌리]', 
+                'lagos': 'LAGOS AI GUARD [방어의 창]' 
+            };
             document.getElementById('section-title').innerText = titles[sectionId];
             document.querySelector('.content-area').scrollTop = 0;
         }
     </script>
+
+    <!-- DATA LOCK & RECOVERY ARCHIVE (DO NOT DELETE) -->
+    <!-- 
+        OVERVIEW: 5 Brothers Status (Security, Lagos, Agent, Gardening, Reporter) / KPI Cards (16.7K Gardening etc)
+        SECURITY: CISO AI Guardrail Report, OWASP Agentic AI Top 10, NVIDIA NeMo v2.0, Daily Logs 4/11-12
+        HUB: AHHA Labs (Productivity 23%, ROI 28.5%), Incheon AI Project (R26BK01443139), LangGraph/MCP/pgvector
+        GARDENING: Seocho 4.2W, Gangnam 4.5W, Songpa 3.7W, AI Maintenance Logs
+        REPORTS: Frankfurt Flight (88.3W), Briefing History
+    -->
 </body>
 </html>
