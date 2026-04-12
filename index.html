@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HIVE Portal v5.2.0 | RWD_FULL_FIX</title>
+    <title>HIVE Portal v6.0.0 | RWD_FULL_FIX</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -434,6 +434,223 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+    
+/* --- AI Chat Console Styles --- */
+.chat-console {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    background: #0d1117;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.chat-header {
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chat-agent-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hexagon-avatar {
+    width: 36px;
+    height: 40px;
+    background: var(--accent-blue);
+    position: relative;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+.chat-body {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-image: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 100%);
+}
+
+.message-bubble {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    position: relative;
+    animation: bubbleIn 0.3s ease-out;
+}
+
+@keyframes bubbleIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.message-ai {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-top-left-radius: 2px;
+    color: var(--text-primary);
+}
+
+.message-user {
+    align-self: flex-end;
+    background: var(--accent-blue);
+    color: white;
+    border-top-right-radius: 2px;
+}
+
+.chat-input-area {
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 12px;
+}
+
+.chat-input {
+    flex-grow: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px 16px;
+    color: white;
+    font-family: var(--font-ui);
+    outline: none;
+}
+
+.chat-input:focus {
+    border-color: var(--accent-blue);
+}
+
+.chat-send-btn {
+    background: var(--accent-blue);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+.chat-send-btn:hover {
+    opacity: 0.9;
+}
+
+.suggested-cmd {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.cmd-pill {
+    font-size: 11px;
+    padding: 4px 10px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 99px;
+    color: var(--accent-blue);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cmd-pill:hover {
+    background: var(--accent-blue);
+    color: white;
+}
+
+/* --- Intel/Report Specific --- */
+.intel-group {
+    margin-bottom: 24px;
+}
+
+.intel-group-header {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.intel-group-header::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.report-content {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    border-left: 2px solid var(--accent-blue);
+}
+
+.report-content b {
+    color: var(--text-primary);
+}
+
+/* --- Gardening Specific --- */
+.garden-log {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.log-entry {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    padding: 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.log-loc {
+    color: var(--accent-cyan);
+    font-weight: bold;
+    min-width: 50px;
+}
+
+.log-msg {
+    color: var(--text-secondary);
+}
+
+.garden-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+}
+
     </style>
 </head>
 <body>
@@ -469,10 +686,11 @@
     <main>
         <header>
             <div id="section-title" style="font-weight: 600; font-size: 18px;">Overview</div>
-            <div class="version-badge">v5.2.0 RWD_FULL_FIX</div>
+            <div class="version-badge">v6.0.0 ULTIMATE_DATABASE</div>
         </header>
 
         <div class="content-area">
+            <!-- Dashboard Section -->
             <!-- Dashboard Section -->
             <section id="overview" class="section-view active">
                 <div class="kpi-grid">
@@ -510,59 +728,113 @@
 
                 <div class="panel">
                     <div class="panel-header">
-                        <div class="panel-title">HIVE Agent PoC 컨설팅 전면 배치</div>
+                        <div class="panel-title">HIVE AI Agent PoC v5.0.0 (Premium Console)</div>
                         <div class="version-badge" style="background: rgba(16, 185, 129, 0.1); color: #10b981; border-color: rgba(16, 185, 129, 0.2);">ACTIVE</div>
                     </div>
                     <div class="panel-content">
-                        <div class="console">
-                            <div class="console-line"><span class="console-timestamp">[2026-04-12 17:00:01]</span> INITIALIZING HIVE AGENT POC SYSTEM...</div>
-                            <div class="console-line"><span class="console-timestamp">[2026-04-12 17:00:03]</span> LOADING AGENTIC FRAMEWORKS (LANGGRAPH, MCP v1.0)...</div>
-                            <div class="console-line"><span class="console-timestamp">[2026-04-12 17:00:05]</span> CONNECTING TO VECTOR STORE (PGVECTOR)...</div>
-                            <div class="console-line"><span class="console-timestamp">[2026-04-12 17:00:08]</span> ENFORCING NEMO GUARDRAILS v2.0...</div>
-                            <div class="console-line"><span class="console-timestamp">[2026-04-12 17:00:10]</span> SYSTEM READY. WAITING FOR COMMANDS.</div>
+                        <div class="chat-console">
+                            <div class="chat-header">
+                                <div class="chat-agent-info">
+                                    <div class="hexagon-avatar">H</div>
+                                    <div>
+                                        <div style="font-weight: 600; font-size: 14px;">HIVE Agent</div>
+                                        <div style="font-size: 10px; color: var(--accent-green);">ONLINE / SECURE</div>
+                                    </div>
+                                </div>
+                                <div class="version-badge">MCP v1.0</div>
+                            </div>
+                            <div class="chat-body" id="chat-body">
+                                <div class="message-bubble message-ai">
+                                    반갑습니다, 형님. HIVE Portal의 AI AgentPoC 콘솔입니다. 어떤 분석이 필요하십니까? 아래의 핵심 분석 명령어를 선택하거나 직접 입력해 주십시오.
+                                    <div class="suggested-cmd">
+                                        <span class="cmd-pill" onclick="triggerPoC('나라장터 분석')">#나라장터 분석</span>
+                                        <span class="cmd-pill" onclick="triggerPoC('제조업 ROI')">#제조업 ROI</span>
+                                        <span class="cmd-pill" onclick="triggerPoC('보안 취약점')">#보안 취약점</span>
+                                        <span class="cmd-pill" onclick="triggerPoC('프레임워크 비교')">#프레임워크 비교</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-input-area">
+                                <input type="text" class="chat-input" placeholder="명령어를 입력하세요..." id="chat-input" onkeydown="if(event.key==='Enter') triggerPoC(this.value)">
+                                <button class="chat-send-btn" onclick="triggerPoC(document.getElementById('chat-input').value)"><i class="fas fa-paper-plane"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
+
+            <!-- Intel Section -->
             <!-- Intel Section -->
             <section id="intel" class="section-view">
                 <div class="panel">
-                    <div class="panel-header"><div class="panel-title">보안 아카이브 (Intel)</div></div>
-                    <div class="panel-content" style="padding: 0;">
-                        <div class="data-list">
-                            <div class="data-item">
-                                <div class="data-icon">🔒</div>
-                                <div class="data-info">
-                                    <div class="data-title"><span class="tag tag-top-secret">특급기밀</span> CISO용 AI 가드레일 전략 리포트</div>
-                                    <div class="data-meta">FILE: SEC_GUARDRAIL_2026.pdf | SIZE: 4.2MB | AUTH: LEVEL_5</div>
+                    <div class="panel-header"><div class="panel-title">보안 아카이브 (Intel/Reports)</div></div>
+                    <div class="panel-content">
+                        <!-- High-Value Intel Group -->
+                        <div class="intel-group">
+                            <div class="intel-group-header">🔒 High-Value Intel</div>
+                            <div class="data-list">
+                                <div class="data-item">
+                                    <div class="data-icon">🛡️</div>
+                                    <div class="data-info">
+                                        <div class="data-title"><span class="tag tag-top-secret">특급기밀</span> CISO용 AI 가드레일 전략 리포트</div>
+                                        <div class="data-meta">FILE: SEC_GUARDRAIL_2026.pdf | SIZE: 4.2MB | AUTH: LEVEL_5</div>
+                                        <div class="report-content">
+                                            <b>핵심 내용:</b> 생성형 AI 도입 시 LLM 취약점(Prompt Injection, Insecure Output Handling)을 차단하기 위한 <b>NeMo Guardrails v2.0 아키텍처</b> 적용. 
+                                            기업용 데이터 유출 방지(DLP) 연동 및 권한 기반 액세스 제어(RBAC) 레이어 설계. 
+                                            <i>"가드레일 없는 AI는 자율주행차의 브레이크 없는 것과 같다."</i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="data-icon">🌐</div>
+                                    <div class="data-info">
+                                        <div class="data-title"><span class="tag tag-top-secret">특급기밀</span> 글로벌 AI 보안 패권 분석</div>
+                                        <div class="data-meta">FILE: GLOBAL_AI_HEGEMONY.docx | SIZE: 12.8MB | AUTH: LEVEL_5</div>
+                                        <div class="report-content">
+                                            <b>핵심 내용:</b> OpenAI, Google, Anthropic 간의 안전성 가이드라인 전쟁 분석. 
+                                            미국-유럽 연합의 AI 규제안(AI Act)에 따른 국내 보안 전략 수립. 
+                                            <b>핵심 기술적 주권</b> 확보를 위한 sLLM 보안 내재화 방안 포함.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="data-item">
-                                <div class="data-icon">🌐</div>
-                                <div class="data-info">
-                                    <div class="data-title"><span class="tag tag-top-secret">특급기밀</span> 글로벌 AI 보안 패권 분석</div>
-                                    <div class="data-meta">FILE: GLOBAL_AI_HEGEMONY.docx | SIZE: 12.8MB | AUTH: LEVEL_5</div>
+                        </div>
+
+                        <!-- Daily Briefings Group -->
+                        <div class="intel-group">
+                            <div class="intel-group-header">📅 Daily Briefings (History)</div>
+                            <div class="data-list">
+                                <div class="data-item">
+                                    <div class="data-icon">☀️</div>
+                                    <div class="data-info">
+                                        <div class="data-title"><span class="tag tag-intel">일일브리핑</span> 2026-04-12 날씨 & 코디 인텔</div>
+                                        <div class="data-meta">STATUS: SENT | CHANNEL: HIVE_ALERT</div>
+                                        <div class="report-content">
+                                            <b>오늘의 날씨:</b> 오전 맑음, 오후 흐림(강수확률 20%). 기온 15~22도. 
+                                            <b>추천 코디:</b> 가벼운 블레이저와 린넨 셔츠. 형님의 활동성을 고려한 <b>세미 캐주얼</b> 스타일. 
+                                            <b>보안 뉴스:</b> Llama-4 기반의 새로운 탈옥 기법 발견, 패치 권고.
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-icon">📄</div>
-                                <div class="data-info">
-                                    <div class="data-title"><span class="tag tag-intel">인텔리전스</span> OWASP Agentic AI Top 10 (2026)</div>
-                                    <div class="data-meta">FILE: OWASP_AGENTIC_2026.md | SIZE: 840KB | AUTH: LEVEL_3</div>
-                                </div>
-                            </div>
-                            <div class="data-item">
-                                <div class="data-icon">🛠️</div>
-                                <div class="data-info">
-                                    <div class="data-title"><span class="tag tag-intel">인텔리전스</span> NVIDIA NeMo Guardrails 아키텍처 v2.0</div>
-                                    <div class="data-meta">FILE: NEMO_ARCH_V2.pdf | SIZE: 7.5MB | AUTH: LEVEL_3</div>
+                                <div class="data-item">
+                                    <div class="data-icon">📈</div>
+                                    <div class="data-info">
+                                        <div class="data-title"><span class="tag tag-intel">일일브리핑</span> 2026-04-11 AI 산업 동향</div>
+                                        <div class="data-meta">STATUS: SENT | CHANNEL: HIVE_ALERT</div>
+                                        <div class="report-content">
+                                            <b>산업 동향:</b> MCP(Model Context Protocol) 1.0의 기업 표준화 가속. 
+                                            <b>추천 기사:</b> "에이전트 오케스트레이션이 가져올 생산성 혁명". 
+                                            <b>개인 일정:</b> Frankfurt 항공권 88만 원대로 하락 알림.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
 
             <!-- Agent Hub Section -->
             <section id="hub" class="section-view">
@@ -619,30 +891,65 @@
             </section>
 
             <!-- Gardening Section -->
+            <!-- Gardening Section -->
             <section id="gardening" class="section-view">
                 <div class="panel">
-                    <div class="panel-header"><div class="panel-title">Smart Gardening Intelligence</div></div>
+                    <div class="panel-header"><div class="panel-title">Smart Gardening Intelligence (Seoul Project)</div></div>
                     <div class="panel-content">
                         <div class="console" style="margin-bottom: 24px; color: #60a5fa; border-color: rgba(96, 165, 250, 0.2);">
-                            <div class="console-line">> RUNNING DIGITAL TWIN SIMULATION...</div>
-                            <div class="console-line">> SENSOR DATA STREAMS: 12.4万 FLOWERS DETECTED</div>
-                            <div class="console-line">> SOIL MOISTURE: 72% | UV EXPOSURE: OPTIMAL</div>
-                            <div class="console-line">> SIMULATION COMPLETE. NO ANOMALIES.</div>
+                            <div class="console-line">> CONNECTING TO SEOUL SMART GARDEN DATABASE...</div>
+                            <div class="console-line">> DATAPOINTS: 16.7K SENSORS ACTIVE</div>
+                            <div class="console-line">> TREE_COUNT: 124,000 TREES MONITORED</div>
+                            <div class="console-line">> HEALTH_INDEX: 98.4% (EXCELLENT)</div>
+                            <div class="console-line">> LOADING ROI ANALYSIS: 2.4B KRW SAVED (EST.)</div>
+                            <div class="console-line">> SYSTEM READY.</div>
                         </div>
-                        <div class="kpi-card" style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.2);">
-                            <div class="kpi-label" style="color: #34d399;">녹색 복지 ROI 분석 (2026 Forecast)</div>
-                            <div class="kpi-value" style="background: linear-gradient(to right, #10b981, #34d399); -webkit-background-clip: text;">2.4B KRW</div>
-                            <div class="kpi-trend">Estimated impact on employee wellbeing</div>
+
+                        <div class="kpi-grid">
+                            <div class="kpi-card" style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.2);">
+                                <div class="kpi-label" style="color: #34d399;">녹색 복지 ROI 분석 (2026 Forecast)</div>
+                                <div class="kpi-value" style="background: linear-gradient(to right, #10b981, #34d399); -webkit-background-clip: text;">2.4B KRW</div>
+                                <div class="kpi-trend">시민 체감형 녹색 복지 실현</div>
+                            </div>
+                            <div class="kpi-card" style="background: rgba(6, 182, 212, 0.05); border-color: rgba(6, 182, 212, 0.2);">
+                                <div class="kpi-label" style="color: #22d3ee;">시범지구 모니터링 현황</div>
+                                <div class="kpi-value" style="background: linear-gradient(to right, #06b6d4, #22d3ee); -webkit-background-clip: text;">3 DISTRICTS</div>
+                                <div class="kpi-trend">서초, 강남, 송파 통합 관리</div>
+                            </div>
+                        </div>
+
+                        <div class="report-content" style="margin-top: 24px; border-left: 2px solid var(--accent-green);">
+                            <b>서울 스마트 가드닝 프로젝트 개요:</b> 
+                            도시 인프라와 IT 기술의 결합을 통해 <b>16.7K의 방대한 데이터셋</b>을 구축하고, 서울 시내 <b>12.4만 그루</b>의 정원수를 실시간으로 관리하고 있습니다. 
+                            단순한 조경 관리를 넘어 <b>시민 체감형 녹색 복지</b>를 실현하며, 미세먼지 저감 및 열섬 현상 완화를 통해 연간 <b>2.4B KRW 규모의 경제적 가치</b>를 창출하는 것을 목표로 합니다.
+                        </div>
+
+                        <div class="panel-header" style="margin-top: 32px; padding: 12px 0;"><div class="panel-title">District Monitoring Logs</div></div>
+                        <div class="garden-log">
+                            <div class="log-entry">
+                                <div class="log-loc">[서초구]</div>
+                                <div class="log-msg"><span class="tag tag-private">S-CLASS</span> 서초대로 주변 가로수 수분 센서 78% 유지 중. 자동 관수 시스템 정상 작동.</div>
+                            </div>
+                            <div class="log-entry">
+                                <div class="log-loc">[강남구]</div>
+                                <div class="log-msg"><span class="tag tag-private">A-CLASS</span> 테헤란로 스마트 가든 허브 노드 데이터 송수신율 99.8%. 건강 지표 매우 양호.</div>
+                            </div>
+                            <div class="log-entry">
+                                <div class="log-loc">[송파구]</div>
+                                <div class="log-msg"><span class="tag tag-public">B-CLASS</span> 잠실 종합운동장 근처 산림 토양 산도(pH) 안정적. 질소 비료 투입 주기 확인 필요.</div>
+                            </div>
+                            <div class="log-entry" style="opacity: 0.6;">
+                                <div class="log-loc">[SYSTEM]</div>
+                                <div class="log-msg">전체 데이터셋 98.4% 신뢰도 도달. 클라우드 동기화 완료.</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
+
         </div>
 
         <footer>
-            <div>[ ID: GATEWAY-CLIENT // AUTH: FULL_RECOVERY_COMPLETE ]</div>
-            <div>STATUS: ONLINE // ENCRYPTION: AES-256-GCM</div>
-        </footer>
     </main>
 
     <!-- Mobile Navigation Bar -->
@@ -669,6 +976,7 @@
         </div>
     </nav>
 
+    
     <script>
         function showSection(sectionId) {
             // Hide all sections
@@ -704,6 +1012,42 @@
             // Reset scroll
             document.querySelector('.content-area').scrollTop = 0;
         }
+
+        // PoC Simulation Logic
+        const chatBody = document.getElementById('chat-body');
+        const chatInput = document.getElementById('chat-input');
+
+        function triggerPoC(cmd) {
+            if (!cmd) return;
+            addMessage('user', cmd);
+            chatInput.value = '';
+
+            // AI Processing simulation
+            setTimeout(() => {
+                let response = "";
+                if (cmd.includes('나라장터')) {
+                    response = "<b>나라장터 분석 결과:</b> 최근 3개월간 지자체 AI 도입 용역은 127건으로 전년 대비 45% 증가했습니다. 특히 인천광역시와 서초구의 스마트 시티 사업 예산이 큰 폭으로 확대되었습니다.";
+                } else if (cmd.includes('제조업 ROI')) {
+                    response = "<b>제조업 ROI 분석:</b> AHHA Labs 사례 기반, AI 예측 보전 도입 시 장비 다운타임 41% 감소, 연간 유지보수비 약 15% 절감 효과를 기대할 수 있습니다.";
+                } else if (cmd.includes('보안 취약점')) {
+                    response = "<b>보안 취약점 진단:</b> NeMo Guardrails v2.0 기반으로 확인 결과, 현재 시스템은 SQL Injection 및 Prompt Injection에 대해 99.9% 방어력을 유지 중입니다. API Gateway 인증 토큰 만료 주기 단축을 권고합니다.";
+                } else if (cmd.includes('프레임워크')) {
+                    response = "<b>프레임워크 비교:</b> LangGraph는 복잡한 순환 그래프 구조 설계에 유리하며, MCP(Model Context Protocol)는 도구 간 상호운용성 확장에 최적입니다. 하이브 시스템에는 두 기술의 하이브리드 적용을 추천합니다.";
+                } else {
+                    response = "입력하신 '" + cmd + "' 명령어에 대한 분석을 시작합니다. HIVE 지식 베이스(v6.0.0 ULTIMATE_DATABASE)를 검색 중입니다...";
+                }
+                addMessage('ai', response);
+            }, 800);
+        }
+
+        function addMessage(sender, text) {
+            const div = document.createElement('div');
+            div.className = 'message-bubble message-' + sender;
+            div.innerHTML = text;
+            chatBody.appendChild(div);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
     </script>
+
 </body>
 </html>
