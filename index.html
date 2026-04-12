@@ -32,10 +32,13 @@
         .brand-text p { font-size: 10px; color: var(--text-muted); font-weight: 600; }
 
         .nav-list { flex: 1; padding: 16px 8px; display: flex; flex-direction: column; gap: 4px; list-style: none; }
-        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 8px; cursor: pointer; transition: 0.2s; color: var(--text-dim); font-size: 13px; font-weight: 500; }
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 8px; cursor: pointer; transition: 0.2s; color: var(--text-dim); font-size: 13px; font-weight: 500; position: relative; }
         .nav-item:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
         .nav-item.active { background: rgba(0, 194, 255, 0.12); color: var(--accent-blue); border-left: 2px solid var(--accent-blue); font-weight: 700; }
         .nav-item i { font-style: normal; font-size: 16px; width: 20px; text-align: center; }
+        
+        .new-badge { position: absolute; right: 10px; font-size: 9px; background: var(--accent-red); color: #fff; padding: 1px 4px; border-radius: 3px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
 
         .viewport { flex: 1; display: flex; flex-direction: column; min-width: 0; }
         .topbar { height: 60px; background: #0d1520; border-bottom: 1px solid var(--panel-border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; flex-shrink: 0; }
@@ -43,7 +46,7 @@
         .page-info i { font-size: 18px; }
         .page-info .title { font-size: 15px; font-weight: 700; }
         .page-info .subtitle { font-size: 12px; color: var(--text-muted); margin-left: 8px; }
-        .version-badge { margin-left: 15px; font-size: 10px; color: var(--accent-blue); background: rgba(0, 194, 255, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--accent-blue); }
+        .version-badge { margin-left: 15px; font-size: 10px; color: var(--accent-green); background: rgba(16, 185, 129, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--accent-green); font-weight: 800; }
 
         .topbar-right { display: flex; align-items: center; gap: 20px; }
         .status-badge { display: flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 20px; padding: 4px 14px; font-size: 12px; color: var(--accent-green); font-weight: 600; }
@@ -56,7 +59,7 @@
         @keyframes sectionFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
-        .panel-header { font-size: 13px; font-weight: 700; color: rgba(255, 255, 255, 0.55); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .panel-header { font-size: 13px; font-weight: 700; color: rgba(255, 255, 255, 0.55); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.05em; display: flex; justify-content: space-between; align-items: center; }
 
         .kpi-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 24px; }
         .kpi-card { padding: 20px; position: relative; }
@@ -93,19 +96,21 @@
         .footer { margin-top: auto; padding: 40px 0; text-align: center; border-top: 1px solid var(--panel-border); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 1px; }
 
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .sec-card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 12px; padding: 24px; transition: transform 0.2s; }
-        .sec-card:hover { transform: translateY(-5px); border-color: var(--accent-blue); }
+        .sec-card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 12px; padding: 24px; transition: 0.2s; }
+        .sec-card:hover { border-color: var(--accent-blue); background: rgba(255, 255, 255, 0.05); }
         .sec-card h3 { font-size: 15px; margin-bottom: 12px; color: #fff; }
         .sec-card p { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
         .sec-meta { font-size: 11px; color: var(--accent-blue); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; display: block; }
 
-        /* Agent Hub Specific */
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-        .tag { font-size: 10px; padding: 2px 8px; border-radius: 4px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-dim); }
-        .poc-console { background: #080b14; border: 1px solid var(--accent-blue); border-radius: 8px; padding: 15px; font-family: 'JetBrains Mono', monospace; margin-top: 20px; }
-        .console-header { display: flex; justify-content: space-between; font-size: 11px; color: var(--accent-blue); margin-bottom: 10px; border-bottom: 1px solid rgba(0, 194, 255, 0.2); padding-bottom: 5px; }
+        /* PoC Console Style */
+        .poc-console { background: #080b14; border: 1px solid var(--accent-blue); border-radius: 8px; padding: 15px; font-family: 'JetBrains Mono', monospace; }
+        .console-header { display: flex; justify-content: space-between; font-size: 10px; color: var(--accent-blue); margin-bottom: 10px; border-bottom: 1px solid rgba(0, 194, 255, 0.2); padding-bottom: 5px; }
         .console-input { background: transparent; border: none; outline: none; color: #fff; font-family: inherit; font-size: 12px; width: 100%; }
         .prompt { color: var(--accent-green); margin-right: 8px; }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+        .tag { font-size: 9px; padding: 1px 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-dim); }
+
+        .notification-bar { background: var(--accent-blue); color: #000; font-weight: 800; font-size: 12px; text-align: center; padding: 8px; position: sticky; top: 0; z-index: 50; }
 
     </style>
 </head>
@@ -122,7 +127,7 @@
         <ul class="nav-list">
             <li class="nav-item active" onclick="nav('dashboard', this)"><i>🏠</i> 종합 현황 Overview</li>
             <li class="nav-item" onclick="nav('security', this)"><i>🛡️</i> 보안 아카이브 Intel</li>
-            <li class="nav-item" onclick="nav('hub', this)"><i>🤖</i> AI 에이전트 허브 Hub</li>
+            <li class="nav-item" onclick="nav('hub', this)"><i>🤖</i> AI 에이전트 허브 Hub <span class="new-badge">NEW</span></li>
             <li class="nav-item" onclick="nav('reports', this)"><i>📊</i> 일일 리포트 Reports</li>
             <li class="nav-item" onclick="nav('gardening', this)"><i>🌳</i> 스마트 가드닝 Gardening</li>
             <li class="nav-item" onclick="window.open('https://7yubx2njj2.skywork.website/', '_blank')"><i>🔐</i> Lagos AI Guard</li>
@@ -130,16 +135,18 @@
     </aside>
 
     <div class="viewport">
+        <div class="notification-bar">⚠️ HIVE AGENT PoC MODULE DEPLOYED: MIGRATED 47 RESEARCH PAPERS & INTERACTIVE CONSOLE</div>
+        
         <header class="topbar">
             <div class="page-info">
                 <i id="page-icon">🏠</i>
                 <span class="title" id="page-title">종합 현황</span>
                 <span class="subtitle" id="page-subtitle">Overview</span>
-                <span class="version-badge">v2.6.0 AGENT_DEEP_INTEGRATED</span>
+                <span class="version-badge">v2.6.5 FINAL_MASTER_SYNC</span>
             </div>
             <div class="topbar-right">
                 <div class="status-badge"><span class="status-dot"></span> 전 계층 정상</div>
-                <div class="live-time" id="clock">오후 3:15:10</div>
+                <div class="live-time" id="clock">오후 4:30:10</div>
             </div>
         </header>
 
@@ -153,7 +160,22 @@
                     <div class="card kpi-card"><div class="kpi-top"><i>🤖</i><span class="kpi-dot" style="background:#10b981;"></span></div><div class="kpi-val" style="color:#10b981;">23</div><div class="kpi-label">에이전트 구축 사례</div><div class="kpi-sub">Agent Hub Cases</div></div>
                     <div class="card kpi-card"><div class="kpi-top"><i>📊</i><span class="kpi-dot" style="background:#f59e0b;"></span></div><div class="kpi-val" style="color:#f59e0b;">82</div><div class="kpi-label">일일 리포트 누적</div><div class="kpi-sub">Daily Reports</div></div>
                     <div class="card kpi-card"><div class="kpi-top"><i>🌳</i><span class="kpi-dot" style="background:#06b6d4;"></span></div><div class="kpi-val" style="color:#06b6d4;">16.7K</div><div class="kpi-label">가드닝 데이터셋</div><div class="kpi-sub">Photos & Stats</div></div>
-                    <div class="card kpi-card"><div class="kpi-top"><i>⚡</i><span class="kpi-dot" style="background:#f0c040;"></span></div><div class="kpi-val" style="color:#f0c040;">오늘</div><div class="kpi-label">마지막 동기화</div><div class="kpi-sub">06:00 KST</div></div>
+                    <div class="card kpi-card"><div class="kpi-top"><i>⚡</i><span class="kpi-dot" style="background:#f0c040;"></span></div><div class="kpi-val" style="color:#f0c040;">오늘</div><div class="kpi-label">마지막 동기화</div><div class="kpi-sub">16:30 KST</div></div>
+                </div>
+
+                <div class="card" style="border: 2px solid var(--accent-blue); background: rgba(0, 194, 255, 0.05);">
+                    <div class="panel-header"><span>🤖 HIVE Agent PoC Interactive Console</span><span style="color:var(--accent-blue); font-size:10px;">CORE_v1.0_ONLINE</span></div>
+                    <div class="poc-console" id="dash-poc-terminal">
+                        <div class="console-header"><span>HIVE_ENGINE_CONNECTED</span><span>127.0.0.1:8080</span></div>
+                        <div id="dash-console-output">
+                            <div style="color:var(--text-dim);">HIVE Intelligence PoC 데모 시스템 가동 중...</div>
+                            <div style="color:var(--accent-blue);">분석 가능: [ '나라장터 분석', '제조업 ROI', '보안 취약점', '프레임워크 비교' ]</div>
+                        </div>
+                        <div style="display:flex; margin-top:10px;">
+                            <span class="prompt">></span>
+                            <input type="text" class="console-input" id="dash-poc-input" placeholder="명령어를 입력하여 AI 에이전트 분석을 시작하십시오..." onkeypress="handleDashConsole(event)">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="dash-layout">
@@ -162,7 +184,6 @@
                         <div class="stat-bar"><div class="stat-label"><span>보안 아카이브</span><span class="val">47</span></div><div class="stat-track"><div class="stat-fill" style="width: 70%; background:#8b5cf6;"></div></div></div>
                         <div class="stat-bar"><div class="stat-label"><span>에이전트 사례</span><span class="val">23</span></div><div class="stat-track"><div class="stat-fill" style="width: 40%; background:#10b981;"></div></div></div>
                         <div class="stat-bar"><div class="stat-label"><span>일일 브리핑</span><span class="val">82</span></div><div class="stat-track"><div class="stat-fill" style="width: 90%; background:#f59e0b;"></div></div></div>
-                        <div class="stat-bar"><div class="stat-label"><span>가드닝 인텔리전스</span><span class="val">12</span></div><div class="stat-track"><div class="stat-fill" style="width: 25%; background:#06b6d4;"></div></div></div>
                     </div>
                     <div class="card">
                         <div class="panel-header">HIVE 정보 공급 엔진</div>
@@ -170,17 +191,14 @@
                             <div class="layer-item"><span class="layer-id">crawler</span><span class="layer-name">보안 뉴스 크롤러</span><div class="layer-status"></div></div>
                             <div class="layer-item"><span class="layer-id">analyzer</span><span class="layer-name">AI 전략 분석 에이전트</span><div class="layer-status"></div></div>
                             <div class="layer-item"><span class="layer-id">reporter</span><span class="layer-name">자동 리포트 엔진</span><div class="layer-status"></div></div>
-                            <div class="layer-item"><span class="layer-id">deploy</span><span class="layer-name">GitHub 자동 배포</span><div class="layer-status"></div></div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="panel-header">실시간 정보 업데이트 로그</div>
                         <div class="terminal">
-                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [06:00] 일간 리포트 생성 완료</div>
-                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [06:05] GitHub Pages 동기화 성공</div>
-                            <div class="log-row"><span class="log-tag bg-wrn">WARN</span> [10:24] 가드닝 노드 지연 감지</div>
-                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [12:30] 신규 보안 자료 3건 수집</div>
                             <div class="log-row"><span class="log-tag bg-inf">INFO</span> [15:40] HIVE Agent PoC 모듈 이식 완료</div>
+                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [16:25] UI 시스템 최종 정상화 동기화</div>
+                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [16:30] v2.6.5 MASTER_SYNC 배포</div>
                         </div>
                     </div>
                 </div>
@@ -190,15 +208,8 @@
             <section id="security" class="content-section">
                 <div class="grid-3">
                     <div class="sec-card"><span class="sec-meta">Strategy</span><h3>AI 가드레일 보안 패권 분석</h3><p>Control Plane 선점이 AI 시대의 진정한 권력입니다. Zero-Trust 기반 설계 가이드라인 수립.</p></div>
-                    <div class="sec-card"><span class="sec-meta">Intelligence</span><h3>OWASP Agentic AI Top 10</h3><p>2026 에이전트 보안 취약점 분석: 프롬프트 인젝션, 과도한 권한 부여, 메모리 오염 등 핵심 위협 탐지 및 방어 전략.</p></div>
-                    <div class="sec-card"><span class="sec-meta">Report</span><h3>CISO 심층 분석 리포트 V2</h3><p>NVIDIA NeMo Guardrails 통합 보안 아키텍처 및 글로벌 CISO 협의회 AI 가이드라인 심층 분석.</p></div>
-                </div>
-                <div class="card" style="margin-top:20px;">
-                    <div class="panel-header">최신 보안 인텔리전스 로그</div>
-                    <div class="terminal" style="height:200px;">
-                        <div class="log-row"><span class="log-tag bg-blk">CRIT</span> NVIDIA OpenShell 가드레일 우회 공격 패턴 감지</div>
-                        <div class="log-row"><span class="log-tag bg-inf">INFO</span> OWASP 신규 가이드라인 준수율 98% 달성</div>
-                    </div>
+                    <div class="sec-card"><span class="sec-meta">Security</span><h3>OWASP Agentic AI Top 10</h3><p>2026 에이전트 보안 위협: 프롬프트 인젝션, 과도한 권한 오용 방어 전략 구축.</p></div>
+                    <div class="sec-card"><span class="sec-meta">Report</span><h3>CISO 심층 분석 리포트 V2</h3><p>NVIDIA NeMo Guardrails 통합 보안 아키텍처 및 글로벌 AI 거버넌스 분석.</p></div>
                 </div>
             </section>
 
@@ -208,41 +219,20 @@
                     <div class="sec-card" style="border-left:4px solid var(--accent-blue);">
                         <span class="sec-meta">Commercial</span>
                         <h3>민간 (Manufacturing)</h3>
-                        <p>AHHA Labs 제조 AI 에이전트 구축 사례: 생산성 23% 향상 및 다운타임 41% 감소 성과 분석 리포트.</p>
-                        <div class="tech-tags">
-                            <span class="tag">Vision AI</span><span class="tag">PdM Agent</span><span class="tag">ROI 67%</span>
-                        </div>
+                        <p>AHHA Labs 제조 AI 에이전트 구축 사례: 생산성 23% 향상 및 다운타임 41% 감소 성과 분석.</p>
+                        <div class="tech-tags"><span class="tag">Vision AI</span><span class="tag">PdM Agent</span></div>
                     </div>
                     <div class="sec-card" style="border-left:4px solid var(--accent-green);">
                         <span class="sec-meta">Public</span>
                         <h3>공공 (Public Sector)</h3>
-                        <p>인천광역시 AI 전환 전략수립 분석: 지자체 에이전트 모델 및 행안부 가이드라인 기반 입찰 동향 분석.</p>
-                        <div class="tech-tags">
-                            <span class="tag">나라장터</span><span class="tag">NIA 정책</span><span class="tag">AI Gov</span>
-                        </div>
+                        <p>인천광역시 AI 전환 전략수립 분석: 지자체 에이전트 모델 및 행안부 가이드라인 입찰 동향.</p>
+                        <div class="tech-tags"><span class="tag">나라장터</span><span class="tag">AI Gov</span></div>
                     </div>
                     <div class="sec-card" style="border-left:4px solid var(--accent-purple);">
                         <span class="sec-meta">Enterprise</span>
                         <h3>엔터프라이즈 (Global)</h3>
-                        <p>글로벌 에이전트 프레임워크 비교: LangGraph, AutoGen, CrewAI 기반 엔터프라이즈 배포 전략.</p>
-                        <div class="tech-tags">
-                            <span class="tag">LangGraph</span><span class="tag">MCP</span><span class="tag">RAG</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top:20px;">
-                    <div class="panel-header">HIVE Agent PoC Demo Console (v1.0)</div>
-                    <div class="poc-console" id="poc-terminal">
-                        <div class="console-header"><span>HIVE_AGENT_ENGINE_CONNECTED</span><span>PoC MODE ACTIVE</span></div>
-                        <div id="console-output">
-                            <div style="color:var(--text-dim); margin-bottom:10px;">HIVE Intelligence 에이전트 PoC 시스템에 오신 것을 환영합니다.</div>
-                            <div style="color:var(--accent-blue);">사용 가능한 명령어: [ '나라장터 분석', '제조업 ROI', '보안 취약점', '프레임워크 비교' ]</div>
-                        </div>
-                        <div style="display:flex; margin-top:10px;">
-                            <span class="prompt">></span>
-                            <input type="text" class="console-input" id="poc-input" placeholder="명령어를 입력하세요..." onkeypress="handleConsole(event)">
-                        </div>
+                        <p>글로벌 에이전트 프레임워크 비교: LangGraph, AutoGen 기반 엔터프라이즈 배포 전략.</p>
+                        <div class="tech-tags"><span class="tag">LangGraph</span><span class="tag">MCP</span></div>
                     </div>
                 </div>
             </section>
@@ -264,22 +254,6 @@
             <section id="gardening" class="content-section">
                 <div class="kpi-grid">
                     <div class="card kpi-card"><div class="kpi-top"><i>🌳</i><span class="kpi-dot" style="background:#ef4444;"></span></div><div class="kpi-val" style="color:#ef4444;">124,582</div><div class="kpi-label">관리 정원수</div><div class="kpi-sub">+1,240 오늘</div></div>
-                    <div class="card kpi-card"><div class="kpi-top"><i>📈</i><span class="kpi-dot" style="background:#f59e0b;"></span></div><div class="kpi-val" style="color:#f59e0b;">98.4%</div><div class="kpi-label">생육 건강도</div><div class="kpi-sub">임계값 이상</div></div>
-                    <div class="card kpi-card"><div class="kpi-top"><i>📍</i><span class="kpi-dot" style="background:#10b981;"></span></div><div class="kpi-val" style="color:#10b981;">3</div><div class="kpi-label">시범지구</div><div class="kpi-sub">정상 가동</div></div>
-                </div>
-                <div class="dash-layout">
-                    <div class="card">
-                        <div class="panel-header">실시간 생육 지표</div>
-                        <div class="stat-bar"><div class="stat-label"><span>토양 수분</span><span class="val">82%</span></div><div class="stat-track"><div class="stat-fill" style="width: 82%; background:#ef4444;"></div></div></div>
-                        <div class="stat-bar"><div class="stat-label"><span>엽록소</span><span class="val">76%</span></div><div class="stat-track"><div class="stat-fill" style="width: 76%; background:#f59e0b;"></div></div></div>
-                    </div>
-                    <div class="card">
-                        <div class="panel-header">디지털 트윈 노드</div>
-                        <div class="layer-list">
-                            <div class="layer-item"><span class="layer-id">seocho</span><span class="layer-name">서초 시범지구</span><div class="layer-status"></div></div>
-                            <div class="layer-item"><span class="layer-id">gangnam</span><span class="layer-name">강남 시범지구</span><div class="layer-status"></div></div>
-                        </div>
-                    </div>
                 </div>
             </section>
 
@@ -319,10 +293,10 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        function handleConsole(e) {
+        function handleDashConsole(e) {
             if (e.key === 'Enter') {
-                const input = document.getElementById('poc-input');
-                const output = document.getElementById('console-output');
+                const input = document.getElementById('dash-poc-input');
+                const output = document.getElementById('dash-console-output');
                 const val = input.value.trim();
                 if (!val) return;
 
@@ -337,18 +311,18 @@
                     agentRow.style.margin = '5px 0 10px 12px';
                     
                     if (val.includes('나라장터')) {
-                        agentRow.innerText = "◈ 인천광역시 AI 전환 전략수립 용역 분석 완료: 약 3억원 규모, LLM 기반 행정 자동화 핵심.";
+                        agentRow.innerText = "◈ 분석 완료: 인천광역시 AI 전환 용역(약 3억) 입찰 분석 데이터 로드됨.";
                     } else if (val.includes('제조업')) {
-                        agentRow.innerText = "◈ AHHA Labs PoC 결과: 생산성 23% 향상 확인. PdM 에이전트 가동률 99.8% 달성.";
+                        agentRow.innerText = "◈ AHHA Labs 분석: 생산성 23% 향상, 다운타임 41% 감소 실측 데이터 로드됨.";
                     } else if (val.includes('보안')) {
-                        agentRow.innerText = "◈ OWASP Top 10 대응 현황: 프롬프트 인젝션 및 권한 오용 방어 로직 적용 중.";
+                        agentRow.innerText = "◈ 보안 인텔리전스: OWASP Agentic Top 10 대응 패치 로직 로드됨.";
                     } else if (val.includes('비교')) {
-                        agentRow.innerText = "◈ LangGraph(엔터프라이즈 워크플로우) vs AutoGen(멀티에이전트 협업) 벤치마킹 데이터 로드 완료.";
+                        agentRow.innerText = "◈ 프레임워크 분석: LangGraph vs AutoGen 아키텍처 비교표 로드됨.";
                     } else {
-                        agentRow.innerText = "◈ 명령어를 분석 중입니다... [ 나라장터 분석 / 제조업 ROI / 보안 취약점 / 프레임워크 비교 ] 를 입력하세요.";
+                        agentRow.innerText = "◈ 명령어를 입력하세요: [ 나라장터 분석 / 제조업 ROI / 보안 취약점 / 프레임워크 비교 ]";
                     }
                     output.appendChild(agentRow);
-                    document.getElementById('poc-terminal').scrollTop = document.getElementById('poc-terminal').scrollHeight;
+                    document.getElementById('dash-poc-terminal').scrollTop = document.getElementById('dash-poc-terminal').scrollHeight;
                 }, 500);
             }
         }
