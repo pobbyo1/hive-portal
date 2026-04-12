@@ -20,148 +20,63 @@
             --border-color: #1e293b;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); display: flex; min-height: 100vh; overflow: hidden; }
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            display: flex;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-
-        /* --- LAGOS Sidebar --- */
-        .sidebar {
-            width: 260px;
-            background-color: var(--sidebar-bg);
-            border-right: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            flex-shrink: 0;
-        }
-
-        .sidebar-logo {
-            padding: 24px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .logo-icon {
-            width: 24px; height: 24px;
-            background: var(--accent-blue);
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            box-shadow: 0 0 10px var(--accent-blue);
-        }
-
+        .sidebar { width: 260px; background-color: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; height: 100vh; flex-shrink: 0; }
+        .sidebar-logo { padding: 24px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border-color); }
+        .logo-icon { width: 24px; height: 24px; background: var(--accent-blue); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); box-shadow: 0 0 10px var(--accent-blue); }
         .logo-text h2 { font-size: 0.95rem; font-weight: 800; letter-spacing: 1px; color: #fff; }
         .logo-text p { font-size: 0.65rem; color: var(--text-muted); font-weight: 600; letter-spacing: 0.5px; }
 
         .nav-menu { flex-grow: 1; padding: 20px 12px; }
-        .nav-item {
-            padding: 12px 16px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 4px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
+        .nav-item { padding: 12px 16px; border-radius: 8px; display: flex; align-items: center; gap: 12px; color: var(--text-muted); cursor: pointer; transition: all 0.2s; margin-bottom: 4px; font-size: 0.85rem; font-weight: 500; }
         .nav-item:hover { background: rgba(255,255,255,0.03); color: #fff; }
         .nav-item.active { background: rgba(56, 189, 248, 0.1); color: var(--accent-blue); }
-        .nav-item i { font-style: normal; font-size: 1.1rem; opacity: 0.8; }
+        .nav-item i { font-style: normal; font-size: 1.1rem; }
 
-        /* --- Top Header --- */
         .main-container { flex-grow: 1; display: flex; flex-direction: column; height: 100vh; overflow-y: auto; }
-        
-        .header {
-            padding: 16px 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            background: rgba(12, 17, 28, 0.8);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0; z-index: 100;
-        }
-
+        .header { padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); background: rgba(12, 17, 28, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; }
         .header-left h1 { font-size: 1.1rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px; }
         .header-left h1 span { font-weight: 400; color: var(--text-muted); font-size: 0.9rem; }
-
         .header-right { display: flex; align-items: center; gap: 24px; }
-        .status-pill {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            color: var(--accent-green);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.72rem;
-            font-weight: 600;
-        }
+        .status-pill { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); color: var(--accent-green); padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; }
         .clock { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-muted); }
 
-        /* --- Content Layout --- */
-        .content { padding: 32px; display: none; }
-        .content.active { display: block; }
+        .content-section { padding: 32px; display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- LAGOS UI Components --- */
-        .kpi-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 24px; }
-        .kpi-card {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
-            position: relative;
-        }
-        .kpi-card::after {
-            content: ''; position: absolute; top: 12px; right: 12px;
-            width: 6px; height: 6px; border-radius: 50%;
-        }
+        /* KPI Grid */
+        .kpi-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 24px; }
+        .kpi-card { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; position: relative; }
+        .kpi-card::after { content: ''; position: absolute; top: 12px; right: 12px; width: 6px; height: 6px; border-radius: 50%; }
         .dot-red::after { background: var(--accent-red); box-shadow: 0 0 8px var(--accent-red); }
         .dot-orange::after { background: var(--accent-orange); box-shadow: 0 0 8px var(--accent-orange); }
         .dot-green::after { background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
         .dot-blue::after { background: var(--accent-blue); box-shadow: 0 0 8px var(--accent-blue); }
         .dot-purple::after { background: var(--accent-purple); box-shadow: 0 0 8px var(--accent-purple); }
         .dot-cyan::after { background: #06b6d4; box-shadow: 0 0 8px #06b6d4; }
-
         .kpi-val { font-size: 1.6rem; font-weight: 700; color: #fff; display: block; }
         .kpi-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; display: block; font-weight: 600; }
         .kpi-sub { font-size: 0.65rem; color: #475569; margin-top: 12px; display: block; }
 
-        .panel-row { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 12px; margin-bottom: 12px; }
+        /* Main Panels */
+        .panel-layout { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 12px; margin-bottom: 12px; }
         .panel { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; }
         .panel-h { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Progress Bars */
         .bar-item { margin-bottom: 20px; }
         .bar-info { display: flex; justify-content: space-between; font-size: 0.72rem; color: #cbd5e1; margin-bottom: 8px; }
         .bar-track { height: 6px; background: #0f172a; border-radius: 3px; overflow: hidden; }
         .bar-fill { height: 100%; border-radius: 3px; }
 
-        /* Status List */
         .st-list { display: flex; flex-direction: column; gap: 12px; }
-        .st-item {
-            background: #0f172a; padding: 14px 20px; border-radius: 8px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .st-key { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-blue); font-weight: 600; }
+        .st-item { background: #0f172a; padding: 14px 20px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .st-key { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent-blue); font-weight: 600; text-transform: uppercase; }
         .st-desc { font-size: 0.75rem; color: var(--text-muted); }
         .st-dot { width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green); }
 
-        /* Logs */
         .log-box { display: flex; flex-direction: column; gap: 12px; height: 320px; overflow-y: auto; padding-right: 8px; }
         .log-box::-webkit-scrollbar { width: 4px; }
         .log-box::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
@@ -171,75 +86,36 @@
         .tag-info { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
         .tag-warn { background: rgba(245, 158, 11, 0.2); color: var(--accent-orange); }
 
-        /* Metrics Grid */
-        .metric-row { display: grid; grid-template-columns: 1.5fr 1fr; gap: 12px; }
-        .metric-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .metric-card { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; }
-        .metric-val { font-size: 1.2rem; font-weight: 700; color: var(--accent-blue); }
-        .metric-label { font-size: 0.7rem; color: #64748b; margin-top: 6px; }
-
-        .mod-list { display: flex; flex-direction: column; gap: 10px; }
-        .mod-box {
-            background: rgba(255,255,255,0.02); padding: 12px 18px; border-radius: 8px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .mod-name { font-size: 0.75rem; color: #e2e8f0; }
-        .mod-tag { font-size: 0.6rem; font-weight: 800; padding: 2px 6px; border-radius: 4px; }
-        .crit { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
-        .high { background: rgba(245, 158, 11, 0.15); color: var(--accent-orange); border: 1px solid rgba(245, 158, 11, 0.3); }
-
-        .footer-sig {
-            text-align: center; padding: 40px 0; font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem; color: #334155; letter-spacing: 1px;
-        }
-
-        /* --- Section Specific (Security Archive) --- */
-        .sec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 16px; }
-        .sec-card { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; }
-        .sec-card h3 { font-size: 0.95rem; margin-bottom: 12px; color: #fff; }
-        .sec-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
-        .sec-tag { font-size: 0.65rem; color: var(--accent-blue); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .footer-sig { text-align: center; padding: 40px 0; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #334155; letter-spacing: 1px; }
 
     </style>
 </head>
 <body>
 
-    <!-- LAGOS Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-logo">
             <div class="logo-icon"></div>
-            <div class="logo-text">
-                <h2>LAGOS</h2>
-                <p>HIVE INTELLIGENCE</p>
-            </div>
+            <div class="logo-text"><h2>LAGOS</h2><p>HIVE INTELLIGENCE</p></div>
         </div>
         <nav class="nav-menu">
-            <div class="nav-item active" onclick="showContent('dashboard')"><i>🏠</i> 종합 현황 Overview</div>
-            <div class="nav-item" onclick="showContent('security')"><i>🛡️</i> 보안 아카이브 Intel</div>
-            <div class="nav-item" onclick="showContent('gardening')"><i>🌳</i> 스마트 가드닝 Gardening</div>
-            <div class="nav-item" onclick="showContent('reports')"><i>📊</i> 일일 리포트 Reports</div>
+            <div class="nav-item active" onclick="navigate('dashboard')"><i>🏠</i> 종합 현황 Overview</div>
+            <div class="nav-item" onclick="navigate('gardening')"><i>🌳</i> 스마트 가드닝 Gardening</div>
+            <div class="nav-item" onclick="navigate('security')"><i>🛡️</i> 보안 아카이브 Intel</div>
             <div class="nav-item" onclick="window.open('https://7yubx2njj2.skywork.website/', '_blank')"><i>🔐</i> Lagos AI Guard</div>
         </nav>
     </aside>
 
     <div class="main-container">
-        
-        <!-- LAGOS Header -->
         <header class="header">
-            <div class="header-left">
-                <h1 id="page-title">🏠 종합 현황 <span>Overview</span></h1>
-            </div>
-            <div class="header-right">
-                <div class="status-pill">● 전 계층 정상</div>
-                <div class="clock" id="live-clock">오후 2:42:15</div>
-            </div>
+            <div class="header-left"><h1 id="page-title">🏠 종합 현황 <span>Overview</span></h1></div>
+            <div class="header-right"><div class="status-pill">● 전 계층 정상</div><div class="clock" id="live-clock">오후 2:42:15</div></div>
         </header>
 
-        <main class="main-content">
-
-            <!-- 1. 메인 대시보드 (Home) -->
-            <section id="dashboard" class="content active">
-                <div class="kpi-grid">
+        <main id="main-content">
+            
+            <!-- Dashboard Home -->
+            <section id="dashboard" class="content-section active">
+                <div class="kpi-row">
                     <div class="kpi-card dot-red"><span class="kpi-val">2,847</span><span class="kpi-label">탐지된 위협</span><span class="kpi-sub">+124 오늘</span></div>
                     <div class="kpi-card dot-orange"><span class="kpi-val">1,203</span><span class="kpi-label">차단된 프롬프트</span><span class="kpi-sub">+87 오늘</span></div>
                     <div class="kpi-card dot-green"><span class="kpi-val">6</span><span class="kpi-label">보안 레이어</span><span class="kpi-sub">전계층 활성</span></div>
@@ -247,14 +123,12 @@
                     <div class="kpi-card dot-purple"><span class="kpi-val">8.2ms</span><span class="kpi-label">평균 응답 지연</span><span class="kpi-sub">SLA < 15ms</span></div>
                     <div class="kpi-card dot-cyan"><span class="kpi-val">14</span><span class="kpi-label">모델 커버리지</span><span class="kpi-sub">연동 LLM</span></div>
                 </div>
-
-                <div class="panel-row">
+                <div class="panel-layout">
                     <div class="panel">
                         <div class="panel-h">오늘의 위협 유형별 현황</div>
                         <div class="bar-item"><div class="bar-info"><span>프롬프트 인젝션</span><span>847</span></div><div class="bar-track"><div class="bar-fill" style="width: 80%; background: var(--accent-red);"></div></div></div>
                         <div class="bar-item"><div class="bar-info"><span>PII 노출 시도</span><span>612</span></div><div class="bar-track"><div class="bar-fill" style="width: 65%; background: var(--accent-orange);"></div></div></div>
                         <div class="bar-item"><div class="bar-info"><span>Jailbreak</span><span>398</span></div><div class="bar-track"><div class="bar-fill" style="width: 45%; background: var(--accent-purple);"></div></div></div>
-                        <div class="bar-item"><div class="bar-info"><span>환각 탐지</span><span>534</span></div><div class="bar-track"><div class="bar-fill" style="width: 55%; background: var(--accent-blue);"></div></div></div>
                     </div>
                     <div class="panel">
                         <div class="panel-h">6계층 심층 방어 상태</div>
@@ -262,8 +136,6 @@
                             <div class="st-item"><div><span class="st-key">identity</span> <span class="st-desc">신원 및 권한 통제</span></div><div class="st-dot"></div></div>
                             <div class="st-item"><div><span class="st-key">input</span> <span class="st-desc">입력 보안 방화벽</span></div><div class="st-dot"></div></div>
                             <div class="st-item"><div><span class="st-key">pii</span> <span class="st-desc">PII 비식별화 엔진</span></div><div class="st-dot"></div></div>
-                            <div class="st-item"><div><span class="st-key">rag</span> <span class="st-desc">RAG 신뢰 레이어</span></div><div class="st-dot"></div></div>
-                            <div class="st-item"><div><span class="st-key">output</span> <span class="st-desc">출력 검증 엔진</span></div><div class="st-dot"></div></div>
                         </div>
                     </div>
                     <div class="panel">
@@ -272,98 +144,62 @@
                             <div class="log-entry"><span class="tag tag-block">BLOCK</span> Prompt Injection 탐지 — ID #4821</div>
                             <div class="log-entry"><span class="tag tag-block">BLOCK</span> PII 노출 시도 차단 — 주민번호 패턴</div>
                             <div class="log-entry"><span class="tag tag-warn">WARN</span> 환각 가능성 높음(0.82) — 의료 정보</div>
-                            <div class="log-entry"><span class="tag tag-block">BLOCK</span> Jailbreak 시도 탐지 — DAN 변형</div>
-                            <div class="log-entry"><span class="tag tag-info">INFO</span> 자가학습 모델 업데이트 완료 — v2.4.1</div>
-                            <div class="log-entry"><span class="tag tag-warn">WARN</span> 이미지 내 QR 악성 명령 탐지</div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 2. 스마트 가드닝 (Gardening) -->
-            <section id="gardening" class="content">
-                <div class="kpi-grid">
+            <!-- Gardening Section -->
+            <section id="gardening" class="content-section">
+                <div class="kpi-row">
                     <div class="kpi-card dot-red"><span class="kpi-val">124,582</span><span class="kpi-label">관리 정원수</span><span class="kpi-sub">+1,240 오늘</span></div>
-                    <div class="kpi-card dot-orange"><span class="kpi-val">98.4%</span><span class="kpi-label">생육 건강도</span><span class="kpi-sub">안정권 유지</span></div>
-                    <div class="kpi-card dot-green"><span class="kpi-val">3</span><span class="kpi-label">시범지구 운영</span><span class="kpi-sub">전계층 정상</span></div>
-                    <div class="kpi-card dot-blue"><span class="kpi-val">1,240 t</span><span class="kpi-label">누적 탄소 저감</span><span class="kpi-sub">기여도 높음</span></div>
-                    <div class="kpi-card dot-purple"><span class="kpi-val">82%</span><span class="kpi-label">평균 수조 잔량</span><span class="kpi-sub">충분한 보급</span></div>
-                    <div class="kpi-card dot-cyan"><span class="kpi-val">428</span><span class="kpi-label">AI 자율 대응</span><span class="kpi-sub">24/7 가동 중</span></div>
+                    <div class="kpi-card dot-orange"><span class="kpi-val">98.4%</span><span class="kpi-label">생육 건강도</span><span class="kpi-sub">임계값 이상 유지</span></div>
+                    <div class="kpi-card dot-green"><span class="kpi-val">3</span><span class="kpi-label">시범지구 레이어</span><span class="kpi-sub">전계층 정상</span></div>
+                    <div class="kpi-card dot-blue"><span class="kpi-val">1,240 t</span><span class="kpi-label">탄소 저감량</span><span class="kpi-sub">연간 누적치</span></div>
+                    <div class="kpi-card dot-purple"><span class="kpi-val">8.2ms</span><span class="kpi-label">평균 분석 지연</span><span class="kpi-sub">SLA < 15ms</span></div>
+                    <div class="kpi-card dot-cyan"><span class="kpi-val">428</span><span class="kpi-label">AI 자율 대응</span><span class="kpi-sub">24/7 액티브</span></div>
                 </div>
-
-                <div class="panel-row">
+                <div class="panel-layout">
                     <div class="panel">
                         <div class="panel-h">오늘의 생육 데이터 현황</div>
                         <div class="bar-item"><div class="bar-info"><span>토양 수분 (Moisture)</span><span>82%</span></div><div class="bar-track"><div class="bar-fill" style="width: 82%; background: var(--accent-red);"></div></div></div>
                         <div class="bar-item"><div class="bar-info"><span>엽록소 수치 (Chlorophyll)</span><span>76%</span></div><div class="bar-track"><div class="bar-fill" style="width: 76%; background: var(--accent-orange);"></div></div></div>
-                        <div class="bar-item"><div class="bar-info"><span>토양 온도 (Soil Temp)</span><span>22.4°C</span></div><div class="bar-track"><div class="bar-fill" style="width: 65%; background: var(--accent-purple);"></div></div></div>
-                        <div class="bar-item"><div class="bar-info"><span>일조량 (Illuminance)</span><span>92%</span></div><div class="bar-track"><div class="bar-fill" style="width: 92%; background: var(--accent-blue);"></div></div></div>
+                        <div class="bar-item"><div class="bar-info"><span>토양 온도 (Soil Temp)</span><span>65%</span></div><div class="bar-track"><div class="bar-fill" style="width: 65%; background: var(--accent-purple);"></div></div></div>
                     </div>
                     <div class="panel">
                         <div class="panel-h">6계층 심층 가드닝 상태</div>
                         <div class="st-list">
-                            <div class="st-item"><div><span class="st-key">identity</span> <span class="st-desc">현장 작업자 인증</span></div><div class="st-dot"></div></div>
-                            <div class="st-item"><div><span class="st-key">input</span> <span class="st-desc">센서 데이터 필터링</span></div><div class="st-dot"></div></div>
                             <div class="st-item"><div><span class="st-key">biological</span> <span class="st-desc">식물 생체 신호 분석</span></div><div class="st-dot"></div></div>
                             <div class="st-item"><div><span class="st-key">irrigation</span> <span class="st-desc">자율 관수 제어 레이어</span></div><div class="st-dot"></div></div>
-                            <div class="st-item"><div><span class="st-key">audit</span> <span class="st-desc">통합 감사 및 모니터링</span></div><div class="st-dot"></div></div>
+                            <div class="st-item"><div><span class="st-key">output</span> <span class="st-desc">최적 생육 리포트 생성</span></div><div class="st-dot"></div></div>
                         </div>
                     </div>
                     <div class="panel">
                         <div class="panel-h">실시간 가드닝 AI 이벤트</div>
                         <div class="log-box">
                             <div class="log-entry"><span class="tag tag-block">BLOCK</span> 비정상 수분 주입 시도 탐지 — #4821</div>
-                            <div class="log-entry"><span class="tag tag-block">BLOCK</span> 센서 데이터 위조 시도 차단 — 강남</div>
-                            <div class="log-entry"><span class="tag tag-warn">WARN</span> 서초지구 엽록소 수치 하락(0.72)</div>
                             <div class="log-entry"><span class="tag tag-info">INFO</span> 자가학습 식물 모델 업데이트 — v2.4.1</div>
                             <div class="log-entry"><span class="tag tag-warn">WARN</span> 강남지구 수조 잔량 임계값 도달</div>
-                            <div class="log-entry"><span class="tag tag-info">INFO</span> LiDAR 수목 스캔 데이터 동기화 완료</div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 3. 보안 아카이브 (Security) -->
-            <section id="security" class="content">
-                <div class="sec-grid">
-                    <div class="sec-card">
-                        <span class="sec-tag">Intelligence</span>
-                        <h3>일간 AI 보안·가드레일 인텔리전스 (4월 12일)</h3>
-                        <p>• OWASP Agentic Top 10 (2026) — 실시간 권한 검증 표준화<br>• 시맨틱 DLP '인라인 추론 차단' 업계 표준 채택</p>
-                    </div>
-                    <div class="sec-card">
-                        <span class="sec-tag">Strategy</span>
-                        <h3>AI 가드레일 보안 패권과 Control Plane의 실체</h3>
-                        <p>Identity/Privilege/Policy 중앙 통제 레이어가 AI 시대의 진정한 권력입니다. Zero-Trust 기반 설계 필수.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Footer -->
             <footer class="footer-sig">
                 {"label": "gateway-client", "id": "gateway-client"} | CONFIDENTIAL HIVE INTELLIGENCE | © 2026 SUNYOUTECH
             </footer>
-
         </main>
     </div>
 
     <script>
-        function showContent(id) {
-            document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+        function navigate(id) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             event.currentTarget.classList.add('active');
-
-            const titleMap = {
-                'dashboard': '🏠 종합 현황 <span>Overview</span>',
-                'security': '🛡️ 보안 아카이브 <span>Intel</span>',
-                'gardening': '🌳 스마트 가드닝 <span>Gardening</span>',
-                'reports': '📊 일일 리포트 <span>Reports</span>'
-            };
-            document.getElementById('page-title').innerHTML = titleMap[id] || 'Overview';
+            const map = { 'dashboard': '🏠 종합 현황 <span>Overview</span>', 'gardening': '🌳 스마트 가드닝 <span>Gardening</span>', 'security': '🛡️ 보안 아카이브 <span>Intel</span>' };
+            document.getElementById('page-title').innerHTML = map[id] || 'Overview';
         }
-
         function updateClock() {
             const now = new Date();
             const h = now.getHours();
@@ -373,7 +209,6 @@
             const s = now.getSeconds().toString().padStart(2, '0');
             document.getElementById('live-clock').innerText = `${ampm} ${h12}:${m}:${s}`;
         }
-
         setInterval(updateClock, 1000);
         updateClock();
     </script>
