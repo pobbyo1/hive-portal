@@ -93,10 +93,19 @@
         .footer { margin-top: auto; padding: 40px 0; text-align: center; border-top: 1px solid var(--panel-border); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 1px; }
 
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .sec-card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 12px; padding: 24px; }
+        .sec-card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 12px; padding: 24px; transition: transform 0.2s; }
+        .sec-card:hover { transform: translateY(-5px); border-color: var(--accent-blue); }
         .sec-card h3 { font-size: 15px; margin-bottom: 12px; color: #fff; }
         .sec-card p { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
         .sec-meta { font-size: 11px; color: var(--accent-blue); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; display: block; }
+
+        /* Agent Hub Specific */
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+        .tag { font-size: 10px; padding: 2px 8px; border-radius: 4px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-dim); }
+        .poc-console { background: #080b14; border: 1px solid var(--accent-blue); border-radius: 8px; padding: 15px; font-family: 'JetBrains Mono', monospace; margin-top: 20px; }
+        .console-header { display: flex; justify-content: space-between; font-size: 11px; color: var(--accent-blue); margin-bottom: 10px; border-bottom: 1px solid rgba(0, 194, 255, 0.2); padding-bottom: 5px; }
+        .console-input { background: transparent; border: none; outline: none; color: #fff; font-family: inherit; font-size: 12px; width: 100%; }
+        .prompt { color: var(--accent-green); margin-right: 8px; }
 
     </style>
 </head>
@@ -126,7 +135,7 @@
                 <i id="page-icon">🏠</i>
                 <span class="title" id="page-title">종합 현황</span>
                 <span class="subtitle" id="page-subtitle">Overview</span>
-                <span class="version-badge">v2.5.4 NORMALIZED</span>
+                <span class="version-badge">v2.6.0 AGENT_DEEP_INTEGRATED</span>
             </div>
             <div class="topbar-right">
                 <div class="status-badge"><span class="status-dot"></span> 전 계층 정상</div>
@@ -171,7 +180,7 @@
                             <div class="log-row"><span class="log-tag bg-inf">INFO</span> [06:05] GitHub Pages 동기화 성공</div>
                             <div class="log-row"><span class="log-tag bg-wrn">WARN</span> [10:24] 가드닝 노드 지연 감지</div>
                             <div class="log-row"><span class="log-tag bg-inf">INFO</span> [12:30] 신규 보안 자료 3건 수집</div>
-                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [14:15] HIVE Portal v2.5.4 배포</div>
+                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [15:40] HIVE Agent PoC 모듈 이식 완료</div>
                         </div>
                     </div>
                 </div>
@@ -179,17 +188,62 @@
 
             <!-- 🛡️ 보안 아카이브 (Security) -->
             <section id="security" class="content-section">
-                <div class="intel-grid">
+                <div class="grid-3">
                     <div class="sec-card"><span class="sec-meta">Strategy</span><h3>AI 가드레일 보안 패권 분석</h3><p>Control Plane 선점이 AI 시대의 진정한 권력입니다. Zero-Trust 기반 설계 가이드라인 수립.</p></div>
-                    <div class="sec-card"><span class="sec-meta">Intelligence</span><h3>일간 AI 보안 위협 리포트</h3><p>OWASP Agentic Top 10 표준화 동향 및 NVIDIA OpenShell 가드레일 가속기 성능 분석.</p></div>
+                    <div class="sec-card"><span class="sec-meta">Intelligence</span><h3>OWASP Agentic AI Top 10</h3><p>2026 에이전트 보안 취약점 분석: 프롬프트 인젝션, 과도한 권한 부여, 메모리 오염 등 핵심 위협 탐지 및 방어 전략.</p></div>
+                    <div class="sec-card"><span class="sec-meta">Report</span><h3>CISO 심층 분석 리포트 V2</h3><p>NVIDIA NeMo Guardrails 통합 보안 아키텍처 및 글로벌 CISO 협의회 AI 가이드라인 심층 분석.</p></div>
+                </div>
+                <div class="card" style="margin-top:20px;">
+                    <div class="panel-header">최신 보안 인텔리전스 로그</div>
+                    <div class="terminal" style="height:200px;">
+                        <div class="log-row"><span class="log-tag bg-blk">CRIT</span> NVIDIA OpenShell 가드레일 우회 공격 패턴 감지</div>
+                        <div class="log-row"><span class="log-tag bg-inf">INFO</span> OWASP 신규 가이드라인 준수율 98% 달성</div>
+                    </div>
                 </div>
             </section>
 
             <!-- 🤖 에이전트 허브 (Hub) -->
             <section id="hub" class="content-section">
                 <div class="grid-3">
-                    <div class="sec-card"><h3>🏢 민간 사례</h3><p>AHHA Labs 제조 AI 에이전트 분석 리포트 - 생산성 23% 향상 및 다운타임 41% 감소 사례.</p></div>
-                    <div class="sec-card"><h3>🏛️ 공공 사례</h3><p>인천광역시 AI 전환 전략수립 분석 - 지자체 에이전트 모델 및 행안부 가이드라인 준수.</p></div>
+                    <div class="sec-card" style="border-left:4px solid var(--accent-blue);">
+                        <span class="sec-meta">Commercial</span>
+                        <h3>민간 (Manufacturing)</h3>
+                        <p>AHHA Labs 제조 AI 에이전트 구축 사례: 생산성 23% 향상 및 다운타임 41% 감소 성과 분석 리포트.</p>
+                        <div class="tech-tags">
+                            <span class="tag">Vision AI</span><span class="tag">PdM Agent</span><span class="tag">ROI 67%</span>
+                        </div>
+                    </div>
+                    <div class="sec-card" style="border-left:4px solid var(--accent-green);">
+                        <span class="sec-meta">Public</span>
+                        <h3>공공 (Public Sector)</h3>
+                        <p>인천광역시 AI 전환 전략수립 분석: 지자체 에이전트 모델 및 행안부 가이드라인 기반 입찰 동향 분석.</p>
+                        <div class="tech-tags">
+                            <span class="tag">나라장터</span><span class="tag">NIA 정책</span><span class="tag">AI Gov</span>
+                        </div>
+                    </div>
+                    <div class="sec-card" style="border-left:4px solid var(--accent-purple);">
+                        <span class="sec-meta">Enterprise</span>
+                        <h3>엔터프라이즈 (Global)</h3>
+                        <p>글로벌 에이전트 프레임워크 비교: LangGraph, AutoGen, CrewAI 기반 엔터프라이즈 배포 전략.</p>
+                        <div class="tech-tags">
+                            <span class="tag">LangGraph</span><span class="tag">MCP</span><span class="tag">RAG</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top:20px;">
+                    <div class="panel-header">HIVE Agent PoC Demo Console (v1.0)</div>
+                    <div class="poc-console" id="poc-terminal">
+                        <div class="console-header"><span>HIVE_AGENT_ENGINE_CONNECTED</span><span>PoC MODE ACTIVE</span></div>
+                        <div id="console-output">
+                            <div style="color:var(--text-dim); margin-bottom:10px;">HIVE Intelligence 에이전트 PoC 시스템에 오신 것을 환영합니다.</div>
+                            <div style="color:var(--accent-blue);">사용 가능한 명령어: [ '나라장터 분석', '제조업 ROI', '보안 취약점', '프레임워크 비교' ]</div>
+                        </div>
+                        <div style="display:flex; margin-top:10px;">
+                            <span class="prompt">></span>
+                            <input type="text" class="console-input" id="poc-input" placeholder="명령어를 입력하세요..." onkeypress="handleConsole(event)">
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -199,8 +253,8 @@
                     <div class="panel-header">데일리 브리핑 아카이브</div>
                     <div id="report-list">
                         <div class="terminal" style="height:auto;">
-                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> 날씨: 서울 기온 17°C (흐림), 코디: 트렌치코트 권장</div>
-                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> 보안: 신규 위협 인텔리전스 7건 업데이트 완료</div>
+                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [2026.04.12] 날씨: 서울 기온 17°C (흐림), 코디: 트렌치코트 권장</div>
+                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [2026.04.12] 보안: 신규 위협 인텔리전스 7건 업데이트 완료</div>
                         </div>
                     </div>
                 </div>
@@ -251,6 +305,7 @@
             document.getElementById('page-subtitle').innerText = subs[id] || '';
             document.querySelector('.main-scroll').scrollTop = 0;
         }
+
         function updateClock() {
             const now = new Date();
             const h = now.getHours();
@@ -263,6 +318,40 @@
         }
         setInterval(updateClock, 1000);
         updateClock();
+
+        function handleConsole(e) {
+            if (e.key === 'Enter') {
+                const input = document.getElementById('poc-input');
+                const output = document.getElementById('console-output');
+                const val = input.value.trim();
+                if (!val) return;
+
+                const userRow = document.createElement('div');
+                userRow.innerHTML = `<span class="prompt" style="color:#fff">> ${val}</span>`;
+                output.appendChild(userRow);
+                input.value = '';
+
+                setTimeout(() => {
+                    const agentRow = document.createElement('div');
+                    agentRow.style.color = 'var(--accent-blue)';
+                    agentRow.style.margin = '5px 0 10px 12px';
+                    
+                    if (val.includes('나라장터')) {
+                        agentRow.innerText = "◈ 인천광역시 AI 전환 전략수립 용역 분석 완료: 약 3억원 규모, LLM 기반 행정 자동화 핵심.";
+                    } else if (val.includes('제조업')) {
+                        agentRow.innerText = "◈ AHHA Labs PoC 결과: 생산성 23% 향상 확인. PdM 에이전트 가동률 99.8% 달성.";
+                    } else if (val.includes('보안')) {
+                        agentRow.innerText = "◈ OWASP Top 10 대응 현황: 프롬프트 인젝션 및 권한 오용 방어 로직 적용 중.";
+                    } else if (val.includes('비교')) {
+                        agentRow.innerText = "◈ LangGraph(엔터프라이즈 워크플로우) vs AutoGen(멀티에이전트 협업) 벤치마킹 데이터 로드 완료.";
+                    } else {
+                        agentRow.innerText = "◈ 명령어를 분석 중입니다... [ 나라장터 분석 / 제조업 ROI / 보안 취약점 / 프레임워크 비교 ] 를 입력하세요.";
+                    }
+                    output.appendChild(agentRow);
+                    document.getElementById('poc-terminal').scrollTop = document.getElementById('poc-terminal').scrollHeight;
+                }, 500);
+            }
+        }
     </script>
 </body>
 </html>
