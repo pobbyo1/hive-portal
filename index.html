@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HIVE Intelligence Portal | ULTIMATE RECOVERY</title>
+    <title>HIVE Intelligence Portal | ULTIMATE MASTER</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -24,11 +24,10 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--bg-body); color: var(--text-main); font-family: 'Inter', 'Noto Sans KR', sans-serif; display: flex; min-height: 100vh; overflow: hidden; }
 
-        /* Sidebar */
         .sidebar { width: 260px; background: var(--sidebar-bg); border-right: 1px solid var(--panel-border); display: flex; flex-direction: column; z-index: 50; }
         .sidebar-header { padding: 32px 24px; border-bottom: 1px solid var(--panel-border); }
         .logo { display: flex; align-items: center; gap: 12px; }
-        .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 20px; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+        .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 20px; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); color: #fff; }
         .logo-text h1 { font-size: 18px; font-weight: 800; letter-spacing: 1px; }
         .logo-text p { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-top: 2px; }
 
@@ -38,7 +37,6 @@
         .nav-item.active { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); border: 1px solid rgba(59, 130, 246, 0.3); font-weight: 700; }
         .nav-item i { font-style: normal; font-size: 18px; width: 24px; text-align: center; }
 
-        /* Main Viewport */
         .viewport { flex: 1; display: flex; flex-direction: column; min-width: 0; position: relative; }
         .topbar { height: 64px; background: rgba(8, 11, 20, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--panel-border); display: flex; align-items: center; justify-content: space-between; padding: 0 32px; z-index: 40; }
         .page-info { display: flex; align-items: center; gap: 12px; }
@@ -54,7 +52,6 @@
         .section.active { display: block; animation: slideUp 0.4s ease-out; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* KPI Grid */
         .kpi-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-bottom: 32px; }
         .kpi-card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 16px; padding: 20px; transition: 0.3s; }
         .kpi-card:hover { border-color: var(--accent-blue); transform: translateY(-4px); }
@@ -62,7 +59,6 @@
         .kpi-value { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 800; color: #fff; }
         .kpi-sub { font-size: 10px; margin-top: 6px; font-weight: 600; color: var(--text-dim); }
 
-        /* Document Cards */
         .doc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
         .doc-card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 24px; padding: 32px; transition: 0.3s; position: relative; overflow: hidden; }
         .doc-card:hover { border-color: var(--accent-blue); }
@@ -81,12 +77,10 @@
         .data-meta { display: flex; flex-wrap: wrap; gap: 8px; }
         .data-tag { font-size: 10px; padding: 3px 8px; border-radius: 4px; background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); font-weight: 700; border: 1px solid rgba(59, 130, 246, 0.2); }
 
-        /* Tech Stack */
         .tech-box { background: rgba(255,255,255,0.02); border: 1px solid var(--panel-border); border-radius: 12px; padding: 16px; margin-top: 12px; }
         .tech-list { display: flex; flex-wrap: wrap; gap: 8px; }
         .tech-tag { font-size: 11px; padding: 4px 12px; background: #0c111d; border: 1px solid var(--panel-border); border-radius: 6px; color: #fff; font-family: 'JetBrains Mono'; }
 
-        /* Terminal Style */
         .terminal { background: #05070a; border: 1px solid var(--panel-border); border-radius: 16px; padding: 24px; font-family: 'JetBrains Mono', monospace; font-size: 13px; max-height: 500px; overflow-y: auto; }
         .log-row { display: flex; gap: 16px; margin-bottom: 12px; color: var(--text-dim); line-height: 1.5; }
         .log-time { color: var(--text-muted); width: 160px; flex-shrink: 0; }
@@ -95,7 +89,6 @@
         .wrn { color: var(--accent-orange); }
         .sec { color: var(--accent-red); }
 
-        /* Footer */
         .footer { margin-top: 64px; padding: 48px; border-top: 1px solid var(--panel-border); display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-family: 'JetBrains Mono'; font-size: 11px; }
         .client-id { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); padding: 6px 16px; border-radius: 8px; color: var(--accent-blue); font-weight: 800; }
 
@@ -127,11 +120,11 @@
         <header class="topbar">
             <div class="page-info">
                 <span class="page-title" id="p-title">종합 현황</span>
-                <span class="badge-ver">v4.0.0 MASTER_RESTORED</span>
+                <span class="badge-ver">v4.1.0 FULL_INJECTION</span>
             </div>
             <div class="topbar-right">
-                <div class="status"><div class="status-dot"></div> 모든 데이터 동기화 완료</div>
-                <div class="clock" id="clock">오후 06:30:00</div>
+                <div class="status"><div class="status-dot"></div> 모든 데이터 로드 완료</div>
+                <div class="clock" id="clock">오후 07:10:00</div>
             </div>
         </header>
 
@@ -238,17 +231,17 @@
                     <div class="log-row"><span class="log-time">[2026.04.12 06:00]</span><span class="log-tag inf">INFO</span> 데일리 인텔리전스 통합 브리핑 전송 완료 (jdjung@sunyoutech.com 외 3인)</div>
                     <div class="log-row"><span class="log-time">[2026.04.12 06:05]</span><span class="log-tag inf">INFO</span> 날씨: 서울 17°C (흐림) / 코디: 트렌치코트 권장</div>
                     <div class="log-row"><span class="log-time">[2026.04.12 09:15]</span><span class="log-tag inf">INFO</span> Frankfurt 항공권 추적: 883,000원 (에티하드 경유) 유지</div>
-                    <div class="log-row"><span class="log-time">[2026.04.12 18:40]</span><span class="log-tag sec">SECRET</span> 특급 기밀 자료 및 과거 모든 분석 데이터 복구 완료 (v4.0.0 MASTER)</div>
-                    <div class="log-row"><span class="log-time">[2026.04.12 18:45]</span><span class="log-tag inf">INFO</span> GitHub Pages 마스터 싱크 활성화</div>
+                    <div class="log-row"><span class="log-time">[2026.04.12 18:40]</span><span class="log-tag sec">SECRET</span> 특급 기밀 자료 및 과거 모든 분석 데이터 복구 완료 (v4.1.0 FULL)</div>
+                    <div class="log-row"><span class="log-time">[2026.04.12 19:10]</span><span class="log-tag inf">INFO</span> 모든 메뉴 데이터 강제 주입(Hard-coding) 프로세스 완료</div>
                 </div>
             </section>
 
             <!-- 🌳 스마트 가드닝 (Gardening) -->
             <section id="gardening" class="section">
                 <div class="kpi-grid">
-                    <div class="kpi-card"><div class="kpi-label">데이터셋 규모</div><div class="kpi-value">16.7K</div></div>
-                    <div class="kpi-card"><div class="kpi-label">건강 지수</div><div class="kpi-value">98.4%</div></div>
-                    <div class="kpi-card"><div class="kpi-label">시범 지구</div><div class="kpi-value">3 NODES</div></div>
+                    <div class="card-kpi"><div class="kpi-label">데이터셋 규모</div><div class="kpi-value">16.7K</div></div>
+                    <div class="card-kpi"><div class="kpi-label">건강 지수</div><div class="kpi-value">98.4%</div></div>
+                    <div class="card-kpi"><div class="kpi-label">시범 지구</div><div class="kpi-value">3 NODES</div></div>
                 </div>
                 <div class="doc-grid">
                     <div class="doc-card pub">
@@ -264,7 +257,7 @@
 
             <footer class="footer">
                 <div>HIVE INTELLIGENCE PLATFORM MASTER SYNC © 2026</div>
-                <div class="client-id">ID: GATEWAY-CLIENT // AUTH: FULL_RECOVERY_COMPLETE</div>
+                <div class="client-id">ID: GATEWAY-CLIENT // AUTH: FULL_INJECTION_COMPLETE</div>
             </footer>
 
         </main>
