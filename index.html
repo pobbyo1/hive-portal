@@ -1172,6 +1172,64 @@
             <div style="text-align:center; margin-top:20px;">
                 <button onclick="alert('제안서 원본 파일은 서버 내 /home/skywork/workspace/InputFiles/ 에 안전하게 보관 중입니다.')" style="background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); color:white; padding:12px 30px; border-radius:30px; cursor:pointer; font-size:0.9rem;">📄 제안서 원본 아카이브 확인</button>
             </div>
+
+            <!-- POC 관제 대시보드 -->
+            <h3 style="margin: 40px 0 20px; display: flex; align-items: center; gap: 10px;">
+                <span class="status-dot"></span> POC 통합 관제 센터 (Simulated)
+            </h3>
+            
+            <div class="quick-access-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <!-- Site 1: Seocho -->
+                <div class="card" style="padding: 15px; border-top: 4px solid var(--accent-blue);">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+                        <h4 style="color:white;">📍 서초구 시범지구</h4>
+                        <span class="badge" style="background:#22c55e;">정상</span>
+                    </div>
+                    <div style="font-size:0.8rem; line-height:1.8;">
+                        <div style="display:flex; justify-content:space-between;"><span>온도</span><span style="color:var(--accent-teal);">22.4°C</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>습도</span><span style="color:var(--accent-teal);">45%</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>토양 수분</span><span style="color:var(--accent-teal);">68%</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>수조 잔량</span><span style="color:var(--accent-teal);">82%</span></div>
+                    </div>
+                    <div style="margin-top:15px; height:4px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden;">
+                        <div style="width:82%; height:100%; background:var(--accent-blue);"></div>
+                    </div>
+                </div>
+
+                <!-- Site 2: Gangnam -->
+                <div class="card" style="padding: 15px; border-top: 4px solid var(--accent-purple);">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+                        <h4 style="color:white;">📍 강남구 시범지구</h4>
+                        <span class="badge" style="background:#f7c948; color:black;">주의</span>
+                    </div>
+                    <div style="font-size:0.8rem; line-height:1.8;">
+                        <div style="display:flex; justify-content:space-between;"><span>온도</span><span style="color:var(--accent-teal);">24.1°C</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>습도</span><span style="color:var(--accent-teal);">38%</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>토양 수분</span><span style="color:#f7c948;">32%</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>수조 잔량</span><span style="color:var(--accent-teal);">15%</span></div>
+                    </div>
+                    <div style="margin-top:15px; height:4px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden;">
+                        <div style="width:15%; height:100%; background:#f7c948;"></div>
+                    </div>
+                </div>
+
+                <!-- Site 3: Songpa -->
+                <div class="card" style="padding: 15px; border-top: 4px solid var(--accent-teal);">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+                        <h4 style="color:white;">📍 송파구 시범지구</h4>
+                        <span class="badge" style="background:#22c55e;">정상</span>
+                    </div>
+                    <div style="font-size:0.8rem; line-height:1.8;">
+                        <div style="display:flex; justify-content:space-between;"><span>온도</span><span style="color:var(--accent-teal);">21.8°C</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>습도</span><span style="color:var(--accent-teal);">50%</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>토양 수분</span><span style="color:var(--accent-teal);">72%</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span>수조 잔량</span><span style="color:var(--accent-teal);">95%</span></div>
+                    </div>
+                    <div style="margin-top:15px; height:4px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden;">
+                        <div style="width:95%; height:100%; background:var(--accent-teal);"></div>
+                    </div>
+                </div>
+            </div>
         </section>
 
     </main>
