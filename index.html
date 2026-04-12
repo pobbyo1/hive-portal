@@ -572,6 +572,95 @@
             .sector-grid, .stats-row, .hero-columns, .quick-access-grid, .term-grid { grid-template-columns: 1fr; }
             .tech-stack-grid { grid-template-columns: repeat(3, 1fr); }
         }
+        /* SECTION 6: 스마트 가드닝 프로젝트 */
+        #gardening {
+            background-color: #080b14;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .gardening-hero-sub {
+            color: #f7c948;
+            letter-spacing: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .gardening-hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .gardening-hero-title span {
+            display: block;
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gardening-hero-desc {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .premium-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(180deg, #4facfe 0%, #3a8dce 100%);
+            border: none;
+            color: white;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+            transition: all 0.3s;
+            margin-bottom: 60px;
+        }
+
+        .premium-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(79, 172, 254, 0.6);
+        }
+
+        .pill-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+        }
+
+        .pill {
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .pill-green { border-color: #22c55e; color: #22c55e; background: rgba(34, 197, 94, 0.05); }
+        .pill-gold { border-color: #f7c948; color: #f7c948; background: rgba(247, 201, 72, 0.05); }
+        .pill-blue { border-color: #4facfe; color: #4facfe; background: rgba(79, 172, 254, 0.05); }
+        .pill-purple { border-color: #9b51e0; color: #9b51e0; background: rgba(155, 81, 224, 0.05); }
+        .pill-cyan { border-color: #00f2fe; color: #00f2fe; background: rgba(0, 242, 254, 0.05); }
+
+        .pill:hover { background: rgba(255,255,255,0.1); color: white; }
+
     </style>
 </head>
 <body>
@@ -1082,19 +1171,29 @@
     
         <!-- SECTION 6: 스마트 가드닝 프로젝트 -->
         <section id="gardening" class="content-section">
-            <h2 class="section-title">🌳 지능형 가드닝 & 녹색복지 통합플랫폼</h2>
             
-            <div class="card" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(21, 128, 61, 0.1) 100%);">
-                <div style="display:flex; justify-content:space-between; align-items:start;">
-                    <div>
-                        <span class="badge badge-hot" style="background:#22c55e;">핵심 프로젝트</span>
-                        <h3 style="margin-top:10px; font-size:1.4rem;">선유기술(주) 차세대 녹색복지 모델</h3>
-                        <p style="margin-top:8px; color:var(--text-muted); font-size:0.9rem;">디지털 트윈 기반의 지능형 관리와 시니어 정서 케어를 결합한 통합 솔루션</p>
-                    </div>
-                    <div style="text-align:right;">
-                        <span style="font-size:0.8rem; color:var(--accent-teal);">상태: 분석 및 기획 단계</span>
-                    </div>
-                </div>
+            <div class="gardening-hero-sub">SUNYOUTECH · 지능형 가드닝 통합 플랫폼</div>
+            <h1 class="gardening-hero-title">
+                서울시 정원수 인텔리전스
+                <span>데이터 확보 및 분석</span>
+            </h1>
+
+            <div class="gardening-hero-desc">
+                IoT 생체 센싱 · 디지털 트윈 관제 · AI 성상 분석<br>
+                국내 지자체 환경에 최적화된 스마트 가드닝 라이선싱, SUNYOUTECH의<br>
+                데이터 기반 녹색 복지 솔루션을 확인하십시오
+            </div>
+
+            <button class="premium-btn" onclick="document.getElementById('\''poc-control'\'' ).scrollIntoView({behavior: '\''smooth'\''})">
+                🖥️ 가드닝 통합 관제 대시보드
+            </button>
+
+            <div class="pill-container">
+                <div class="pill pill-green">IoT 센서 데이터</div>
+                <div class="pill pill-gold">현장 사진 아카이브</div>
+                <div class="pill pill-blue">AI 성상 분석</div>
+                <div class="pill pill-purple">디지털 트윈</div>
+                <div class="pill">비교해보세요</div>
             </div>
 
             <div class="sector-grid">
@@ -1174,7 +1273,7 @@
             </div>
 
             <!-- POC 관제 대시보드 -->
-            <h3 style="margin: 40px 0 20px; display: flex; align-items: center; gap: 10px;">
+            <h3 id="poc-control" style="margin: 80px 0 20px; display: flex; align-items: center; justify-content: center; gap: 10px;">
                 <span class="status-dot"></span> POC 통합 관제 센터 (Simulated)
             </h3>
             
@@ -1185,7 +1284,7 @@
                         <h4 style="color:white;">📍 서초구 시범지구</h4>
                         <span class="badge" style="background:#22c55e;">정상</span>
                     </div>
-                    <div style="font-size:0.8rem; line-height:1.8;">
+                    <div style="font-size:0.8rem; line-height:1.8; text-align: left;">
                         <div style="display:flex; justify-content:space-between;"><span>온도</span><span style="color:var(--accent-teal);">22.4°C</span></div>
                         <div style="display:flex; justify-content:space-between;"><span>습도</span><span style="color:var(--accent-teal);">45%</span></div>
                         <div style="display:flex; justify-content:space-between;"><span>토양 수분</span><span style="color:var(--accent-teal);">68%</span></div>
@@ -1202,7 +1301,7 @@
                         <h4 style="color:white;">📍 강남구 시범지구</h4>
                         <span class="badge" style="background:#f7c948; color:black;">주의</span>
                     </div>
-                    <div style="font-size:0.8rem; line-height:1.8;">
+                    <div style="font-size:0.8rem; line-height:1.8; text-align: left;">
                         <div style="display:flex; justify-content:space-between;"><span>온도</span><span style="color:var(--accent-teal);">24.1°C</span></div>
                         <div style="display:flex; justify-content:space-between;"><span>습도</span><span style="color:var(--accent-teal);">38%</span></div>
                         <div style="display:flex; justify-content:space-between;"><span>토양 수분</span><span style="color:#f7c948;">32%</span></div>
@@ -1219,7 +1318,7 @@
                         <h4 style="color:white;">📍 송파구 시범지구</h4>
                         <span class="badge" style="background:#22c55e;">정상</span>
                     </div>
-                    <div style="font-size:0.8rem; line-height:1.8;">
+                    <div style="font-size:0.8rem; line-height:1.8; text-align: left;">
                         <div style="display:flex; justify-content:space-between;"><span>온도</span><span style="color:var(--accent-teal);">21.8°C</span></div>
                         <div style="display:flex; justify-content:space-between;"><span>습도</span><span style="color:var(--accent-teal);">50%</span></div>
                         <div style="display:flex; justify-content:space-between;"><span>토양 수분</span><span style="color:var(--accent-teal);">72%</span></div>
