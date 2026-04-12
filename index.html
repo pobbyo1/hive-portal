@@ -7,110 +7,114 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-base: #0a1018;
-            --sidebar-bg: linear-gradient(180deg, #0d1520 0%, #0a1018 100%);
-            --panel-bg: rgba(255, 255, 255, 0.03);
-            --panel-border: rgba(255, 255, 255, 0.08);
-            --accent-blue: #00c2ff;
+            --bg-base: #080b14;
+            --sidebar-bg: #05070a;
+            --panel-bg: #111827;
+            --panel-border: #1f2937;
+            --accent-blue: #3b82f6;
             --accent-green: #10b981;
             --accent-red: #ef4444;
-            --accent-orange: #f59e0b;
             --accent-purple: #8b5cf6;
-            --accent-yellow: #f0c040;
-            --text-main: #ffffff;
-            --text-dim: rgba(255, 255, 255, 0.7);
-            --text-muted: rgba(255, 255, 255, 0.35);
+            --accent-teal: #14b8a6;
+            --text-main: #f9fafb;
+            --text-dim: #9ca3af;
+            --text-muted: #4b5563;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg-base); color: var(--text-main); font-family: 'Noto Sans KR', 'Inter', sans-serif; display: flex; min-height: 100vh; overflow: hidden; }
+        body { background-color: var(--bg-base); color: var(--text-main); font-family: 'Inter', 'Noto Sans KR', sans-serif; display: flex; min-height: 100vh; overflow: hidden; }
 
-        .sidebar { width: 240px; background: var(--sidebar-bg); border-right: 1px solid var(--panel-border); display: flex; flex-direction: column; flex-shrink: 0; z-index: 20; }
-        .sidebar-brand { padding: 24px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--panel-border); }
-        .shield-icon { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #00c2ff, #005580); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-        .brand-text h2 { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 800; letter-spacing: 0.05em; color: #fff; }
-        .brand-text p { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+        /* Sidebar Style */
+        .sidebar { width: 260px; background: var(--sidebar-bg); border-right: 1px solid var(--panel-border); display: flex; flex-direction: column; z-index: 50; }
+        .sidebar-brand { padding: 32px 24px; border-bottom: 1px solid var(--panel-border); }
+        .brand-logo { display: flex; align-items: center; gap: 12px; }
+        .logo-box { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+        .brand-text h2 { font-size: 16px; font-weight: 800; letter-spacing: 2px; }
+        .brand-text p { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
 
-        .nav-list { flex: 1; padding: 16px 8px; display: flex; flex-direction: column; gap: 4px; list-style: none; }
-        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 8px; cursor: pointer; transition: 0.2s; color: var(--text-dim); font-size: 13px; font-weight: 500; position: relative; }
-        .nav-item:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
-        .nav-item.active { background: rgba(0, 194, 255, 0.12); color: var(--accent-blue); border-left: 2px solid var(--accent-blue); font-weight: 700; }
-        .nav-item i { font-style: normal; font-size: 16px; width: 20px; text-align: center; }
+        .nav-list { flex: 1; padding: 24px 12px; list-style: none; }
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 8px; cursor: pointer; color: var(--text-dim); font-size: 14px; font-weight: 500; transition: all 0.2s; margin-bottom: 4px; }
+        .nav-item:hover { background: #1f2937; color: #fff; }
+        .nav-item.active { background: #1e293b; color: var(--accent-blue); border: 1px solid rgba(59, 130, 246, 0.3); font-weight: 700; }
+        .nav-item i { font-style: normal; font-size: 18px; width: 24px; text-align: center; }
+
+        /* Viewport Layout */
+        .viewport { flex: 1; display: flex; flex-direction: column; min-width: 0; position: relative; }
+        .topbar { height: 64px; background: rgba(8, 11, 20, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--panel-border); display: flex; align-items: center; justify-content: space-between; padding: 0 32px; z-index: 40; }
+        .page-title-area { display: flex; align-items: center; gap: 12px; }
+        .page-title { font-size: 16px; font-weight: 700; }
+        .page-subtitle { font-size: 12px; color: var(--text-muted); }
+
+        .topbar-right { display: flex; align-items: center; gap: 24px; }
+        .status-pill { display: flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 20px; padding: 4px 12px; color: var(--accent-green); font-size: 12px; font-weight: 700; }
+        .clock { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text-muted); }
+
+        .main-content { flex: 1; overflow-y: auto; padding: 32px; }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Cards & Grids */
+        .grid-kpi { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-bottom: 32px; }
+        .card-kpi { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 12px; padding: 20px; position: relative; overflow: hidden; }
+        .card-kpi::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--accent-blue); opacity: 0.3; }
+        .kpi-label { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
+        .kpi-value { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 800; color: #fff; }
+        .kpi-trend { font-size: 11px; margin-top: 4px; font-weight: 600; }
+
+        /* Agent Hub Premium Style */
+        .hub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px; }
+        .hub-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--panel-border); border-radius: 16px; padding: 28px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
+        .hub-card:hover { transform: translateY(-8px); border-color: rgba(59, 130, 246, 0.5); background: rgba(59, 130, 246, 0.03); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .hub-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; }
+        .hub-card.comm::before { background: var(--accent-blue); }
+        .hub-card.pub::before { background: var(--accent-green); }
+        .hub-card.ent::before { background: var(--accent-purple); }
+
+        .hub-icon { font-size: 32px; margin-bottom: 20px; }
+        .hub-title { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 12px; }
+        .hub-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; margin-bottom: 24px; min-height: 60px; }
+
+        .doc-list { list-style: none; }
+        .doc-item { padding: 12px 0; border-top: 1px solid var(--panel-border); display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+        .doc-item a { color: #fff; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        .doc-item a:hover { color: var(--accent-blue); }
+        .doc-tag { font-size: 9px; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.05); color: var(--text-muted); }
+
+        /* Premium Agent Console */
+        .agent-container { background: #0c111c; border: 1px solid var(--panel-border); border-radius: 20px; overflow: hidden; margin-top: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .agent-header { background: #161c28; padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--panel-border); }
+        .agent-meta { display: flex; align-items: center; gap: 16px; }
+        .hexagon-avatar { width: 44px; height: 44px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%); display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff; position: relative; }
+        .hexagon-avatar::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; box-shadow: 0 0 15px var(--accent-blue); opacity: 0.5; }
         
-        .new-badge { position: absolute; right: 10px; font-size: 9px; background: var(--accent-red); color: #fff; padding: 1px 4px; border-radius: 3px; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        .agent-info h4 { font-size: 14px; font-weight: 800; color: #fff; }
+        .agent-info span { font-size: 11px; color: var(--accent-green); font-weight: 700; display: flex; align-items: center; gap: 4px; }
+        .agent-info span::before { content: ''; width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green); }
 
-        .viewport { flex: 1; display: flex; flex-direction: column; min-width: 0; }
-        .topbar { height: 60px; background: #0d1520; border-bottom: 1px solid var(--panel-border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; flex-shrink: 0; }
-        .page-info { display: flex; align-items: center; gap: 12px; }
-        .page-info i { font-size: 18px; }
-        .page-info .title { font-size: 15px; font-weight: 700; }
-        .page-info .subtitle { font-size: 12px; color: var(--text-muted); margin-left: 8px; }
-        .version-badge { margin-left: 15px; font-size: 10px; color: var(--accent-green); background: rgba(16, 185, 129, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--accent-green); font-weight: 800; }
+        .chat-area { height: 400px; overflow-y: auto; padding: 32px; display: flex; flex-direction: column; gap: 20px; background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.05), transparent); }
+        .msg { max-width: 80%; padding: 16px 20px; border-radius: 16px; font-size: 14px; line-height: 1.6; }
+        .msg.user { align-self: flex-end; background: var(--accent-blue); color: #fff; border-bottom-right-radius: 4px; }
+        .msg.agent { align-self: flex-start; background: #1f2937; color: var(--text-main); border-bottom-left-radius: 4px; border: 1px solid var(--panel-border); }
 
-        .topbar-right { display: flex; align-items: center; gap: 20px; }
-        .status-badge { display: flex; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 20px; padding: 4px 14px; font-size: 12px; color: var(--accent-green); font-weight: 600; }
-        .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
-        .live-time { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text-muted); }
+        .chat-input-box { background: #161c28; padding: 24px 32px; display: flex; gap: 16px; border-top: 1px solid var(--panel-border); }
+        .input-field { flex: 1; background: #080b14; border: 1px solid var(--panel-border); border-radius: 12px; padding: 14px 20px; color: #fff; outline: none; transition: border-color 0.2s; }
+        .input-field:focus { border-color: var(--accent-blue); }
+        .btn-send { background: var(--accent-blue); border: none; border-radius: 12px; padding: 0 24px; color: #fff; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .btn-send:hover { background: #2563eb; transform: scale(1.02); }
 
-        .main-scroll { flex: 1; overflow-y: auto; padding: 24px; }
-        .content-section { display: none; }
-        .content-section.active { display: block; animation: sectionFade 0.3s ease-out; }
-        @keyframes sectionFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Tech Tags */
+        .tech-section { margin-top: 40px; }
+        .tech-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+        .tech-item { background: #111827; border: 1px solid var(--panel-border); border-radius: 12px; padding: 16px; display: flex; align-items: center; gap: 12px; }
+        .tech-icon { width: 32px; height: 32px; background: rgba(255,255,255,0.05); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        .tech-name { font-size: 12px; font-weight: 700; color: #fff; }
 
-        .card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
-        .panel-header { font-size: 13px; font-weight: 700; color: rgba(255, 255, 255, 0.55); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.05em; display: flex; justify-content: space-between; align-items: center; }
+        /* Notification Banner */
+        .banner { background: var(--accent-blue); color: #000; padding: 8px; text-align: center; font-size: 12px; font-weight: 800; letter-spacing: 1px; }
 
-        .kpi-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 24px; }
-        .kpi-card { padding: 20px; position: relative; }
-        .kpi-top { display: flex; justify-content: space-between; margin-bottom: 12px; }
-        .kpi-top i { font-size: 20px; font-style: normal; }
-        .kpi-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 4px; }
-        .kpi-val { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 900; line-height: 1; }
-        .kpi-label { font-size: 12px; font-weight: 700; color: var(--text-dim); margin-top: 8px; }
-        .kpi-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
-
-        .dash-layout { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 20px; }
-        
-        .stat-bar { margin-bottom: 16px; }
-        .stat-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; color: var(--text-dim); }
-        .stat-label .val { font-family: 'JetBrains Mono', monospace; font-weight: 700; }
-        .stat-track { height: 6px; background: rgba(255, 255, 255, 0.06); border-radius: 3px; overflow: hidden; }
-        .stat-fill { height: 100%; border-radius: 3px; }
-
-        .layer-list { display: flex; flex-direction: column; gap: 10px; }
-        .layer-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 8px; }
-        .layer-id { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--accent-blue); width: 65px; }
-        .layer-name { font-size: 12px; color: var(--text-dim); flex: 1; }
-        .layer-status { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-green); box-shadow: 0 0 6px var(--accent-green); }
-
-        .terminal { height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; font-family: 'JetBrains Mono', monospace; }
-        .terminal::-webkit-scrollbar { width: 4px; }
-        .terminal::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 2px; }
-        .log-row { display: flex; gap: 10px; font-size: 11px; line-height: 1.6; color: var(--text-dim); }
-        .log-tag { font-weight: 700; font-size: 10px; padding: 0 6px; border-radius: 2px; flex-shrink: 0; }
-        .bg-blk { color: var(--accent-red); background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); }
-        .bg-inf { color: var(--accent-green); background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); }
-        .bg-wrn { color: var(--accent-orange); background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); }
-
-        .footer { margin-top: auto; padding: 40px 0; text-align: center; border-top: 1px solid var(--panel-border); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 1px; }
-
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .sec-card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 12px; padding: 24px; transition: 0.2s; }
-        .sec-card:hover { border-color: var(--accent-blue); background: rgba(255, 255, 255, 0.05); }
-        .sec-card h3 { font-size: 15px; margin-bottom: 12px; color: #fff; }
-        .sec-card p { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
-        .sec-meta { font-size: 11px; color: var(--accent-blue); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; display: block; }
-
-        /* PoC Console Style */
-        .poc-console { background: #080b14; border: 1px solid var(--accent-blue); border-radius: 8px; padding: 15px; font-family: 'JetBrains Mono', monospace; }
-        .console-header { display: flex; justify-content: space-between; font-size: 10px; color: var(--accent-blue); margin-bottom: 10px; border-bottom: 1px solid rgba(0, 194, 255, 0.2); padding-bottom: 5px; }
-        .console-input { background: transparent; border: none; outline: none; color: #fff; font-family: inherit; font-size: 12px; width: 100%; }
-        .prompt { color: var(--accent-green); margin-right: 8px; }
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-        .tag { font-size: 9px; padding: 1px 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-dim); }
-
-        .notification-bar { background: var(--accent-blue); color: #000; font-weight: 800; font-size: 12px; text-align: center; padding: 8px; position: sticky; top: 0; z-index: 50; }
+        /* Footer */
+        .footer-info { margin-top: auto; padding: 40px; border-top: 1px solid var(--panel-border); text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); }
 
     </style>
 </head>
@@ -118,16 +122,18 @@
 
     <aside class="sidebar">
         <div class="sidebar-brand">
-            <div class="shield-icon">🛡</div>
-            <div class="brand-text">
-                <h2>LAGOS</h2>
-                <p>AI Security Gateway</p>
+            <div class="brand-logo">
+                <div class="logo-box">H</div>
+                <div class="brand-text">
+                    <h2>HIVE</h2>
+                    <p>Intelligence Portal</p>
+                </div>
             </div>
         </div>
         <ul class="nav-list">
             <li class="nav-item active" onclick="nav('dashboard', this)"><i>🏠</i> 종합 현황 Overview</li>
             <li class="nav-item" onclick="nav('security', this)"><i>🛡️</i> 보안 아카이브 Intel</li>
-            <li class="nav-item" onclick="nav('hub', this)"><i>🤖</i> AI 에이전트 허브 Hub <span class="new-badge">NEW</span></li>
+            <li class="nav-item" onclick="nav('hub', this)"><i>🤖</i> 에이전트 허브 Agent Hub</li>
             <li class="nav-item" onclick="nav('reports', this)"><i>📊</i> 일일 리포트 Reports</li>
             <li class="nav-item" onclick="nav('gardening', this)"><i>🌳</i> 스마트 가드닝 Gardening</li>
             <li class="nav-item" onclick="window.open('https://7yubx2njj2.skywork.website/', '_blank')"><i>🔐</i> Lagos AI Guard</li>
@@ -135,130 +141,142 @@
     </aside>
 
     <div class="viewport">
-        <div class="notification-bar">⚠️ HIVE AGENT PoC MODULE DEPLOYED: MIGRATED 47 RESEARCH PAPERS & INTERACTIVE CONSOLE</div>
+        <div class="banner">PREMIUM PoC MODULE v2.7.0 ACTIVATED // ALL RESEARCH DATA SYNCED</div>
         
         <header class="topbar">
-            <div class="page-info">
-                <i id="page-icon">🏠</i>
-                <span class="title" id="page-title">종합 현황</span>
-                <span class="subtitle" id="page-subtitle">Overview</span>
-                <span class="version-badge">v2.6.5 FINAL_MASTER_SYNC</span>
+            <div class="page-title-area">
+                <span class="page-title" id="page-title">종합 현황</span>
+                <span class="page-subtitle" id="page-subtitle">Overview</span>
             </div>
             <div class="topbar-right">
-                <div class="status-badge"><span class="status-dot"></span> 전 계층 정상</div>
-                <div class="live-time" id="clock">오후 4:30:10</div>
+                <div class="status-pill">전 계층 보안 정상</div>
+                <div class="clock" id="clock">오후 4:45:00</div>
             </div>
         </header>
 
-        <main class="main-scroll">
+        <main class="main-content">
 
             <!-- 🏠 종합 현황 (Dashboard) -->
-            <section id="dashboard" class="content-section active">
-                <div class="kpi-grid">
-                    <div class="card kpi-card"><div class="kpi-top"><i>📡</i><span class="kpi-dot" style="background:#00c2ff;"></span></div><div class="kpi-val" style="color:#00c2ff;">152</div><div class="kpi-label">누적 인텔리전스</div><div class="kpi-sub">+12 오늘</div></div>
-                    <div class="card kpi-card"><div class="kpi-top"><i>🛡️</i><span class="kpi-dot" style="background:#8b5cf6;"></span></div><div class="kpi-val" style="color:#8b5cf6;">47</div><div class="kpi-label">보안 전략 자료</div><div class="kpi-sub">Security Intel</div></div>
-                    <div class="card kpi-card"><div class="kpi-top"><i>🤖</i><span class="kpi-dot" style="background:#10b981;"></span></div><div class="kpi-val" style="color:#10b981;">23</div><div class="kpi-label">에이전트 구축 사례</div><div class="kpi-sub">Agent Hub Cases</div></div>
-                    <div class="card kpi-card"><div class="kpi-top"><i>📊</i><span class="kpi-dot" style="background:#f59e0b;"></span></div><div class="kpi-val" style="color:#f59e0b;">82</div><div class="kpi-label">일일 리포트 누적</div><div class="kpi-sub">Daily Reports</div></div>
-                    <div class="card kpi-card"><div class="kpi-top"><i>🌳</i><span class="kpi-dot" style="background:#06b6d4;"></span></div><div class="kpi-val" style="color:#06b6d4;">16.7K</div><div class="kpi-label">가드닝 데이터셋</div><div class="kpi-sub">Photos & Stats</div></div>
-                    <div class="card kpi-card"><div class="kpi-top"><i>⚡</i><span class="kpi-dot" style="background:#f0c040;"></span></div><div class="kpi-val" style="color:#f0c040;">오늘</div><div class="kpi-label">마지막 동기화</div><div class="kpi-sub">16:30 KST</div></div>
+            <section id="dashboard" class="section active">
+                <div class="grid-kpi">
+                    <div class="card-kpi"><div class="kpi-label">누적 인텔리전스</div><div class="kpi-value">152</div><div class="kpi-trend" style="color:var(--accent-blue);">+12 오늘</div></div>
+                    <div class="card-kpi"><div class="kpi-label">보안 전략 자료</div><div class="kpi-value">47</div><div class="kpi-trend" style="color:var(--accent-purple);">Archive</div></div>
+                    <div class="card-kpi"><div class="kpi-label">에이전트 구축사례</div><div class="kpi-value">23</div><div class="kpi-trend" style="color:var(--accent-green);">Hub Cases</div></div>
+                    <div class="card-kpi"><div class="kpi-label">일일 리포트</div><div class="kpi-value">82</div><div class="kpi-trend" style="color:var(--accent-orange);">Cumulative</div></div>
+                    <div class="card-kpi"><div class="kpi-label">가드닝 데이터</div><div class="kpi-value">16.7K</div><div class="kpi-trend" style="color:var(--accent-teal);">Dataset</div></div>
+                    <div class="card-kpi"><div class="kpi-label">엔진 상태</div><div class="kpi-value">STABLE</div><div class="kpi-trend" style="color:var(--accent-green);">ALL LIVE</div></div>
                 </div>
 
-                <div class="card" style="border: 2px solid var(--accent-blue); background: rgba(0, 194, 255, 0.05);">
-                    <div class="panel-header"><span>🤖 HIVE Agent PoC Interactive Console</span><span style="color:var(--accent-blue); font-size:10px;">CORE_v1.0_ONLINE</span></div>
-                    <div class="poc-console" id="dash-poc-terminal">
-                        <div class="console-header"><span>HIVE_ENGINE_CONNECTED</span><span>127.0.0.1:8080</span></div>
-                        <div id="dash-console-output">
-                            <div style="color:var(--text-dim);">HIVE Intelligence PoC 데모 시스템 가동 중...</div>
-                            <div style="color:var(--accent-blue);">분석 가능: [ '나라장터 분석', '제조업 ROI', '보안 취약점', '프레임워크 비교' ]</div>
+                <!-- Premium Chat Console -->
+                <div class="agent-container">
+                    <div class="agent-header">
+                        <div class="agent-meta">
+                            <div class="hexagon-avatar">H</div>
+                            <div class="agent-info">
+                                <h4>HIVE Intelligence Agent</h4>
+                                <span>PoC Demo Mode Active</span>
+                            </div>
                         </div>
-                        <div style="display:flex; margin-top:10px;">
-                            <span class="prompt">></span>
-                            <input type="text" class="console-input" id="dash-poc-input" placeholder="명령어를 입력하여 AI 에이전트 분석을 시작하십시오..." onkeypress="handleDashConsole(event)">
-                        </div>
+                        <div style="font-family:'JetBrains Mono'; font-size:11px; color:var(--text-muted);">ID: 2EBA-DDC7-EAE9</div>
                     </div>
-                </div>
-
-                <div class="dash-layout">
-                    <div class="card">
-                        <div class="panel-header">인텔리전스 공급 분포</div>
-                        <div class="stat-bar"><div class="stat-label"><span>보안 아카이브</span><span class="val">47</span></div><div class="stat-track"><div class="stat-fill" style="width: 70%; background:#8b5cf6;"></div></div></div>
-                        <div class="stat-bar"><div class="stat-label"><span>에이전트 사례</span><span class="val">23</span></div><div class="stat-track"><div class="stat-fill" style="width: 40%; background:#10b981;"></div></div></div>
-                        <div class="stat-bar"><div class="stat-label"><span>일일 브리핑</span><span class="val">82</span></div><div class="stat-track"><div class="stat-fill" style="width: 90%; background:#f59e0b;"></div></div></div>
+                    <div class="chat-area" id="chat-output">
+                        <div class="msg agent">형님, 안녕하십니까! **HIVE Intelligence** PoC 에이전트입니다. 하이브의 모든 연구 자산과 인텔리전스를 기반으로 분석을 수행할 준비가 되었습니다. 무엇을 도와드릴까요?</div>
+                        <div class="msg agent" style="font-size:12px; color:var(--accent-blue); background:transparent; border:none; padding-top:0;">명령어 추천: [ '나라장터 분석', '제조업 ROI 분석', '보안 취약점 리포트', 'LangGraph 비교' ]</div>
                     </div>
-                    <div class="card">
-                        <div class="panel-header">HIVE 정보 공급 엔진</div>
-                        <div class="layer-list">
-                            <div class="layer-item"><span class="layer-id">crawler</span><span class="layer-name">보안 뉴스 크롤러</span><div class="layer-status"></div></div>
-                            <div class="layer-item"><span class="layer-id">analyzer</span><span class="layer-name">AI 전략 분석 에이전트</span><div class="layer-status"></div></div>
-                            <div class="layer-item"><span class="layer-id">reporter</span><span class="layer-name">자동 리포트 엔진</span><div class="layer-status"></div></div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="panel-header">실시간 정보 업데이트 로그</div>
-                        <div class="terminal">
-                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [15:40] HIVE Agent PoC 모듈 이식 완료</div>
-                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [16:25] UI 시스템 최종 정상화 동기화</div>
-                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [16:30] v2.6.5 MASTER_SYNC 배포</div>
-                        </div>
+                    <div class="chat-input-box">
+                        <input type="text" class="input-field" id="chat-input" placeholder="에이전트에게 분석 명령을 내리십시오..." onkeypress="handleChat(event)">
+                        <button class="btn-send" onclick="sendMsg()">🚀 분석 실행</button>
                     </div>
                 </div>
             </section>
 
-            <!-- 🛡️ 보안 아카이브 (Security) -->
-            <section id="security" class="content-section">
-                <div class="grid-3">
-                    <div class="sec-card"><span class="sec-meta">Strategy</span><h3>AI 가드레일 보안 패권 분석</h3><p>Control Plane 선점이 AI 시대의 진정한 권력입니다. Zero-Trust 기반 설계 가이드라인 수립.</p></div>
-                    <div class="sec-card"><span class="sec-meta">Security</span><h3>OWASP Agentic AI Top 10</h3><p>2026 에이전트 보안 위협: 프롬프트 인젝션, 과도한 권한 오용 방어 전략 구축.</p></div>
-                    <div class="sec-card"><span class="sec-meta">Report</span><h3>CISO 심층 분석 리포트 V2</h3><p>NVIDIA NeMo Guardrails 통합 보안 아키텍처 및 글로벌 AI 거버넌스 분석.</p></div>
+            <!-- 🤖 에이전트 허브 (Hub) - Premium Rebuild -->
+            <section id="hub" class="section">
+                <div class="hub-grid">
+                    <div class="hub-card comm">
+                        <div class="hub-icon">🏢</div>
+                        <h3 class="hub-title">민간 (Commercial)</h3>
+                        <p class="hub-desc">제조, 금융, 유통 분야 AI 에이전트 도입 전략 및 실질적 ROI 분석 데이터셋</p>
+                        <ul class="doc-list">
+                            <li class="doc-item"><a href="#">AHHA Labs 제조 에이전트 리포트</a><span class="doc-tag">2026.04.12</span></li>
+                            <li class="doc-item"><a href="#">금융권 멀티에이전트 도입 가이드</a><span class="doc-tag">Q1 NEW</span></li>
+                            <li class="doc-item"><a href="#">제조업 ROI 23% 향상 실측지표</a><span class="doc-tag">Verified</span></li>
+                        </ul>
+                    </div>
+                    <div class="hub-card pub">
+                        <div class="hub-icon">🏛️</div>
+                        <h3 class="hub-title">공공 (Public)</h3>
+                        <p class="hub-desc">지자체, 정부부처 AI 전환 입찰 공고 및 정책 가이드라인 분석 아카이브</p>
+                        <ul class="doc-list">
+                            <li class="doc-item"><a href="#">인천광역시 AI 전략수립 용역 분석</a><span class="doc-tag">나라장터</span></li>
+                            <li class="doc-item"><a href="#">행안부 AI 에이전트 도입 지침 v2</a><span class="doc-tag">2026</span></li>
+                            <li class="doc-item"><a href="#">NIA 공공 AI 모델링 사례집</a><span class="doc-tag">Case Study</span></li>
+                        </ul>
+                    </div>
+                    <div class="hub-card ent">
+                        <div class="hub-icon">🌐</div>
+                        <h3 class="hub-title">엔터프라이즈 (Tech)</h3>
+                        <p class="hub-desc">LangGraph, MCP 등 글로벌 프레임워크 기반 엔터프라이즈 아키텍처 설계</p>
+                        <ul class="doc-list">
+                            <li class="doc-item"><a href="#">LangGraph vs AutoGen 벤치마킹</a><span class="doc-tag">Tech Doc</span></li>
+                            <li class="doc-item"><a href="#">MCP 프로토콜 통합 보안 설계</a><span class="doc-tag">Security</span></li>
+                            <li class="doc-item"><a href="#">RAG 최적화: pgvector 구축 가이드</a><span class="doc-tag">Architecture</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tech-section">
+                    <h3 style="font-size:16px; margin-bottom:20px;">HIVE Agent Core Technology Stack</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item"><div class="tech-icon">🧠</div><span class="tech-name">LLM: EXAONE 3.5 / GPT-5</span></div>
+                        <div class="tech-item"><div class="tech-icon">🔗</div><span class="tech-name">LangGraph Orchestration</span></div>
+                        <div class="tech-item"><div class="tech-icon">🛡️</div><span class="tech-name">NVIDIA NeMo Guardrails</span></div>
+                        <div class="tech-item"><div class="tech-icon">🔌</div><span class="tech-name">MCP Protocol Standard</span></div>
+                        <div class="tech-item"><div class="tech-icon">💾</div><span class="tech-name">Vector DB: pgvector</span></div>
+                        <div class="tech-item"><div class="tech-icon">📊</div><span class="tech-name">Custom Analytics Engine</span></div>
+                    </div>
                 </div>
             </section>
 
-            <!-- 🤖 에이전트 허브 (Hub) -->
-            <section id="hub" class="content-section">
-                <div class="grid-3">
-                    <div class="sec-card" style="border-left:4px solid var(--accent-blue);">
-                        <span class="sec-meta">Commercial</span>
-                        <h3>민간 (Manufacturing)</h3>
-                        <p>AHHA Labs 제조 AI 에이전트 구축 사례: 생산성 23% 향상 및 다운타임 41% 감소 성과 분석.</p>
-                        <div class="tech-tags"><span class="tag">Vision AI</span><span class="tag">PdM Agent</span></div>
+            <!-- 🛡️ 보안 (Security) -->
+            <section id="security" class="section">
+                <div class="hub-grid">
+                    <div class="hub-card comm" style="border-left:none;">
+                        <h3 class="hub-title">AI 가드레일 전략</h3>
+                        <p class="hub-desc">Zero-Trust 기반의 AI Control Plane 선점 전략 및 설계 가이드라인.</p>
                     </div>
-                    <div class="sec-card" style="border-left:4px solid var(--accent-green);">
-                        <span class="sec-meta">Public</span>
-                        <h3>공공 (Public Sector)</h3>
-                        <p>인천광역시 AI 전환 전략수립 분석: 지자체 에이전트 모델 및 행안부 가이드라인 입찰 동향.</p>
-                        <div class="tech-tags"><span class="tag">나라장터</span><span class="tag">AI Gov</span></div>
+                    <div class="hub-card pub" style="border-left:none;">
+                        <h3 class="hub-title">OWASP Top 10</h3>
+                        <p class="hub-desc">에이전틱 AI의 10대 보안 취약점 분석 및 실시간 방어 로직 연구자료.</p>
                     </div>
-                    <div class="sec-card" style="border-left:4px solid var(--accent-purple);">
-                        <span class="sec-meta">Enterprise</span>
-                        <h3>엔터프라이즈 (Global)</h3>
-                        <p>글로벌 에이전트 프레임워크 비교: LangGraph, AutoGen 기반 엔터프라이즈 배포 전략.</p>
-                        <div class="tech-tags"><span class="tag">LangGraph</span><span class="tag">MCP</span></div>
+                    <div class="hub-card ent" style="border-left:none;">
+                        <h3 class="hub-title">CISO Report</h3>
+                        <p class="hub-desc">글로벌 기업 보안 책임자들을 위한 AI 도입 리스크 관리 리포트.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- 📊 일일 리포트 (Reports) -->
-            <section id="reports" class="content-section">
-                <div class="card">
-                    <div class="panel-header">데일리 브리핑 아카이브</div>
-                    <div id="report-list">
-                        <div class="terminal" style="height:auto;">
-                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [2026.04.12] 날씨: 서울 기온 17°C (흐림), 코디: 트렌치코트 권장</div>
-                            <div class="log-row"><span class="log-tag bg-inf">INFO</span> [2026.04.12] 보안: 신규 위협 인텔리전스 7건 업데이트 완료</div>
-                        </div>
+            <!-- 📊 리포트 (Reports) -->
+            <section id="reports" class="section">
+                <div class="hub-card" style="width:100%;">
+                    <h3 class="hub-title">Daily Intelligence Reports</h3>
+                    <div class="doc-list" id="report-list">
+                        <div class="doc-item" style="color:var(--accent-blue);">[2026.04.12] 데일리 브리핑: AI 시장 동향 및 보안 위협 분석 (완료)</div>
+                        <div class="doc-item" style="color:var(--text-dim);">[2026.04.11] 데일리 브리핑: 제조업 AI 에이전트 도입 ROI 실측 보고서 (완료)</div>
                     </div>
                 </div>
             </section>
 
-            <!-- 🌳 스마트 가드닝 (Gardening) -->
-            <section id="gardening" class="content-section">
-                <div class="kpi-grid">
-                    <div class="card kpi-card"><div class="kpi-top"><i>🌳</i><span class="kpi-dot" style="background:#ef4444;"></span></div><div class="kpi-val" style="color:#ef4444;">124,582</div><div class="kpi-label">관리 정원수</div><div class="kpi-sub">+1,240 오늘</div></div>
+            <!-- 🌳 가드닝 (Gardening) -->
+            <section id="gardening" class="section">
+                <div class="grid-kpi">
+                    <div class="card-kpi"><div class="kpi-label">정원수</div><div class="kpi-value">124,582</div></div>
+                    <div class="card-kpi"><div class="kpi-label">건강도</div><div class="kpi-value">98.4%</div></div>
                 </div>
             </section>
 
-            <footer class="footer">
-                <span style="color:var(--accent-blue); font-weight:700;">[ SYS-GATEWAY: GATEWAY-CLIENT ]</span> // CONFIDENTIAL HIVE INTELLIGENCE // © 2026 SUNYOUTECH
+            <footer class="footer-info">
+                [ SYS-GATEWAY: GATEWAY-CLIENT ] // HIVE INTELLIGENCE PLATFORM // © 2026 SUNYOUTECH
             </footer>
 
         </main>
@@ -266,65 +284,59 @@
 
     <script>
         function nav(id, el) {
-            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-            const target = document.getElementById(id);
-            if (target) target.classList.add('active');
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            if (el) el.classList.add('active');
-            const icons = { 'dashboard': '🏠', 'security': '🛡️', 'hub': '🤖', 'reports': '📊', 'gardening': '🌳' };
-            const titles = { 'dashboard': '종합 현황', 'security': '보안 아카이브', 'hub': 'AI 에이전트 허브', 'reports': '일일 리포트', 'gardening': '스마트 가드닝' };
-            const subs = { 'dashboard': 'Overview', 'security': 'Intel', 'hub': 'Hub', 'reports': 'Reports', 'gardening': 'Gardening' };
-            document.getElementById('page-icon').innerText = icons[id] || '';
-            document.getElementById('page-title').innerText = titles[id] || '';
-            document.getElementById('page-subtitle').innerText = subs[id] || '';
-            document.querySelector('.main-scroll').scrollTop = 0;
+            el.classList.add('active');
+            
+            const titles = { 'dashboard': '종합 현황', 'security': '보안 아카이브', 'hub': '에이전트 허브', 'reports': '일일 리포트', 'gardening': '스마트 가드닝' };
+            const subs = { 'dashboard': 'Overview', 'security': 'Intel Archive', 'hub': 'Agent Hub', 'reports': 'Reports', 'gardening': 'Gardening' };
+            document.getElementById('page-title').innerText = titles[id];
+            document.getElementById('page-subtitle').innerText = subs[id];
+            document.querySelector('.main-content').scrollTop = 0;
         }
 
         function updateClock() {
             const now = new Date();
-            const h = now.getHours();
-            const ampm = h >= 12 ? '오후' : '오전';
-            const h12 = h % 12 || 12;
-            const m = now.getMinutes().toString().padStart(2, '0');
-            const s = now.getSeconds().toString().padStart(2, '0');
-            const el = document.getElementById('clock');
-            if (el) el.innerText = `${ampm} ${h12}:${m}:${s}`;
+            const time = now.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('clock').innerText = time;
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        function handleDashConsole(e) {
-            if (e.key === 'Enter') {
-                const input = document.getElementById('dash-poc-input');
-                const output = document.getElementById('dash-console-output');
-                const val = input.value.trim();
-                if (!val) return;
+        function handleChat(e) { if (e.key === 'Enter') sendMsg(); }
 
-                const userRow = document.createElement('div');
-                userRow.innerHTML = `<span class="prompt" style="color:#fff">> ${val}</span>`;
-                output.appendChild(userRow);
-                input.value = '';
+        function sendMsg() {
+            const input = document.getElementById('chat-input');
+            const output = document.getElementById('chat-output');
+            const val = input.value.trim();
+            if (!val) return;
 
-                setTimeout(() => {
-                    const agentRow = document.createElement('div');
-                    agentRow.style.color = 'var(--accent-blue)';
-                    agentRow.style.margin = '5px 0 10px 12px';
-                    
-                    if (val.includes('나라장터')) {
-                        agentRow.innerText = "◈ 분석 완료: 인천광역시 AI 전환 용역(약 3억) 입찰 분석 데이터 로드됨.";
-                    } else if (val.includes('제조업')) {
-                        agentRow.innerText = "◈ AHHA Labs 분석: 생산성 23% 향상, 다운타임 41% 감소 실측 데이터 로드됨.";
-                    } else if (val.includes('보안')) {
-                        agentRow.innerText = "◈ 보안 인텔리전스: OWASP Agentic Top 10 대응 패치 로직 로드됨.";
-                    } else if (val.includes('비교')) {
-                        agentRow.innerText = "◈ 프레임워크 분석: LangGraph vs AutoGen 아키텍처 비교표 로드됨.";
-                    } else {
-                        agentRow.innerText = "◈ 명령어를 입력하세요: [ 나라장터 분석 / 제조업 ROI / 보안 취약점 / 프레임워크 비교 ]";
-                    }
-                    output.appendChild(agentRow);
-                    document.getElementById('dash-poc-terminal').scrollTop = document.getElementById('dash-poc-terminal').scrollHeight;
-                }, 500);
-            }
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg user';
+            userMsg.innerText = val;
+            output.appendChild(userMsg);
+            input.value = '';
+
+            setTimeout(() => {
+                const agentMsg = document.createElement('div');
+                agentMsg.className = 'msg agent';
+                
+                if (val.includes('나라장터')) {
+                    agentMsg.innerHTML = "◈ **공공 분석 결과**: 인천광역시 AI 전략수립 용역(3억 규모)이 포착되었습니다. LLM 기반 행정 자동화 에이전트 구축이 핵심 목표입니다.";
+                } else if (val.includes('제조업') || val.includes('ROI')) {
+                    agentMsg.innerHTML = "◈ **민간 분석 결과**: AHHA Labs PoC 실측 데이터에 따르면, PdM 에이전트 도입 후 **다운타임 41% 감소**와 **생산성 23% 향상**이 확인되었습니다.";
+                } else if (val.includes('보안') || val.includes('취약점')) {
+                    agentMsg.innerHTML = "◈ **보안 분석 리포트**: OWASP Agentic Top 10에 의거, 현재 '프롬프트 인젝션'과 '과도한 권한'에 대한 2단계 가드레일 패치가 적용되었습니다.";
+                } else if (val.includes('비교')) {
+                    agentMsg.innerHTML = "◈ **기술 벤치마킹**: LangGraph(DAG 기반 워크플로우)가 AutoGen보다 엔터프라이즈 환경의 상태 관리에 더 적합하다는 연구 결과가 도출되었습니다.";
+                } else {
+                    agentMsg.innerText = "◈ 명령어를 확인 중입니다... [ '나라장터 분석' / '제조업 ROI 분석' / '보안 취약점 리포트' / 'LangGraph 비교' ] 등을 입력해 보세요.";
+                }
+                
+                output.appendChild(agentMsg);
+                output.scrollTop = output.scrollHeight;
+            }, 600);
         }
     </script>
 </body>
