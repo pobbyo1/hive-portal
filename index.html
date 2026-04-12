@@ -104,8 +104,11 @@
 
         .card-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
         .data-box { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
-        .data-header { font-weight: 700; color: white; font-size: 16px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+        .data-header { font-weight: 700; color: white; font-size: 16px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
         .data-body { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
+        .sec-detail { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border); font-size: 13px; color: #cbd5e1; }
+        .sec-detail.active { display: block; animation: detailFade 0.3s ease-out; }
+        @keyframes detailFade { from { opacity: 0; } to { opacity: 1; } }
         .tag { font-size: 10px; font-weight: 900; padding: 2px 8px; border-radius: 4px; background: rgba(255,255,255,0.1); margin-right: 6px; }
 
         /* Terminal */
@@ -193,51 +196,85 @@
                     <div class="card-title"><i class="fas fa-user-secret" style="color: var(--red);"></i> 특급 기밀 보관소 [보안의 벽]</div>
                     
                     <!-- 공격 기법 -->
-                    <div class="data-box sec-item" data-type="attack">
+                    <div class="data-box sec-item" data-type="attack" onclick="toggleDetail(this)">
                         <div class="data-header"><span>🔥 Privilege Escalation Chain (4/13)</span><span class="tag" style="color:var(--red);">CRITICAL</span></div>
-                        <div class="data-body">멀티 에이전트 환경에서 하위 권한 에이전트가 상위 권한 에이전트의 인증 토큰을 탈취하는 체인 공격 포착. 비즈니스 로직 우회 위협에 대한 냉철한 대응 필요.</div>
+                        <div class="data-body">멀티 에이전트 환경에서 하위 권한 에이전트가 상위 권한 에이전트의 인증 토큰을 탈취하는 체인 공격 포착.</div>
+                        <div class="sec-detail">
+                            <p><strong>[심층 분석]</strong> 공격자는 먼저 보안 수준이 낮은 '이메일 요약 에이전트' 등에 간접 프롬프트 주입을 시도합니다. 이후 해당 에이전트가 기업 내부 DB에 접근 가능한 '분석 에이전트'와 데이터를 교환할 때, API 세션 토큰을 가로채거나 권한 상승을 명령하는 방식으로 최종 기밀에 접근합니다.</p>
+                            <p style="margin-top:8px;"><strong>[대응 방안]</strong> 에이전트 간 통신 시에도 제로트러스트 원칙을 적용하여, 각 호출마다 최소 권한 검증(Least Privilege)과 상호 인증을 의무화해야 합니다.</p>
+                        </div>
                     </div>
-                    <div class="data-box sec-item" data-type="attack">
+                    <div class="data-box sec-item" data-type="attack" onclick="toggleDetail(this)">
                         <div class="data-header"><span>🔥 프롬프트 인젝션 2.0 & 간접 주입 (4/13)</span><span class="tag">ATTACK</span></div>
-                        <div class="data-body">PDF/이미지 내부에 숨겨진 악성 명령어를 통한 에이전트 탈취 공격. 2026년 기업용 에이전트의 최대 위협으로 부상.</div>
+                        <div class="data-body">PDF/이미지 내부에 숨겨진 악성 명령어를 통한 에이전트 탈취 공격.</div>
+                        <div class="sec-detail">
+                            <p><strong>[심층 분석]</strong> 2026년형 공격은 텍스트가 아닌 '비시각적 데이터'에 집중합니다. PDF 메타데이터, 이미지의 스테가노그래피 레이어, 혹은 웹 크롤링 시 HTML 주석 속에 난독화된 프롬프트를 숨깁니다. 에이전트가 이를 읽는 순간 내장된 시스템 명령어가 활성화됩니다.</p>
+                            <p style="margin-top:8px;"><strong>[하이브 권고]</strong> 외부 데이터를 읽기 전 반드시 '비시각적 요소 제거(Data Sanitization)' 프로세스를 거치는 전용 보안 프록시 레이어를 구축하십시오.</p>
+                        </div>
                     </div>
-                    <div class="data-box sec-item" data-type="attack">
+                    <div class="data-box sec-item" data-type="attack" onclick="toggleDetail(this)">
                         <div class="data-header"><span>🔥 OWASP Agentic AI Top 10 (4/7)</span><span class="tag">ATTACK</span></div>
-                        <div class="data-body">에이전틱 AI 환경의 10대 핵심 취약점(A1-A10). 권한 오용 및 워크플로우 변조 기법 분석 완료.</div>
+                        <div class="data-body">에이전틱 AI 환경의 10대 핵심 취약점(A1-A10).</div>
+                        <div class="sec-detail">
+                            <p><strong>[분석 결과]</strong> 에이전트의 과도한 권한(A1), 신뢰할 수 없는 플러그인(A2), 지식 기반 오염(A3) 등이 핵심 리스크로 지목되었습니다. 특히 '불투명한 체인 실행'으로 인한 연쇄 보안 사고가 2026년 기업 보안의 최대 난제로 꼽힙니다.</p>
+                        </div>
                     </div>
 
                     <!-- 방어 기술 -->
-                    <div class="data-box sec-item" data-type="defense">
+                    <div class="data-box sec-item" data-type="defense" onclick="toggleDetail(this)">
                         <div class="data-header"><span>🛡️ Isolation-First Architecture (4/13)</span><span class="tag" style="color:var(--accent);">NEW</span></div>
-                        <div class="data-body">소프트웨어 가드레일의 한계를 인정하고, 신뢰 실행 환경(TEE) 내에서만 추론을 수행하는 격리 우선 아키텍처로의 전환 가속화. 인프라 수준의 보안 확보가 핵심 Moat.</div>
+                        <div class="data-body">소프트웨어 가드레일의 한계를 인정하고 하드웨어 수준에서 격리하는 아키텍처.</div>
+                        <div class="sec-detail">
+                            <p><strong>[기술 상세]</strong> NVIDIA Blackwell 기반의 'Confidential Computing' 기능을 활용하여 추론 과정을 암호화된 TEE(Trusted Execution Environment) 내에 가둡니다. 이는 운영체제나 클라우드 관리자조차 모델 내부 데이터에 접근할 수 없게 만드는 '완전한 블랙박스' 추론을 보장합니다.</p>
+                            <p style="margin-top:8px;"><strong>[시장 추세]</strong> 고도화된 탈옥 공격에 소프트웨어 방식은 뚫릴 수밖에 없다는 인식이 확산되며, 금융 및 정부 기관을 중심으로 하드웨어 기반 격리 도입이 필수화되고 있습니다.</p>
+                        </div>
                     </div>
-                    <div class="data-box sec-item" data-type="defense">
+                    <div class="data-box sec-item" data-type="defense" onclick="toggleDetail(this)">
                         <div class="data-header"><span>🛡️ 에이전틱 가드레일 (Behavioral Control) (4/13)</span><span class="tag">DEFENSE</span></div>
-                        <div class="data-body">단순 텍스트 차단을 넘어 에이전트의 '행동 의도'를 실시간 검증. API 호출 전단계에서 정책 강제(IORails).</div>
+                        <div class="data-body">단순 텍스트 차단을 넘어 에이전트의 '행동 의도'를 실시간 검증.</div>
+                        <div class="sec-detail">
+                            <p><strong>[핵심 기능]</strong> NVIDIA NeMo IORails와 연동하여 에이전트가 도구를 호출하기 직전, '이 행동이 비즈니스 로직에 부합하는가?'를 실시간 판별합니다. 부적절한 도구 호출 시 이를 강제 중단(Kill-switch) 시키는 강력한 통제력을 제공합니다.</p>
+                        </div>
                     </div>
-                    <div class="data-box sec-item" data-type="defense">
+                    <div class="data-box sec-item" data-type="defense" onclick="toggleDetail(this)">
                         <div class="data-header"><span>🛡️ Semantic DLP & 컨텍스트 마스킹 (4/11)</span><span class="tag">DEFENSE</span></div>
-                        <div class="data-body">문맥을 이해하는 데이터 유출 방지. 기밀 유출 시도 시 동적 마스킹 기술 적용 가이드.</div>
+                        <div class="data-body">문맥을 이해하는 데이터 유출 방지.</div>
+                        <div class="sec-detail">
+                            <p><strong>[기술 혁신]</strong> 단순 정규식 탐지가 아닌, AI가 문장의 의미를 분석하여 기업 기밀(설계도, 전략 등)이 포함되어 있는지 판별합니다. 유출 시도 포착 시 해당 부분만 실시간으로 변조하거나 가려버리는 동적 마스킹을 수행합니다.</p>
+                        </div>
                     </div>
 
                     <!-- CISO 전략 -->
-                    <div class="data-box sec-item" data-type="strategy">
+                    <div class="data-box sec-item" data-type="strategy" onclick="toggleDetail(this)">
                         <div class="data-header"><span>💼 AI Compliance as a Business Asset (4/13)</span><span class="tag" style="color:var(--gold);">STRATEGY</span></div>
-                        <div class="data-body">EU AI Act 등 글로벌 규제 대응을 단순 비용이 아닌 '브랜드 신뢰 자산'으로 정량화. 보안 사고 발생 시 기업 가치 하락 방어를 위한 사전 거버넌스 수립 분석.</div>
+                        <div class="data-body">글로벌 규제 대응을 단순 비용이 아닌 '브랜드 신뢰 자산'으로 정량화.</div>
+                        <div class="sec-detail">
+                            <p><strong>[전략 분석]</strong> EU AI Act 등 보안 위반 시 연 매출의 최대 7% 과징금이 부과됩니다. 이를 방어하는 것은 사고 발생 시 기업 가치 하락을 막는 최고의 투자입니다.</p>
+                            <p style="margin-top:8px;"><strong>[로드맵]</strong> 기업 내 AI 인벤토리 구축 및 리스크 등급 분류 자동화 시스템 수립을 제안합니다.</p>
+                        </div>
                     </div>
-                    <div class="data-box sec-item" data-type="strategy">
+                    <div class="data-box sec-item" data-type="strategy" onclick="toggleDetail(this)">
                         <div class="data-header"><span>💼 AI Control Plane 선점 전략 (4/11)</span><span class="tag">STRATEGY</span></div>
-                        <div class="data-body">CISO 전용 자료. Zero-Trust 기반 거버넌스 및 기업용 LLM 도입 시 보안 ROI 정량 분석 리포트.</div>
+                        <div class="data-body">CISO 전용 자료. Zero-Trust 기반 거버넌스 로드맵.</div>
+                        <div class="sec-detail">
+                            <p><strong>[핵심 요지]</strong> 모든 AI 호출 통로를 하나의 'Control Plane'으로 단일화하고, 여기서 보안/비용/성능을 통합 관리하는 것이 차세대 CISO의 핵심 과제입니다.</p>
+                        </div>
                     </div>
 
                     <!-- 글로벌 패권 -->
-                    <div class="data-box sec-item" data-type="market">
+                    <div class="data-box sec-item" data-type="market" onclick="toggleDetail(this)">
                         <div class="data-header"><span>🌐 The War of Security Moats (4/13)</span><span class="tag" style="color:var(--accent);">MARKET</span></div>
-                        <div class="data-body">NVIDIA(하드웨어 가속 보안) vs Apple(온디바이스 보안) vs Meta(오픈소스 가드레일)의 보안 주도권 전쟁. 각사는 보안 레이어를 통해 자사 기술 스택 락인을 극대화 중.</div>
+                        <div class="data-body">빅테크 3사의 보안 주도권 전쟁 분석.</div>
+                        <div class="sec-detail">
+                            <p><strong>[패권 분석]</strong> NVIDIA(하드웨어 가드레일), Apple(PCC 프라이버시), Meta(Llama Guard 오픈 표준) 등 각사는 독자적인 보안 기술을 해자(Moat)로 삼아 시장 점유율을 지키고 있습니다.</p>
+                        </div>
                     </div>
-                    <div class="data-box sec-item" data-type="market">
+                    <div class="data-box sec-item" data-type="market" onclick="toggleDetail(this)">
                         <div class="data-header"><span>🌐 NVIDIA OpenShell & IORails (4/12)</span><span class="tag">MARKET</span></div>
-                        <div class="data-body">GTC 2026 공개. 하드웨어 가속 기반 보안 엔진. 추론 성능 저하 없는 실시간 가드레일 아키텍처 동향.</div>
+                        <div class="data-body">GTC 2026 공개. 하드웨어 가속 기반 보안 엔진 동향.</div>
+                        <div class="sec-detail">
+                            <p><strong>[시장 영향]</strong> 보안 연산 부하를 하드웨어로 처리하여 속도와 안전이라는 두 마리 토끼를 잡은 모델입니다. 향후 엔터프라이즈 AI 서버의 표준 사양이 될 전망입니다.</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -338,6 +375,13 @@
                     item.style.display = 'none';
                 }
             });
+        }
+
+        function toggleDetail(el) {
+            const detail = el.querySelector('.sec-detail');
+            if (detail) {
+                detail.classList.toggle('active');
+            }
         }
     </script>
 </body>
